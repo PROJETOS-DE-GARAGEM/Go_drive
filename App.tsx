@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import BgGradient from "./src/components/BgGradient/BgGradient";
+import BgGradient from "./src/components/BgGradient/BgGradientStyle";
 import Welcome from "./src/pages/Welcome/Welcome";
 
 export default function App() {

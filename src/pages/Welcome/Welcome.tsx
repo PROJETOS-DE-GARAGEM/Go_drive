@@ -1,6 +1,6 @@
 import { View, Image, Text } from "react-native";
 import styles from "./WelcomeStyle";
-import BgGradient from "../../components/BgGradient/BgGradient";
+import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 
 export default function Welcome() {
