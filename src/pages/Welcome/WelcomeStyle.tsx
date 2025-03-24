@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 20,
     textAlign: 'center',
-  }
+  } 
 });
 
 export default styles;

@@ -1,12 +1,16 @@
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import BgGradient from "./src/components/BgGradient/BgGradientStyle";
 import Welcome from "./src/pages/Welcome/Welcome";
+import Login from "./src/pages/Register/Register";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Welcome />
-    </View>
+    <SafeAreaView style={styles.container}>
+      {/* <Welcome /> */}
+      
+      
+      <Login/>
+    </SafeAreaView>
   );
 }
 
