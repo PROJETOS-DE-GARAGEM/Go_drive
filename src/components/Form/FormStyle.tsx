@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "Catamaran",
     fontWeight: "700",
-    lineHeight: 28,
-    marginBottom: 20,
-    marginTop: 20,
+    
   },
 
   input: {
@@ -33,6 +31,12 @@ const styles = StyleSheet.create({
     borderColor: "#f3f5f7",
     backgroundColor: "rgba(255,255,255,0.5)",
     color: "#333",
+  },
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    marginBottom: 20
   },
 });
 

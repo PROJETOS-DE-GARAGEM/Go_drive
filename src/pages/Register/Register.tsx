@@ -2,6 +2,7 @@ import { View, Image, Text } from "react-native";
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import styles from "./RegisterStyle";
 import Form from "../../components/Form/Form";
+import Button from "../../components/Button/Button";
 
 export default function Register() {
   return (
@@ -21,8 +22,18 @@ export default function Register() {
       <View style={styles.formContainer}>
         <Form
           title="Cadastro"
-          fields={["name", "surname", "email", "password", "drivingLicence"]}
+          fields={[
+            "name",
+            "surname",
+            "email",
+            "password",
+            "confirmPassword",
+            "drivingLicence",
+          ]}
         />
+        <View style={styles.buttonWrapper}>
+          <Button name="Enviar" />
+        </View>
       </View>
     </View>
   );

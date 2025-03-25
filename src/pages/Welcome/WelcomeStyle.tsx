@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 2,
-    justifyContent: 'center',
+    justifyContent: "center",
     alignItems: "center",
   },
 
@@ -27,16 +27,16 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 38,
     textAlign: "center",
-    
   },
   text: {
-    color: '#d9dde1',
+    color: "#d9dde1",
     fontSize: 16,
-    fontFamily: 'Catamaran',
-    fontWeight: '500',
+    fontFamily: "Catamaran",
+    fontWeight: "500",
     lineHeight: 20,
-    textAlign: 'center',
-  } 
+    textAlign: "center",
+    marginBottom: 40,
+  },
 });
 
 export default styles;
