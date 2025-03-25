@@ -17,7 +17,12 @@ export default function Welcome() {
       <View style={styles.content}>
         <Text style={styles.title}>Go Drive</Text>
         <Text style={styles.text}>Alugue agora, movimente-se rápido</Text>
-        <ButtonIcon iconName="arrow-forward" iconSize={30} iconColor="white" />
+        <ButtonIcon
+          iconName="arrow-forward"
+          iconSize={30}
+          iconColor="white"
+          style={{ backgroundColor: "rgba(255,255,255,0.3)" }}
+        />
       </View>
     </View>
   );

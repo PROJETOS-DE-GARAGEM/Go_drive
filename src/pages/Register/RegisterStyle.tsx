@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   registerContainer: {
@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   registerImageContainer: {
+    flex: 3,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: 10,
   },
   registerImage: {
     width: 50,
@@ -31,9 +32,20 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   formContainer: {
-    flex: 1,
-    marginTop: 50
-  }
+    flex: 7,
+    backgroundColor: "#fff",
+    borderTopEndRadius: 24,
+    borderTopStartRadius: 24,
+    justifyContent: "center",
+  },
+  buttonWrapper: {
+    position: "absolute", // Posiciona o botão de forma absoluta
+    bottom: Platform.OS === "android" ? 40 : 10, // Ajusta o espaçamento inferior para Android e iOS
+    left: 20, // Margem à esquerda
+    right: 20, // Margem à direita
+    alignItems: "center", // Centraliza o botão horizontalmente
+    zIndex: 1,
+  },
 });
 
 export default styles;
