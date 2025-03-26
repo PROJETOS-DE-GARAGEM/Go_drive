@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -37,6 +37,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'space-between',
     marginBottom: 20
+  },
+
+  buttonWrapper: {
+    position: "absolute", // Posiciona o botão de forma absoluta
+    bottom: Platform.OS === "android" ? 40 : 10, // Ajusta o espaçamento inferior para Android e iOS
+    left: 20, // Margem à esquerda
+    right: 20, // Margem à direita
+    alignItems: "center", // Centraliza o botão horizontalmente
+    zIndex: 1,
   },
 });
 

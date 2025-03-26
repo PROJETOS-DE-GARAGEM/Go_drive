@@ -12,11 +12,6 @@ import Login from "./src/pages/Register/Register";
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle="light-content"
-        translucent={true}
-        backgroundColor={"#1F51D8"}
-      />
       {/* <Welcome /> */}
       <Login />
     </SafeAreaView>

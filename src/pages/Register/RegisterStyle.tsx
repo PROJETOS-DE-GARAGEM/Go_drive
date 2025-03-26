@@ -38,14 +38,12 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 24,
     justifyContent: "center",
   },
-  buttonWrapper: {
-    position: "absolute", // Posiciona o botão de forma absoluta
-    bottom: Platform.OS === "android" ? 40 : 10, // Ajusta o espaçamento inferior para Android e iOS
-    left: 20, // Margem à esquerda
-    right: 20, // Margem à direita
-    alignItems: "center", // Centraliza o botão horizontalmente
-    zIndex: 1,
-  },
+  buttonInput:{
+    justifyContent: 'center',
+    alignItems: "center",
+    marginBottom: Platform.OS === "android" ? 40 : 20,
+  }
+ 
 });
 
 export default styles;
