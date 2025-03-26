@@ -30,10 +30,9 @@ export default function Register() {
             "confirmPassword",
             "drivingLicence",
           ]}
-        />
-        <View style={styles.buttonWrapper}>
+        >
           <Button name="Enviar" />
-        </View>
+        </Form>
       </View>
     </View>
   );

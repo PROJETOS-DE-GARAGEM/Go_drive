@@ -2,6 +2,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import styles from "./ButtonStyle";
 interface ButtonProps {
   name: string;
+  // onPress: () => void;
 }
 
 export default function Button({ name }: ButtonProps) {

@@ -2,10 +2,10 @@ import { ReactNode, useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import styles from "./FormStyle";
+import Button from "../Button/Button";
 
 interface FormProps {
   title: string;
-  TitleIcon?: ReactNode;
   fields: (
     | "name"
     | "surname"
@@ -14,19 +14,11 @@ interface FormProps {
     | "confirmPassword"
     | "drivingLicence"
   )[];
-
-  // onSubmit: (data: {
-  //   name?: string;
-  //   surname?: string;
-  //   email: string;
-  //   password: string;
-  //   confirmPassword: string;
-  //   drivingLicence?: number;
-  // }) => void;
+  children?: ReactNode;
 }
 
-export default function Form({ title, fields }: FormProps) {
-  const [formData, setFormaData] = useState({
+export default function Form({ title, fields, children }: FormProps) {
+  const [formData, setFormData] = useState({
     name: "",
     surname: "",
     email: "",
@@ -35,37 +27,42 @@ export default function Form({ title, fields }: FormProps) {
     drivingLicence: "",
   });
 
-  const handleInputChange = (fields: string, value: string) => {
-    setFormaData((prevData) => ({
+  const handleInputChange = (fields: string, value: string): void => {
+    setFormData((prevData) => ({
       ...prevData,
       [fields]: value,
     }));
   };
 
+  const fieldLabels: Record<string, string> = {
+    name: "Nome",
+    surname: "Sobrenome",
+    email: "Email",
+    password: "Senha",
+    confirmPassword: "Confirmar Senha",
+    drivingLicence: "Número da CNH",
+  };
+
+  const handleSubmit = () => {};
+
   return (
     <View style={styles.formContainer}>
       <View style={styles.titleContainer}>
         <Text style={styles.formTitle}>{title}</Text>
-        <ButtonIcon iconName="close" iconSize={20} iconColor="#939ba4"/>
+        <ButtonIcon iconName="close" iconSize={20} iconColor="#939ba4" />
       </View>
-      {fields.includes("name") && (
-        <TextInput style={styles.input} placeholder="Nome" />
-      )}
-      {fields.includes("surname") && (
-        <TextInput style={styles.input} placeholder="Sobrenome" />
-      )}
-      {fields.includes("email") && (
-        <TextInput style={styles.input} placeholder="Email" />
-      )}
-      {fields.includes("password") && (
-        <TextInput style={styles.input} placeholder="Senha" />
-      )}
-      {fields.includes("confirmPassword") && (
-        <TextInput style={styles.input} placeholder="Confirmar Senha" />
-      )}
-      {fields.includes("drivingLicence") && (
-        <TextInput style={styles.input} placeholder="Número da CNH" />
-      )}
+
+      {fields.map((field) => (
+        <TextInput
+          key={field}
+          style={styles.input}
+          placeholder={fieldLabels[field]}
+          value={formData[field as keyof typeof formData]} // Acessa dinamicamente
+          onChangeText={(text) => handleInputChange(field, text)}
+        />
+      ))}
+
+      <View style={styles.buttonWrapper}>{children}</View>
     </View>
   );
 }
