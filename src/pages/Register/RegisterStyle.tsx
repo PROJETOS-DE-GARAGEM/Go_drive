@@ -38,6 +38,11 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 24,
     justifyContent: "center",
   },
+  buttonInput:{
+    justifyContent: 'center',
+    alignItems: "center",
+    marginBottom: Platform.OS === "android" ? 40 : 20,
+  }
  
 });
 

@@ -3,7 +3,7 @@ import styles from "./WelcomeStyle";
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 
-export default function Welcome() {
+export default   function Welcome() {
   return (
     <View style={styles.container}>
       <BgGradient />
