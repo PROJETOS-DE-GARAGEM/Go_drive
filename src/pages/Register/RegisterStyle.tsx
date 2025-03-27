@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   buttonInput:{
     justifyContent: 'center',
     alignItems: "center",
-    marginBottom: Platform.OS === "android" ? 40 : 20,
+    marginBottom: Platform.OS === "android" ? 20 : 40,
   }
  
 });
