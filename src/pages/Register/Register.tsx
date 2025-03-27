@@ -1,4 +1,4 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, ScrollView } from "react-native";
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import styles from "./RegisterStyle";
 import Form from "../../components/Form/Form";
@@ -22,22 +22,26 @@ export default function Register() {
           </Text>
         </View>
 
-        <View style={styles.formContainer}>
-          <Form
-            title="Cadastro"
-            fields={[
-              { name: "name", placeholder: "Nome" },
-              { name: "surname", placeholder: "Sobrenome" },
-              { name: "email", placeholder: "Email" },
-              { name: "password", placeholder: "Senha" },
-              { name: "confirmPassword", placeholder: "Confirmar senha" },
-              { name: "drivingLicence", placeholder: "Número da CNH" },
-            ]}
-          />
-          <View style={styles.buttonInput}>
-            <Button name="Enviar" />
+          <View style={styles.formContainer}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+            >
+            <Form
+              title="Cadastro"
+              fields={[
+                { name: "name", placeholder: "Nome" },
+                { name: "surname", placeholder: "Sobrenome" },
+                { name: "email", placeholder: "Email" },
+                { name: "password", placeholder: "Senha" },
+                { name: "confirmPassword", placeholder: "Confirmar senha" },
+                { name: "drivingLicence", placeholder: "Número da CNH" },
+              ]}
+            />
+            </ScrollView>
+            <View style={styles.buttonInput}>
+              <Button name="Enviar" />
+            </View>
           </View>
-        </View>
       </View>
     </FormProvider>
   );
