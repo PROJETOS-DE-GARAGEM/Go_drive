@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 24,
     justifyContent: "center",
   },
+  headerScrollContainer: {
+    height: 20,
+  },
   buttonInput:{
     justifyContent: 'center',
     alignItems: "center",

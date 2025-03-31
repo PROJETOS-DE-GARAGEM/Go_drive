@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
-    padding: 30,
+    padding: 20,
   },
 
   formTitle: {
