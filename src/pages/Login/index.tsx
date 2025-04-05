@@ -57,8 +57,8 @@ export default function Register() {
               <Button name="Entrar" onPress={loginUser}/>
               <TouchableOpacity style={styles.linkButton} activeOpacity={0.6}>
                 <Text style={styles.linkText}>
-                  Já possuí uma conta ?{" "}
-                  <Text style={{ color: "#1f51d8" }}>Faça o login</Text>.
+                  Não possuí uma conta?{" "}
+                  <Text style={{ color: "#1f51d8" }}>Cadastrar-se</Text>.
                 </Text>
               </TouchableOpacity>
             </View>
