@@ -45,8 +45,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     marginBottom: Platform.OS === "android" ? 20 : 40,
+  },
+  linkButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 6,
+  },
+  linkText: {
+    color: "#333",
+    fontSize: 15,
   }
- 
 });
 
 export default styles;

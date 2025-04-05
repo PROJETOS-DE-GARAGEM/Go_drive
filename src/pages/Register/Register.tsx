@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { View, Image, Text, ScrollView } from "react-native";
+import { View, Image, Text, ScrollView, TouchableOpacity } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
 
 import styles from "./RegisterStyle";
@@ -25,13 +24,6 @@ export default function Register() {
 
   async function registerUser() {
     try {
-      await addDoc(collection(db, "users"), {
-        name: methods.handleSubmit,
-        surname: methods.handleSubmit,
-        email: methods.handleSubmit,
-        password: methods.handleSubmit,
-        driverLicense: methods.handleSubmit,
-      });
     } catch (error) {
       alert("Erro ao cadastrar o usuário.");
     }
@@ -69,6 +61,12 @@ export default function Register() {
           </ScrollView>
           <View style={styles.buttonInput}>
             <Button name="Cadastrar-se" onPress={registerUser} />
+            <TouchableOpacity style={styles.linkButton} activeOpacity={0.6}>
+              <Text style={styles.linkText}>
+                Já possuí uma conta?
+                <Text style={{ color: "#1f51d8" }}> Faça o login</Text>.
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
