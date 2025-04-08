@@ -6,7 +6,7 @@ interface IconProps {
   iconSize?: number;
   iconColor?: string;
   style?: ViewStyle;
-  // onPress:()=> void;
+  onPress?:()=> void;
 }
 export default function ButtonIcon({
   iconName,

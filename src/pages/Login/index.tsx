@@ -22,12 +22,10 @@ type LoginProps = {
   password: string;
 };
 
-export default function Register() {
+export default function Login() {
   const methods = useForm<LoginProps>();
 
-  async function loginUser() {
-    
-  }
+  async function loginUser() {}
 
   return (
     <FormProvider {...methods}>
@@ -54,7 +52,7 @@ export default function Register() {
               ]}
             />
             <View style={styles.buttonInput}>
-              <Button name="Entrar" onPress={loginUser}/>
+              <Button name="Entrar" onPress={loginUser} />
               <TouchableOpacity style={styles.linkButton} activeOpacity={0.6}>
                 <Text style={styles.linkText}>
                   Não possuí uma conta?{" "}

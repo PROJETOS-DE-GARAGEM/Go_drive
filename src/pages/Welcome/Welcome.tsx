@@ -2,8 +2,14 @@ import { View, Image, Text } from "react-native";
 import styles from "./WelcomeStyle";
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { AuthStackParamList } from "../../types/navigation";
 
 export default   function Welcome() {
+
+  const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  
   return (
     <View style={styles.container}>
       <BgGradient />
@@ -22,6 +28,7 @@ export default   function Welcome() {
           iconSize={30}
           iconColor="white"
           style={{ backgroundColor: "rgba(255,255,255,0.3)" }}
+          onPress={()=> navigation.navigate("Login")}
         />
       </View>
     </View>
