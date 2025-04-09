@@ -29,7 +29,7 @@ export default function DetailsCar() {
         </View>
       </View>
 
-      {/* button alugarCarro */}
+      {/* button add component alugarCarro */}
     </View>
   );
 }
