@@ -8,7 +8,7 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   const handleNavigateToLogin = () => {
-    navigation.navigate("AuthStack", { screen: "Login" });
+    navigation.navigate("AuthStack", { screen: "Login"});
   };
 
   return (

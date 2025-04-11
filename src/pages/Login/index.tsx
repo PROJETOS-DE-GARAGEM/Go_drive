@@ -16,6 +16,7 @@ import Button from "../../components/Button/Button";
 
 import { collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firabaseConnection";
+import { useNavigation } from "@react-navigation/native";
 
 type LoginProps = {
   email: string;
@@ -24,7 +25,7 @@ type LoginProps = {
 
 export default function Login() {
   const methods = useForm<LoginProps>();
-
+  const navigation = useNavigation();
   async function loginUser() {}
 
   return (
@@ -53,7 +54,22 @@ export default function Login() {
             />
             <View style={styles.buttonInput}>
               <Button name="Entrar" onPress={loginUser} />
-              <TouchableOpacity style={styles.linkButton} activeOpacity={0.6}>
+              <TouchableOpacity
+                style={styles.linkButton}
+                activeOpacity={0.6}
+                onPress={() =>
+                  navigation.navigate("AuthStack", {
+                    screen: "Register",
+                    params: {
+                      name: "Ruan",
+                      surname: "Gomes",
+                      email: "rugcosta@gmail.com",
+                      password: "1234",
+                      CNHnumber: 1637463737,
+                    },
+                  })
+                }
+              >
                 <Text style={styles.linkText}>
                   Não possuí uma conta?{" "}
                   <Text style={{ color: "#1f51d8" }}>Cadastrar-se</Text>.
