@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
 
@@ -16,6 +17,7 @@ import Button from "../../components/Button/Button";
 
 import { collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firabaseConnection";
+import { useAuth } from "../../hooks/useAuth";
 
 type LoginProps = {
   email: string;
@@ -24,8 +26,23 @@ type LoginProps = {
 
 export default function Login() {
   const methods = useForm<LoginProps>();
+  const { signIn } = useAuth();
 
-  async function loginUser() {}
+  async function loginUser() {
+    const { email, password } = methods.getValues(); // Pega os dados do formulário
+
+    if (!email || !password) {
+      Alert.alert("Preencha todos os campos");
+      return;
+    }
+
+    try {
+      await signIn(email, password); // Chama a função do contexto
+      console.log("Usuário logado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao logar:", error);
+    }
+  }
 
   return (
     <FormProvider {...methods}>
