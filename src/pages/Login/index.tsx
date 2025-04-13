@@ -18,6 +18,7 @@ import Button from "../../components/Button/Button";
 import { collection, addDoc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firabaseConnection";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigation } from "@react-navigation/native";
 
 type LoginProps = {
   email: string;
@@ -27,6 +28,7 @@ type LoginProps = {
 export default function Login() {
   const methods = useForm<LoginProps>();
   const { signIn } = useAuth();
+  const navigation = useNavigation();
 
   async function loginUser() {
     const { email, password } = methods.getValues(); // Pega os dados do formulário
