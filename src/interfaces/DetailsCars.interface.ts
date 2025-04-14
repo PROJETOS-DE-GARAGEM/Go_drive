@@ -17,12 +17,12 @@ export interface ICharactersCar {
 
 export interface IDataDetailsCar extends ICharactersCar{
   title?: string;
-  descrition?: string;
+  description?: string;
   quality?: string;
   kmRound?: number;
   available?: number | null | undefined
   nameCharacters?:  string;
-  descritionCharacters?: string
+  descriptionCharacters?: string
   buttonIcon: React.ReactNode
 }
 

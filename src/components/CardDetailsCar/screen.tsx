@@ -1,24 +1,25 @@
 import { Text, View } from 'react-native';
 import { IDataDetailsCar } from '../../interfaces/DetailsCars.interface'
-import ButtonIcon from '../../components/ButtonIcon/ButtonIcon'
-// import  styles  from './styles'
+import  styles  from './screenStyle'
 
 
 
 export const CardDetailsCar: React.FC<IDataDetailsCar> = ({
-  descrition,
+  description,
   brand,
   available,
   buttonIcon
 }) => {
 
   return (
-    <View style={{}}>
-      <View>
-        <Text>{brand}</Text>
-        <Text>{descrition}</Text>
+    <View style={styles.containerCardDetails}>
+      <View style={styles.container}>
         <View>
-          <Text>{available}</Text>
+          <Text style={styles.titleBrand}>{brand}</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
+        <View style={styles.conteinerAvailableButtonIcon}>
+          <Text style={styles.available}>{available}</Text>
           {buttonIcon}
         </View>
       </View>
@@ -29,17 +30,17 @@ export const CardDetailsCar: React.FC<IDataDetailsCar> = ({
 
 export const CardDetailsCarousel: React.FC<IDataDetailsCar> = ({
   title,
-  descritionCharacters,
+  descriptionCharacters,
   nameCharacters,   //nameCharacters
   buttonIcon
 }) => {
   return (
     <>
-      <Text>{title}</Text>
+      <Text style={{}}>{title}</Text>
       <View style={{}}>
           { buttonIcon }
           { nameCharacters }
-          { descritionCharacters }
+          { descriptionCharacters }
       </View>
       {/* button alugarCarro */}
     </>
