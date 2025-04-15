@@ -30,8 +30,9 @@ export default function Login() {
   const { signIn } = useAuth();
   const navigation = useNavigation();
 
-  async function loginUser() {
-    const { email, password } = methods.getValues(); // Pega os dados do formulário
+  async function loginUser(data: LoginProps) {
+    const { email, password } = data;
+    console.log(data);
 
     if (!email || !password) {
       Alert.alert("Preencha todos os campos");
@@ -39,7 +40,7 @@ export default function Login() {
     }
 
     try {
-      await signIn(email, password); // Chama a função do contexto
+      await signIn(email, password); 
       console.log("Usuário logado com sucesso!");
     } catch (error) {
       console.error("Erro ao logar:", error);
@@ -66,12 +67,14 @@ export default function Login() {
             <Form
               title="Login"
               fields={[
-                { name: "email", placeholder: "Email" },
-                { name: "password", placeholder: "Senha" },
+                { name: "email", placeholder: "Email", rules: { required: "Email é obrigatório", pattern: { value: /\S+@\S+\.\S+/, message: "Email inválido" } } },
+                { name: "password", placeholder: "Senha", rules: { required: "Senha é obrigatória", minLength: { value: 6, message: "A senha deve ter pelo menos 6 caracteres" }, pattern: {value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+          message:
+            "A senha deve conter pelo menos uma letra maiúscula e um caractere especial" } } },
               ]}
             />
             <View style={styles.buttonInput}>
-              <Button name="Entrar" onPress={loginUser} />
+              <Button name="Entrar" onPress={methods.handleSubmit(loginUser)} />
               <TouchableOpacity
                 style={styles.linkButton}
                 activeOpacity={0.6}
