@@ -16,11 +16,13 @@ export const CardDetailsCar: React.FC<IDataDetailsCar> = ({
       <View style={styles.container}>
         <View>
           <Text style={styles.titleBrand}>{brand}</Text>
-          <Text style={styles.description}>{description}</Text>
         </View>
-        <View style={styles.conteinerAvailableButtonIcon}>
-          <Text style={styles.available}>{available}</Text>
-          {buttonIcon}
+        <View style={styles.containerDescription}>
+          <Text style={styles.description}>{description}</Text>
+          <View style={styles.conteinerAvailableButtonIcon}>
+            <Text style={styles.available}>{available}</Text>
+            {buttonIcon}
+          </View>
         </View>
       </View>
     </View>
@@ -31,18 +33,20 @@ export const CardDetailsCar: React.FC<IDataDetailsCar> = ({
 export const CardDetailsCarousel: React.FC<IDataDetailsCar> = ({
   title,
   descriptionCharacters,
-  nameCharacters,   //nameCharacters
+  nameCharacters,
   buttonIcon
 }) => {
   return (
     <>
-      <Text style={{}}>{title}</Text>
-      <View style={{}}>
+      <View style={styles.containerCardDetails}> 
+        <Text style={styles.titleCharacters}>{title}</Text>
+        <View style={styles.detailsCarousel}>
           { buttonIcon }
-          { nameCharacters }
-          { descriptionCharacters }
-      </View>
+          <Text style={styles.nameCharacters}>{ nameCharacters }</Text>
+          <Text style={styles.descriptionCharacters}>{ descriptionCharacters }</Text>
+        </View>
       {/* button alugarCarro */}
+      </View>
     </>
   )
 }

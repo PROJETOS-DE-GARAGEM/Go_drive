@@ -4,30 +4,59 @@ const styles = StyleSheet.create({
   containerCardDetails: {
      marginHorizontal: 15,
      paddingVertical: 5,
-     boxShadow: '0px 1px px 0px rgba(196,197,202,0.75)'
+     boxShadow: '0px -1px px 0px rgba(196,197,202,0.75)'
   },
   container: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
     paddingLeft: 5
   },
   titleBrand: {
     fontSize: 18,
     fontWeight: 600,
-    paddingVertical: 5
+    paddingVertical: 15,
   },
   description: {
     color: "#C4C5CA",
-    maxWidth: 180
+    maxWidth: 180,
   },
   conteinerAvailableButtonIcon: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginVertical: 6
+  },
+  containerDescription: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   available: {
     color: "#C4C5CA"
   },
+  titleCharacters: {
+    fontSize: 18,
+    fontWeight: 600,
+    paddingVertical: 10,
+    marginVertical: 10
+  },
+  detailsCarousel: {
+    display: "flex",
+    justifyContent: "flex-start",
+    width: 130,
+    height: 150,
+    backgroundColor: "#EBEBEB",
+    borderRadius: 30,
+    padding: 10,
+  },
+  nameCharacters: {
+    color: '#C4C5CA',
+    marginVertical: 8,
+  },
+  descriptionCharacters: {
+
+  }
 });
 
 export default styles;

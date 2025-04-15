@@ -26,12 +26,8 @@ export interface IDataDetailsCar extends ICharactersCar{
   buttonIcon: React.ReactNode
 }
 
-interface IBaseStyle extends ImageStyle{
-  borderRadius?: number;
-}
-
 export interface IImageCarProps {
   uri: string;
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
-  style?: StyleProp<IBaseStyle>
+  style?: StyleProp<ImageStyle>
 }
