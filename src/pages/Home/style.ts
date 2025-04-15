@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 23,
     fontWeight: "700",
+    paddingLeft: 10,
   },
   listCarsContainer: {
     flex: 1,
@@ -24,6 +25,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingStart: 5,
     paddingEnd: 5, 
+  },
+  buttonSpectAll: {
+    top: 10,
+    paddingRight: 15,
+  },
+  buttonSpectAllText: {
+    color: "#999",
+    fontSize: 16,
   },
 });
 

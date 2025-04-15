@@ -1,4 +1,4 @@
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, Pressable } from "react-native";
 
 import { InputFilter } from "./components/InputFilter";
 import { Header } from "./components/Header";
@@ -55,8 +55,10 @@ export default function Home() {
       />
       <View style={styles.listCarsContainer}>
         <View style={styles.headerCarsContainer}>
-          <Text>Carros</Text>
-          <Text>Todos</Text>
+          <Text style={styles.title}>Carros</Text>
+          <Pressable style={styles.buttonSpectAll}>
+            <Text style={styles.buttonSpectAllText}>Todos</Text>
+          </Pressable>
         </View>
       </View>
     </View>
