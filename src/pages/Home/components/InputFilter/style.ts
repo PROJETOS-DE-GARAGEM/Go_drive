@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 50,
     borderRadius: 7,
+    borderWidth: 0.3,
+    opacity: 0.4,
   },
   inputSearch: {
     flexDirection: "row",
@@ -28,6 +30,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 0.3,
+    opacity: 0.4,
   },
 });
 
