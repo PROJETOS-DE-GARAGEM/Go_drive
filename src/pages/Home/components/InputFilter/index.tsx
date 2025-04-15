@@ -14,7 +14,7 @@ const InputFilter = () => {
       <View style={styles.inputContainer}>
         <View style={styles.inputSearch}>
           <Fontisto name="search" size={25} color={"#000"} />
-          <TextInput placeholder="Pesquisar" placeholderTextColor={"#000"} />
+          <TextInput style={{ flex: 1}} placeholder="Pesquisar" placeholderTextColor={"#000"} />
         </View>
       </View>
 
