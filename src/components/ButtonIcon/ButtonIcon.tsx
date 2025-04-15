@@ -6,21 +6,20 @@ interface IconProps {
   iconSize?: number;
   iconColor?: string;
   style?: ViewStyle;
-  // onPress:()=> void;
+  onPress: () => void;
 }
 export default function ButtonIcon({
   iconName,
   iconSize,
   iconColor,
-  style
+  style,
+  onPress,
 }: IconProps) {
   return (
     <View>
-      <TouchableOpacity style={[styles.button, style]}>
+      <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
         <Icon name={iconName} size={iconSize} color={iconColor} />
       </TouchableOpacity>
     </View>
   );
 }
-
-
