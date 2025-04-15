@@ -2,10 +2,12 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#1f51d8",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   logoContainer: {
     flexDirection: "row",
@@ -30,7 +32,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   titleHeader: {
-    fontSize: 20,
+    color: "#FFF",
+    fontSize: 25,
     fontWeight: "700",
     fontStyle: "italic",
   },
