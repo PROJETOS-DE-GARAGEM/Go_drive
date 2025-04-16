@@ -2,9 +2,13 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   containerImage: {
-    marginHorizontal: 10,
+    display: "flex",
     marginTop: 15,
   },
+    carousel: {
+      display: "flex",
+      marginTop: 15,
+  }
 });
 
 export default styles;

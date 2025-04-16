@@ -27,7 +27,7 @@ export interface IDataDetailsCar extends ICharactersCar{
 }
 
 export interface IImageCarProps {
-  uri: string;
+  uris: string[];
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
   style?: StyleProp<ImageStyle>
 }

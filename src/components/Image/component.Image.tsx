@@ -1,23 +1,39 @@
-import { View, Image, TouchableWithoutFeedback  } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, Dimensions  } from 'react-native';
 import { IImageCarProps } from '../../interfaces/DetailsCars.interface'
 import styles from './styles'
 import Carousel from 'react-native-reanimated-carousel';
 
 export const ComponentImage: React.FC<IImageCarProps> = ({
-  uri,
+  uris,
   resizeMode="cover",
   style
 }) => {
+
+  const { width } = Dimensions.get('screen')
+
+  const images = uris.map(uri => ({ uri }))
+
   return (
     <>
       <View style={styles.containerImage}>
-        <Image 
-          source={{ uri }}
-          resizeMode={resizeMode}
-          style={style}
-        />
+        <Carousel
+          width={width}
+          height={250}
+          data={images}
+          scrollAnimationDuration={500}
+          style={styles.carousel}
+          renderItem={({item}) => (
+            <Image 
+            source={{ uri: item.uri }}
+            resizeMode={resizeMode}
+            style={style}
+            />
+          )}
+        >
+        </Carousel>
       </View>
     </>
   );
 }
+
 

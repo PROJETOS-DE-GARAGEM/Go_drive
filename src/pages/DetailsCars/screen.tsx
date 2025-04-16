@@ -7,16 +7,23 @@ import styles from './styles'
 
 
 export const DetailsCars = () => {
+  const images = [
+  "https://t.ctcdn.com.br/z65Pikc6Z7My2T04IuMJ7ajKPl0=/1200x675/smart/i900301.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOhmREtCugQfmgP4SmCmzF-X0IDS7lfkwVQQ&s",
+  "https://quatrorodas.abril.com.br/wp-content/uploads/2024/04/unnamed-1.png?crop=1&resize=1080,565"
+  ]
   return (
     <View style={styles.containerDetailsCars}>
       {/* componentHeader ou Nav*/}
       <Text style={{fontSize: 18, fontWeight: 600, color: "#CED2D6", textAlign: "center", marginVertical: 15, marginTop: 40}}>componentHeader ou Nav</Text>
       <View>
         <ComponentImage 
-          uri='https://t.ctcdn.com.br/z65Pikc6Z7My2T04IuMJ7ajKPl0=/1200x675/smart/i900301.png'        // query API uri
+          uris = {images}      // query API uri
           resizeMode={'cover'} 
           style={styles.imageCar}
         />
+      </View>
+      
         <CardDetailsCar
           brand='Audi'                         // query API brand, available e desc
           available={4.2} 
@@ -25,7 +32,6 @@ export const DetailsCars = () => {
             <ButtonIcon iconName='star' iconSize={16} iconColor='orange' style={styles.buttonIcon}/>
           }
         />
-      </View>
 
       <CardDetailsCarousel 
         title='Caracteristicas'
