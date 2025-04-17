@@ -1,10 +1,48 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { ComponentImage } from '../../components/Image/component.Image';
 import { CardDetailsCar, CardDetailsCarousel } from '../../components/CardDetailsCar/screen';
 import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
 import Button from '../../components/Button/Button'
 import styles from './styles'
 
+const DATA = [
+  {
+    nameCharacters: 'Capacidade',
+    descriptionCharacters: '4 cadeiras'
+  },
+  {
+    nameCharacters: 'Portas',
+    descriptionCharacters: '4 portas'
+  },
+  {
+    nameCharacters: 'Ar Condicionado',
+    descriptionCharacters: 'Sim'
+  },
+  {
+    nameCharacters: 'Transmissão',
+    descriptionCharacters: 'Automático'
+  },
+  {
+    nameCharacters: 'Combustível',
+    descriptionCharacters: 'Gasolina'
+  },
+  {
+    nameCharacters: 'Multimídia',
+    descriptionCharacters: 'Tela 7" com Bluetooth'
+  },
+  {
+    nameCharacters: 'Potência',
+    descriptionCharacters: '120 cv'
+  },
+  {
+    nameCharacters: 'Ano',
+    descriptionCharacters: '2023'
+  },
+  {
+    nameCharacters: 'Quilometragem',
+    descriptionCharacters: '35.000 km'
+  }
+];
 
 export const DetailsCars = () => {
   const images = [
@@ -32,14 +70,20 @@ export const DetailsCars = () => {
             <ButtonIcon iconName='star' iconSize={16} iconColor='orange' style={styles.buttonIcon}/>
           }
         />
-
-      <CardDetailsCarousel 
-        title='Caracteristicas'
-        buttonIcon={
-          <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
-        }
-        nameCharacters='Capacidade'
-        descriptionCharacters='4 cadeiras'
+      <FlatList
+        data={DATA}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => (     
+          <CardDetailsCarousel 
+            title='Caracteristicas'
+            buttonIcon={
+              <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
+            }
+            nameCharacters={item.nameCharacters}
+            descriptionCharacters={item.descriptionCharacters}
+          />
+        )}
       />
       <View style={styles.containerRentNowButton}>
         <Button 
