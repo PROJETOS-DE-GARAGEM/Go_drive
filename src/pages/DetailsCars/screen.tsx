@@ -62,21 +62,23 @@ export const DetailsCars = () => {
         />
       </View>
       
-        <CardDetailsCar
-          brand='Audi'                         // query API brand, available e desc
-          available={4.2} 
-          description='sofisticação, desempenho e inovação.'
-          buttonIcon={
-            <ButtonIcon iconName='star' iconSize={16} iconColor='orange' style={styles.buttonIcon}/>
-          }
-        />
+      <CardDetailsCar
+        brand='Audi'                         // query API brand, available e desc
+        available={4.2} 
+        description='sofisticação, desempenho e inovação.'
+        buttonIcon={
+          <ButtonIcon iconName='star' iconSize={16} iconColor='orange' style={styles.buttonIcon}/>
+        }
+      />
+
+      <Text style={styles.titleCharacters}>Caracteristicas</Text>
+
       <FlatList
         data={DATA}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (     
           <CardDetailsCarousel 
-            title='Caracteristicas'
             buttonIcon={
               <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
             }

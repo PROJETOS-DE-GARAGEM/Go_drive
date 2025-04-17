@@ -20,7 +20,8 @@ export const ComponentImage: React.FC<IImageCarProps> = ({
           width={width}
           height={250}
           data={images}
-          scrollAnimationDuration={500}
+          scrollAnimationDuration={1000}
+          mode='horizontal-stack'
           style={styles.carousel}
           renderItem={({item}) => (
             <Image 
@@ -35,5 +36,3 @@ export const ComponentImage: React.FC<IImageCarProps> = ({
     </>
   );
 }
-
-
