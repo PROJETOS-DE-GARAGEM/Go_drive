@@ -1,19 +1,25 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import styles from "./style";
 
+import { VelhicesProps } from "../../hooks/useHome";
+
 type ListBrandsProps = {
-  title: string;
+  data: VelhicesProps;
 };
 
-const ListBrands = ({ title }: ListBrandsProps) => {
+const ListBrands = ({ data }: ListBrandsProps) => {
   return (
-    <View style={styles.brandContainer}>
-      <TouchableOpacity style={styles.iconBrand}></TouchableOpacity>
+    <TouchableOpacity style={styles.brandContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleBrand}>{title}</Text>
+      <Image
+        style={styles.iconBrand}
+        source={{ uri: data.imageMarca }}
+        resizeMode="contain"
+      />
+        <Text style={styles.titleBrand}>{data.marca}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
