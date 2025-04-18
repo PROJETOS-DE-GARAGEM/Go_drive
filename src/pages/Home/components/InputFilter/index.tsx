@@ -1,24 +1,35 @@
 import { View, TextInput, TouchableOpacity } from "react-native";
 
+import { useHome } from "../../hooks/useHome";
+
 import { Fontisto, Ionicons } from "@expo/vector-icons";
 
 import styles from "./style";
 
 type SearchProps = {
-  data: string;
-}
+  setModalVisible: (value: boolean) => void;
+};
 
-const InputFilter = () => {
+const InputFilter = ({ setModalVisible }: SearchProps) => {
+  const { getBrands } = useHome();
+
   return (
     <View style={styles.containerSearch}>
       <View style={styles.inputContainer}>
         <View style={styles.inputSearch}>
           <Fontisto name="search" size={25} color={"#000"} />
-          <TextInput style={{ flex: 1}} placeholder="Pesquisar" placeholderTextColor={"#000"} />
+          <TextInput
+            style={{ flex: 1 }}
+            placeholder="Pesquisar"
+            placeholderTextColor={"#000"}
+          />
         </View>
       </View>
 
-      <TouchableOpacity style={styles.iconContainer}>
+      <TouchableOpacity
+        style={styles.iconContainer}
+        onPress={() => setModalVisible(true)}
+      >
         <Ionicons name="filter" size={25} color={"#000"} />
       </TouchableOpacity>
     </View>

@@ -2,24 +2,25 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   brandContainer: {
-    marginTop: 10,
+    marginTop: 6,
     flexDirection: "column",
-    gap: 5,
+    paddingLeft: 20,
   },
   iconBrand: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
     backgroundColor: "#1f51d8",
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 4,
+      width: 10,
+      height: 10,
     },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-
-    elevation: 8,
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 10,
   },
   titleContainer: {
     flex: 1,
@@ -27,7 +28,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   titleBrand: {
+    fontWeight: "700",
     color: "#999",
+    marginTop: 6,
   },
 });
 

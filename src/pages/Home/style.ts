@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    marginBottom: 10,
     fontSize: 23,
     fontWeight: "700",
     paddingLeft: 10,
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
   listCarsContainer: {
     flex: 1,
     backgroundColor: "#FFF",
-    marginTop: 40,
+    marginTop: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingStart: 5,
-    paddingEnd: 5, 
+    paddingEnd: 5,
   },
   buttonSpectAll: {
     top: 10,

@@ -1,66 +1,79 @@
-import { Text, View, FlatList, Pressable } from "react-native";
+import { useState } from "react";
+import {
+  Text,
+  View,
+  FlatList,
+  Pressable,
+  ActivityIndicator,
+  Modal,
+} from "react-native";
+
+import styles from "./style";
 
 import { InputFilter } from "./components/InputFilter";
 import { Header } from "./components/Header";
 import { ListBrands } from "./components/ListBrands";
+import { ListCars } from "./components/ListCars";
+import { FilterModal } from "./components/FilterModal";
 
-import styles from "./style";
-
-//Fake data
-const DATA = [
-  {
-    id: "1",
-    title: "First",
-  },
-  {
-    id: "2",
-    title: "Second",
-  },
-  {
-    id: "3",
-    title: "Third",
-  },
-  {
-    id: "4",
-    title: "Second",
-  },
-  {
-    id: "5",
-    title: "Third",
-  },
-  {
-    id: "6",
-    title: "Second",
-  },
-  {
-    id: "7",
-    title: "Third",
-  },
-];
+import { useHome } from "./hooks/useHome";
 
 export default function Home() {
+  const [modalVisible, setModalVisible] = useState(false);
+  const { cars, loading } = useHome();
+
   return (
     <View style={styles.container}>
       <Header />
-      <InputFilter />
-      <Text style={styles.title}>Marcas</Text>
-      <FlatList
-        data={DATA}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <ListBrands title={item.title} />}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingHorizontal: 10, gap: 54}}
-        style={{ maxHeight: 90 }}
-      />
-      <View style={styles.listCarsContainer}>
-        <View style={styles.headerCarsContainer}>
-          <Text style={styles.title}>Carros</Text>
-          <Pressable style={styles.buttonSpectAll}>
-            <Text style={styles.buttonSpectAllText}>Todos</Text>
-          </Pressable>
+      <InputFilter setModalVisible={setModalVisible} />
+      {loading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size={70} color="#1f51d8" />
         </View>
-      </View>
+      ) : (
+        <>
+          <Text style={styles.title}>Marcas</Text>
+          <FlatList
+            data={cars}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => <ListBrands data={item} />}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ paddingHorizontal: 5 }}
+            style={{ maxHeight: 90 }}
+          />
+          <View style={styles.listCarsContainer}>
+            <View style={styles.headerCarsContainer}>
+              <Text style={styles.title}>Carros</Text>
+              <Pressable style={styles.buttonSpectAll}>
+                <Text style={styles.buttonSpectAllText}>Todos</Text>
+              </Pressable>
+            </View>
+            <FlatList
+              data={cars}
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              columnWrapperStyle={{ justifyContent: "space-between" }}
+              contentContainerStyle={{ paddingBottom: 14, padding: 10 }}
+              renderItem={({ item }) => (
+                <ListCars data={item} widthScreen={"49%"} />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+        </>
+      )}
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)}
+        statusBarTranslucent={true}
+      >
+        <FilterModal closeModal={() => setModalVisible(false)} />
+      </Modal>
     </View>
   );
 }
