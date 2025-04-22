@@ -1,33 +1,20 @@
 import { useState } from "react";
 import { View, Text, Switch } from "react-native";
 
+import { VelhicesProps } from "../../hooks/useHome";
+
 import styles from "./style";
 
 interface BrandProps {
-  id: string;
-  marca: string;
+  data: VelhicesProps;
 }
 
-interface BrandsFilterProps {
-  data: BrandProps;
-  onToggleBrand: (brand: BrandProps | undefined) => void;
-}
-
-const ListFilterBrands = ({ data, onToggleBrand }: BrandsFilterProps) => {
+const ListFilterBrands = ({ data }: BrandProps) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
   const toggleSwitch = () => {
-    setIsEnabled((previousState) => {
-      const newState = !previousState;
-      const brandData = newState ? data : undefined;
-
-      onToggleBrand(brandData)
-      console.log(onToggleBrand)
-      console.log(newState)
-      return newState;
-    });
+    setIsEnabled((previousState) => !previousState);
   };
-
 
   return (
     <View style={styles.container}>
