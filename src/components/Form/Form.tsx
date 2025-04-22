@@ -1,13 +1,24 @@
 import { Controller, useFormContext } from "react-hook-form";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 import styles from "./FormStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useState } from "react";
 
 //Interface que será utilizada no form
 interface FormProps {
-  title: string;
-  fields: { name: string; placeholder: string; rules?: object }[];
+  title?: string;
+  fields: {
+    name: string;
+    placeholder: string;
+    rules?: object;
+    style?: ViewStyle;
+  }[];
 }
 
 const Form: React.FC<FormProps> = ({ title, fields }) => {
@@ -31,7 +42,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
           }) => (
             <View>
               <TextInput
-                style={styles.input}
+                style={[styles.input, field.style]}
                 placeholder={field.placeholder}
                 onBlur={onBlur}
                 onChangeText={onChange}

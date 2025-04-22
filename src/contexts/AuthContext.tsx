@@ -8,7 +8,6 @@ type User = {
 };
 
 //Context typing
-
 type AuthContextType = {
   user: User | null;
   //   IsAuthticated: boolean;

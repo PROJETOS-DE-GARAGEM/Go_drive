@@ -11,6 +11,7 @@ export type AuthStackParamList = {
     password: string;
     CNHnumber: number;
   };
+  MultiForm: undefined;
 };
 
 //Root navigation that rolls all the stacks

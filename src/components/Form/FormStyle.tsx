@@ -2,11 +2,11 @@ import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   formContainer: {
-    flex: 1,
     backgroundColor: "#fff",
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20
   },
 
   formTitle: {

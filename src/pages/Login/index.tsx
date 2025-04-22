@@ -40,7 +40,7 @@ export default function Login() {
     }
 
     try {
-      await signIn(email, password); 
+      await signIn(email, password);
       console.log("Usuário logado com sucesso!");
     } catch (error) {
       console.error("Erro ao logar:", error);
@@ -64,30 +64,61 @@ export default function Login() {
           </View>
 
           <View style={styles.formContainer}>
-            <Form
-              title="Login"
-              fields={[
-                { name: "email", placeholder: "Email", rules: { required: "Email é obrigatório", pattern: { value: /\S+@\S+\.\S+/, message: "Email inválido" } } },
-                { name: "password", placeholder: "Senha", rules: { required: "Senha é obrigatória", minLength: { value: 6, message: "A senha deve ter pelo menos 6 caracteres" }, pattern: {value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-          message:
-            "A senha deve conter pelo menos uma letra maiúscula e um caractere especial" } } },
-              ]}
-            />
+            <View style={{marginTop: -200 }}>
+              <Form
+                title="Login"
+                fields={[
+                  {
+                    name: "email",
+                    placeholder: "Email",
+                    rules: {
+                      required: "Email é obrigatório",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Email inválido",
+                      },
+                    },
+                  },
+                  {
+                    name: "password",
+                    placeholder: "Senha",
+                    rules: {
+                      required: "Senha é obrigatória",
+                      minLength: {
+                        value: 6,
+                        message: "A senha deve ter pelo menos 6 caracteres",
+                      },
+                      pattern: {
+                        value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                        message:
+                          "A senha deve conter pelo menos uma letra maiúscula e um caractere especial",
+                      },
+                    },
+                  },
+                ]}
+              />
+            </View>
+
             <View style={styles.buttonInput}>
               <Button name="Entrar" onPress={methods.handleSubmit(loginUser)} />
               <TouchableOpacity
                 style={styles.linkButton}
                 activeOpacity={0.6}
+                // onPress={() =>
+                //   navigation.navigate("AuthStack", {
+                //     screen: "Register",
+                //     params: {
+                //       name: "Ruan",
+                //       surname: "Gomes",
+                //       email: "rugcosta@gmail.com",
+                //       password: "1234",
+                //       CNHnumber: 1637463737,
+                //     },
+                //   })
+                // }
                 onPress={() =>
                   navigation.navigate("AuthStack", {
-                    screen: "Register",
-                    params: {
-                      name: "Ruan",
-                      surname: "Gomes",
-                      email: "rugcosta@gmail.com",
-                      password: "1234",
-                      CNHnumber: 1637463737,
-                    },
+                    screen: "MultiForm",
                   })
                 }
               >
