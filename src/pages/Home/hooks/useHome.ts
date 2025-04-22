@@ -23,87 +23,34 @@ export interface VelhicesProps {
   versao: string;
 }
 
-export interface BrandsProps {
-  id: string;
-  marca: string;
-}
-
 export const useHome = () => {
   const [cars, setCars] = useState<VelhicesProps[]>([]);
-  const [brands, setBrands] = useState<BrandsProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchVelhices() {
-      await getVelhices();
+    async function fetchAllCars() {
+      try {
+        const carsRef = collection(db, "veiculos");
+        const queryRef = query(carsRef, orderBy("created", "desc"));
+        const snapshot = await getDocs(queryRef);
+        const listCars = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as VelhicesProps[];
+
+        setCars(listCars);
+        setLoading(false);
+      } catch (error) {
+        console.log("Erro ao buscar os dados", error);
+        setLoading(false);
+      }
     }
 
-    fetchVelhices();
+    fetchAllCars();
   }, []);
-
-  async function getVelhices() {
-    const carsRef = collection(db, "veiculos");
-    const queryRef = query(carsRef, orderBy("created", "desc"));
-
-    getDocs(queryRef).then((snapshot) => {
-      let listCars = [] as VelhicesProps[];
-
-      snapshot.forEach((doc) => {
-        listCars.push({
-          id: doc.id,
-          modelo: doc.data().modelo,
-          uuid: doc.data().uuid,
-          marca: doc.data().marca,
-          cambio: doc.data().cambio,
-          aluguel: doc.data().aluguel,
-          capacidade: doc.data().capacidade,
-          combustivel: doc.data().combustivel,
-          km: doc.data().km,
-          versao: doc.data().versao,
-          cor: doc.data().cor,
-          cidade: doc.data().cidade,
-          fabricacao: doc.data().fabricacao,
-          funcionalidades: doc.data().funcionalidades,
-          imageMarca: doc.data().imageMarca,
-          imageUrl: doc.data().imageUrl,
-          placa: doc.data().placa,
-        });
-      });
-
-      setCars(listCars);
-      setLoading(false);
-    });
-  }
-
-  useEffect(() => {
-    async function fetchBrands() {
-      await getBrands();
-    }
-
-    fetchBrands();
-  }, []);
-
-  async function getBrands() {
-    const brandsRef = collection(db, "veiculos");
-    const snapshot = await getDocs(brandsRef);
-
-    let listBrands = [] as BrandsProps[];
-
-    snapshot.forEach((doc) => {
-        listBrands.push({
-          id: doc.id,
-          marca: doc.data().marca,
-        });
-    });
-    
-    setBrands(listBrands);
-  }
 
   return {
     cars,
-    getVelhices,
     loading,
-    getBrands,
-    brands,
   };
 };

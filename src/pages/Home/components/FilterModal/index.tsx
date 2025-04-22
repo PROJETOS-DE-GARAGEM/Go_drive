@@ -11,7 +11,7 @@ type FilterModalProps = {
 };
 
 const FilterModal = ({ closeModal }: FilterModalProps) => {
-  const { brands } = useHome();
+  const { cars } = useHome();
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={closeModal}>
@@ -23,7 +23,7 @@ const FilterModal = ({ closeModal }: FilterModalProps) => {
         </View>
         <View style={styles.contentFilterBrands}>
           <FlatList
-            data={brands}
+            data={cars}
             renderItem={({ item }) => <ListFilterBrands data={item} />}
           />
         </View>
