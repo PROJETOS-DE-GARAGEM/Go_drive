@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    width: 200,
+    width: 190,
     height: 270,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
   imageCar: {
-    width: 200,
+    width: 190,
     height: 160,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,

@@ -2,10 +2,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import styles from "./style";
 
-import { CarsProps } from "../../../../contexts/homeContext";
+import { BrandProps } from "../../../../contexts/homeContext";
 
 type ListBrandsProps = {
-  data: CarsProps;
+  data: BrandProps;
 };
 
 const ListBrands = ({ data }: ListBrandsProps) => {
