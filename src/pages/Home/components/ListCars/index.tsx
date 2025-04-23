@@ -1,19 +1,18 @@
-import { View, Text, Image, Pressable, DimensionValue } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 import styles from "./style";
 
-import { VelhicesProps } from "../../hooks/useHome";
+import { CarsProps } from "../../../../contexts/homeContext";
 
 type ListCarProps = {
-  data: VelhicesProps;
-  widthScreen: DimensionValue;
+  data: CarsProps;
 };
 
-const ListCars = ({ data, widthScreen }: ListCarProps) => {
+const ListCars = ({ data }: ListCarProps) => {
   return (
-    <Pressable style={[styles.container, { width: widthScreen }]}>
+    <Pressable style={styles.container}>
       <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
 
       <View style={styles.partialInfoCar}>
@@ -27,9 +26,9 @@ const ListCars = ({ data, widthScreen }: ListCarProps) => {
       </View>
 
       <View style={styles.endInfoCar}>
-          <Text style={styles.textDetails}>
-            <MaterialIcons name="event-seat" /> {data.capacidade} Lugares
-          </Text>
+        <Text style={styles.textDetails}>
+          <MaterialIcons name="event-seat" /> {data.capacidade} Lugares
+        </Text>
         <Text style={styles.textDetails}>R${data.aluguel[0]}/dia</Text>
       </View>
     </Pressable>

@@ -1,24 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Switch } from "react-native";
-
-import { VelhicesProps } from "../../hooks/useHome";
 
 import styles from "./style";
 
-interface BrandProps {
-  data: VelhicesProps;
-}
+type FilterProps = {
+  brand: string;
+  selectedBrand: string | undefined;
+  brandSelected: (brand: string | undefined) => void;
+};
 
-const ListFilterBrands = ({ data }: BrandProps) => {
+const ListFilterBrands = ({ brand, selectedBrand ,brandSelected }: FilterProps) => {
   const [isEnabled, setIsEnabled] = useState(false);
 
+  useEffect(() => {
+    setIsEnabled(brand === selectedBrand);
+  }, [brandSelected, brand]);
+
   const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
+    const newState = !isEnabled;
+    setIsEnabled(newState);
+
+    const brandData = newState ? brand : undefined;
+    brandSelected(brandData);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleBrand}>{data.marca}</Text>
+      <Text style={styles.titleBrand}>{brand}</Text>
       <Switch
         trackColor={{ false: "#767577", true: "#1f51d8" }}
         thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}

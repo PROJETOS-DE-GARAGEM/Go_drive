@@ -3,9 +3,9 @@ import {
   Text,
   View,
   FlatList,
-  Pressable,
   ActivityIndicator,
   Modal,
+  TouchableOpacity,
 } from "react-native";
 
 import styles from "./style";
@@ -16,11 +16,11 @@ import { ListBrands } from "./components/ListBrands";
 import { ListCars } from "./components/ListCars";
 import { FilterModal } from "./components/FilterModal";
 
-import { useHome } from "./hooks/useHome";
+import { useHome } from "../../hooks/useHome";
 
 export default function Home() {
   const [modalVisible, setModalVisible] = useState(false);
-  const { cars, loading } = useHome();
+  const { cars, loading, fetchCarsFiltered } = useHome();
 
   return (
     <View style={styles.container}>
@@ -42,25 +42,30 @@ export default function Home() {
             renderItem={({ item }) => <ListBrands data={item} />}
             keyExtractor={(item) => item.id}
             contentContainerStyle={{ paddingHorizontal: 5 }}
-            style={{ maxHeight: 90 }}
+            style={{ maxHeight: 150 }}
           />
           <View style={styles.listCarsContainer}>
             <View style={styles.headerCarsContainer}>
               <Text style={styles.title}>Carros</Text>
-              <Pressable style={styles.buttonSpectAll}>
+              <TouchableOpacity
+                style={styles.buttonSpectAll}
+                onPress={() => fetchCarsFiltered(undefined)}
+              >
                 <Text style={styles.buttonSpectAllText}>Todos</Text>
-              </Pressable>
+              </TouchableOpacity>
             </View>
             <FlatList
               data={cars}
-              numColumns={2}
-              showsVerticalScrollIndicator={false}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
-              contentContainerStyle={{ paddingBottom: 14, padding: 10 }}
-              renderItem={({ item }) => (
-                <ListCars data={item} widthScreen={"49%"} />
-              )}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                paddingBottom: 14,
+                padding: 5,
+                gap: 15,
+                paddingHorizontal: 10,
+              }}
               keyExtractor={(item) => item.id}
+              renderItem={({ item }) => <ListCars data={item} />}
             />
           </View>
         </>

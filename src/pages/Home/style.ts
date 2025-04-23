@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   listCarsContainer: {
     flex: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#FAFCFD",
     marginTop: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -24,13 +24,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingStart: 5,
     paddingEnd: 5,
+    marginBottom: 5,
   },
   buttonSpectAll: {
     top: 10,
-    paddingRight: 15,
+    marginRight: 20,
+    height: 30,
+    paddingHorizontal: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#CCC",
+    borderRadius: 10,
   },
   buttonSpectAllText: {
-    color: "#999",
+    color: "#fff",
     fontSize: 16,
   },
 });

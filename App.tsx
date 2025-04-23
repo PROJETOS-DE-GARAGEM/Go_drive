@@ -9,7 +9,6 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <CustomStatusBar backgroundColor="#1f51d8" barStyle="light-content" />
-
       <NavigationContainer>
         <AuthProvider>
           <RootStack />
