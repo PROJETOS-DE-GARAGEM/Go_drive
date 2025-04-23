@@ -2,19 +2,25 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    borderWidth: 0.5,
+    width: 200,
+    height: 270,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginBottom: 14,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    elevation: 7,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
   },
   imageCar: {
-    width: "100%",
-    height: 140,
+    width: 200,
+    height: 160,
     borderTopLeftRadius: 7,
-    borderTopRightRadius: 7
+    borderTopRightRadius: 7,
   },
   partialInfoCar: {
     padding: 10,
@@ -35,6 +41,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#999",
   },
-})
+});
 
 export default styles;

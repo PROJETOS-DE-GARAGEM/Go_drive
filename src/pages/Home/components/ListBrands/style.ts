@@ -7,20 +7,17 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   iconBrand: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: "#1f51d8",
     justifyContent: "center",
     alignItems: "center",
+    elevation: 17,
     shadowColor: "#000",
-    shadowOffset: {
-      width: 10,
-      height: 10,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 10,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
   },
   titleContainer: {
     flex: 1,
@@ -30,7 +27,7 @@ const styles = StyleSheet.create({
   titleBrand: {
     fontWeight: "700",
     color: "#999",
-    marginTop: 6,
+    marginTop: 10,
   },
 });
 

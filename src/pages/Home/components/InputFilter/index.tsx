@@ -1,7 +1,5 @@
 import { View, TextInput, TouchableOpacity } from "react-native";
 
-import { useHome } from "../../hooks/useHome";
-
 import { Fontisto, Ionicons } from "@expo/vector-icons";
 
 import styles from "./style";
@@ -11,8 +9,6 @@ type SearchProps = {
 };
 
 const InputFilter = ({ setModalVisible }: SearchProps) => {
-  const { getBrands } = useHome();
-
   return (
     <View style={styles.containerSearch}>
       <View style={styles.inputContainer}>

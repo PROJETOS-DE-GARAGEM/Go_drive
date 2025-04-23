@@ -1,17 +1,29 @@
 import { View, Text, TouchableWithoutFeedback, FlatList } from "react-native";
 
 import { ListFilterBrands } from "../ListFilterBrands";
-import { useHome } from "../../hooks/useHome";
+import { useHome } from "../../../../hooks/useHome";
 
 import styles from "./style";
 import Button from "../../../../components/Button/Button";
+import { useState } from "react";
 
 type FilterModalProps = {
   closeModal: () => void;
 };
 
 const FilterModal = ({ closeModal }: FilterModalProps) => {
-  const { cars } = useHome();
+  const [selectedBrand, setSelectedBrand] = useState<string | undefined>(
+    undefined
+  );
+  const { cars, fetchCarsFiltered } = useHome();
+
+  const uniqueBrands = Array.from(new Set(cars.map((car) => car.marca)));
+
+  function applyFilter() {
+    fetchCarsFiltered(selectedBrand);
+    closeModal();
+  }
+
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={closeModal}>
@@ -23,12 +35,18 @@ const FilterModal = ({ closeModal }: FilterModalProps) => {
         </View>
         <View style={styles.contentFilterBrands}>
           <FlatList
-            data={cars}
-            renderItem={({ item }) => <ListFilterBrands data={item} />}
+            data={uniqueBrands}
+            renderItem={({ item }) => (
+              <ListFilterBrands
+                selectedBrand={selectedBrand}
+                brand={item}
+                brandSelected={setSelectedBrand}
+              />
+            )}
           />
         </View>
         <View style={styles.buttonFilter}>
-        <Button name="Aplicar" onPress={closeModal} />
+          <Button name="Aplicar" onPress={applyFilter} />
         </View>
       </View>
     </View>
