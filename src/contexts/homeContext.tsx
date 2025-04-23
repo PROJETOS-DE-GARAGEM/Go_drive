@@ -23,12 +23,20 @@ export type CarsProps = {
   versao: string;
 };
 
+export type BrandProps = {
+  id: string;
+  marca: string;
+  imageMarca: string;
+}
+
 type HomeContextData = {
   cars: CarsProps[];
+  brands: BrandProps[];
   loading: boolean;
   fetchCarsFiltered: (brand: string | undefined) => Promise<void>;
   searchBrands: (text: string | "") => Promise<void>;
   fetchAllCars: () => Promise<void>;
+  fetchAllBrands: () => Promise<void>;
 };
 
 type HomeProviderProps = {
@@ -39,11 +47,13 @@ export const HomeContext = createContext({} as HomeContextData);
 
 export function HomeProvider({ children }: HomeProviderProps) {
   const [cars, setCars] = useState<CarsProps[]>([]);
+  const [brands, setBrands] = useState<BrandProps[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAllCars() {
       await fetchAllCars();
+      await fetchAllBrands();
     }
 
     getAllCars();
@@ -60,6 +70,25 @@ export function HomeProvider({ children }: HomeProviderProps) {
       })) as CarsProps[];
 
       setCars(listCars);
+      setLoading(false);
+    } catch (error) {
+      console.log("Erro ao buscar os dados", error);
+      setLoading(false);
+    }
+  }
+
+  async function fetchAllBrands() {
+    try {
+      const carsRef = collection(db, "veiculos");
+      const queryRef = query(carsRef, orderBy("created", "desc"));
+      const snapshot = await getDocs(queryRef);
+      const listBrands = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        marca: doc.data().marca,
+        imageMarca: doc.data().imageMarca,
+      })) as BrandProps[];
+
+      setBrands(listBrands);
       setLoading(false);
     } catch (error) {
       console.log("Erro ao buscar os dados", error);
@@ -131,6 +160,8 @@ export function HomeProvider({ children }: HomeProviderProps) {
         fetchCarsFiltered,
         searchBrands,
         fetchAllCars,
+        fetchAllBrands,
+        brands,
       }}
     >
       {children}

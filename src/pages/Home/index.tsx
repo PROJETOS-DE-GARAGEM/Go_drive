@@ -22,7 +22,7 @@ export default function Home() {
   const [modalVisible, setModalVisible] = useState(false);
   const [search, setSearch] = useState<string>("");
 
-  const { cars, loading, fetchCarsFiltered, searchBrands } = useHome();
+  const { cars, brands ,loading, fetchCarsFiltered, searchBrands } = useHome();
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -46,7 +46,7 @@ export default function Home() {
         <>
           <Text style={styles.title}>Marcas</Text>
           <FlatList
-            data={cars}
+            data={brands}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => <ListBrands data={item} />}
@@ -71,7 +71,7 @@ export default function Home() {
               contentContainerStyle={{
                 paddingBottom: 14,
                 padding: 5,
-                gap: 15,
+                gap: 8,
                 paddingHorizontal: 10,
               }}
               keyExtractor={(item) => item.id}
