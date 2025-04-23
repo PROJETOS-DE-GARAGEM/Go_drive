@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
     justifyContent: "center",
+    paddingLeft: 20,
+    paddingRight: 20
   },
   headerScrollContainer: {
     height: 20,

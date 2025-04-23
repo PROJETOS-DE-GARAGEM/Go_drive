@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
-    paddingLeft: 20,
-    paddingRight: 20
+    
   },
 
   formTitle: {

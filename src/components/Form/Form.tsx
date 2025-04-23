@@ -27,7 +27,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
   return (
     <View style={styles.formContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.formTitle}>{title}</Text>
+        {title && <Text style={styles.formTitle}>{title}</Text> }
       </View>
 
       {fields.map((field) => (
