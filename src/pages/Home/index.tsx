@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useDeferredValue } from "react";
 import {
   Text,
   View,
@@ -20,12 +20,22 @@ import { useHome } from "../../hooks/useHome";
 
 export default function Home() {
   const [modalVisible, setModalVisible] = useState(false);
-  const { cars, loading, fetchCarsFiltered } = useHome();
+  const [search, setSearch] = useState<string>("");
+
+  const { cars, loading, fetchCarsFiltered, searchBrands } = useHome();
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      searchBrands(search);
+    }, 700);
+
+    return () => clearTimeout(delay);
+  }, [search]);
 
   return (
     <View style={styles.container}>
       <Header />
-      <InputFilter setModalVisible={setModalVisible} />
+      <InputFilter setModalVisible={setModalVisible} searchInput={setSearch} />
       {loading ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}

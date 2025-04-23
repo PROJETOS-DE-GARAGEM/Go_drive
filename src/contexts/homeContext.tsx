@@ -27,6 +27,8 @@ type HomeContextData = {
   cars: CarsProps[];
   loading: boolean;
   fetchCarsFiltered: (brand: string | undefined) => Promise<void>;
+  searchBrands: (text: string | "") => Promise<void>;
+  fetchAllCars: () => Promise<void>;
 };
 
 type HomeProviderProps = {
@@ -40,26 +42,30 @@ export function HomeProvider({ children }: HomeProviderProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchAllCars() {
-      try {
-        const carsRef = collection(db, "veiculos");
-        const queryRef = query(carsRef, orderBy("created", "desc"));
-        const snapshot = await getDocs(queryRef);
-        const listCars = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as CarsProps[];
-
-        setCars(listCars);
-        setLoading(false);
-      } catch (error) {
-        console.log("Erro ao buscar os dados", error);
-        setLoading(false);
-      }
+    async function getAllCars() {
+      await fetchAllCars();
     }
 
-    fetchAllCars();
+    getAllCars();
   }, []);
+
+  async function fetchAllCars() {
+    try {
+      const carsRef = collection(db, "veiculos");
+      const queryRef = query(carsRef, orderBy("created", "desc"));
+      const snapshot = await getDocs(queryRef);
+      const listCars = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as CarsProps[];
+
+      setCars(listCars);
+      setLoading(false);
+    } catch (error) {
+      console.log("Erro ao buscar os dados", error);
+      setLoading(false);
+    }
+  }
 
   async function fetchCarsFiltered(marca: string | undefined) {
     setLoading(true);
@@ -73,16 +79,47 @@ export function HomeProvider({ children }: HomeProviderProps) {
 
       const snapshot = await getDocs(queryRef);
 
-      const listCars = snapshot.docs.map((doc) => ({
+      const filterCars = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       })) as CarsProps[];
 
-      setCars(listCars);
-    } catch (error) {
-      console.log("Erro ao buscar dados filtrados", error);
-    } finally {
+      setCars(filterCars);
       setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log("Erro ao buscar dados filtrados", error);
+    }
+  }
+
+  async function searchBrands(text: string) {
+    if (!text) {
+      setLoading(true);
+      await fetchAllCars();
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const carsRef = collection(db, "veiculos");
+      let queryRef = query(carsRef);
+
+      queryRef = query(queryRef, where("marca", ">=", text));
+      queryRef = query(queryRef, where("marca", "<=", text + "\uf8ff"));
+
+      const snapshot = await getDocs(queryRef);
+
+      const searchCars = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as CarsProps[];
+
+      setCars(searchCars);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log("Erro ao buscar dados filtrados", error);
     }
   }
 
@@ -92,6 +129,8 @@ export function HomeProvider({ children }: HomeProviderProps) {
         cars,
         loading,
         fetchCarsFiltered,
+        searchBrands,
+        fetchAllCars,
       }}
     >
       {children}
