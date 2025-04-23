@@ -6,9 +6,10 @@ import styles from "./style";
 
 type SearchProps = {
   setModalVisible: (value: boolean) => void;
+  searchInput: (text: string) => void;
 };
 
-const InputFilter = ({ setModalVisible }: SearchProps) => {
+const InputFilter = ({ setModalVisible, searchInput }: SearchProps) => {
   return (
     <View style={styles.containerSearch}>
       <View style={styles.inputContainer}>
@@ -18,6 +19,7 @@ const InputFilter = ({ setModalVisible }: SearchProps) => {
             style={{ flex: 1 }}
             placeholder="Pesquisar"
             placeholderTextColor={"#000"}
+            onChangeText={(text) => searchInput(text)}
           />
         </View>
       </View>

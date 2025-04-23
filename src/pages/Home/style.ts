@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#CCC",
+    backgroundColor: "#1f51d8",
     borderRadius: 10,
   },
   buttonSpectAllText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 14,
   },
 });
 
