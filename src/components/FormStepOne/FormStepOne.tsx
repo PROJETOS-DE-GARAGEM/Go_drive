@@ -2,14 +2,17 @@ import { View } from "react-native";
 import Form from "../Form/Form";
 import styles from "./FormStepOneStyle";
 import Button from "../Button/Button";
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function FrmStepOne() {
+  const methods = useForm();
   return (
+    <FormProvider {...methods}>
     <View style={styles.container}>
       <Form
         title="Informações Pessoais"
         fields={[
-          { name: "FullName", placeholder: "Nome completo" },
+          { name: "FullName", placeholder: "Nome completo",  },
           { name: "CPF", placeholder: "CPF" },
           { name: "PhoneNumber", placeholder: "Telefone" },
         ]}
@@ -55,8 +58,8 @@ export default function FrmStepOne() {
       <View style={styles.buttonContainer}>
         <Button style={styles.button} name="Voltar" onPress={() => {}} />
         <Button style={styles.button} name="Proximo" onPress={() => {}} />
-
       </View>
     </View>
+    </FormProvider>
   );
 }

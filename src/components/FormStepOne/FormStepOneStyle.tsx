@@ -5,9 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  formSpacing: {
-    marginBottom: -24, 
-  },
+ 
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -21,10 +19,10 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "48%", 
-    paddingVertical: 10, 
     alignItems: "center", 
     justifyContent: "space-between",
-  },
+    textAlign: "center",
+    marginTop: 5  },
 });
 
 export default styles;
