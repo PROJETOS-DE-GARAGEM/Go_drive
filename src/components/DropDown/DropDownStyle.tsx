@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
   unselectedText: {
     // Cor do texto "Selecione..."
-    color: "#939ba4",
+    color: "#C7C7CD",
     fontSize: 16,
     fontWeight: "500",
 

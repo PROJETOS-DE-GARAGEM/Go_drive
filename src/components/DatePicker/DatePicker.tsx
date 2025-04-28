@@ -1,40 +1,72 @@
 import { useState } from "react";
-import { View, Button, Text, Platform } from "react-native";
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ViewStyle,
+} from "react-native";
+import DatePickerModal from "react-native-modal-datetime-picker";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { format } from "date-fns";
+import styles from "./DatePickerStyle";
 
 type DatePickerProps = {
   onChange: (date: Date) => void;
-  icon: string;
+  icon?: string;
+  placeholder?: string;
 };
 
-export default function DatePicker({ label, date, onChange, mode = 'date' }: DatePickerProps) {
+export default function DatePicker({
+  onChange,
+  icon,
+  placeholder,
+}: DatePickerProps) {
   const [show, setShow] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const handleChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
-    if (event.type === "set" && selectedDate) {
-      onChange(selectedDate);
-    }
+  const handleConfirm = (date: Date) => {
+    setShow(false);
+    setSelectedDate(date);
+    onChange(date);
+  };
+
+  const handleCancel = () => {
     setShow(false);
   };
 
   return (
-    <View style={{ marginVertical: 10 }}>
-      {label && <Text style={{ marginBottom: 5 }}>{label}</Text>}
-
-      <Button title="Selecionar data" onPress={() => setShow(true)} />
-
-      <Text style={{ marginTop: 5 }}>{date.toLocaleDateString()}</Text>
-
-      {show && (
-        <DateTimePicker
-          value={date}
-          mode={mode}
-          display={Platform.OS === "ios" ? "spinner" : "default"}
-          onChange={handleChange}
+    <View>
+      <View style={styles.containerInput}>
+        <TextInput
+          onPress={() => setShow(true)}
+          style={styles.inputText}
+          placeholder={placeholder}
+          placeholderTextColor={"#C7C7CD"}
+          value={selectedDate ? format(selectedDate, "dd/MM/yyyy") : ""}
+          editable={false}
         />
-      )}
+        <TouchableOpacity
+          onPress={() => setShow(true)} // Abre o modal
+          style={styles.buttonIconPicker}
+        >
+          <View>
+            <FontAwesome
+              style={styles.iconCalendar}
+              name="calendar"
+              size={20}
+              color={"gray"}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <DatePickerModal
+        isVisible={show} // Controla a visibilidade do modal
+        mode="date" // Define o modo (date, time ou datetime)
+        onConfirm={handleConfirm} // Chamado ao confirmar a data
+        onCancel={handleCancel} // Chamado ao cancelar
+      />
     </View>
   );
 }

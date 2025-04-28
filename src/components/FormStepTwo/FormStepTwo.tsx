@@ -5,12 +5,16 @@ import Form from "../Form/Form";
 import DropDown from "../DropDown/DropDown";
 import { useState } from "react";
 import DatePicker from "../DatePicker/DatePicker";
+import Button from "../Button/Button";
 
 export default function FormStepTwo() {
   const methods = useForm();
   const [selectedValue, setSelectedValue] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const handleDateChange = (date: Date) => {
+    console.log("Data selecionada:", date);
+  };
 
   return (
     <FormProvider {...methods}>
@@ -42,13 +46,22 @@ export default function FormStepTwo() {
             ]}
           />
         </View>
-        <DatePicker
-        label="Data de emisssao"
-        date={selectedDate}
-        onChange={setSelectedDate}
-        
-        />
-        
+        <View style={styles.datePicker}>
+          <DatePicker
+            onChange={handleDateChange}
+            placeholder="Data de Emissão"
+          />
+        </View>
+        <View style={styles.datePicker}>
+          <DatePicker
+            onChange={handleDateChange}
+            placeholder="Data de validade"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button style={styles.button} name="Voltar" onPress={() => {}} />
+          <Button style={styles.button} name="Proximo" onPress={() => {}} />
+        </View>
       </View>
     </FormProvider>
   );
