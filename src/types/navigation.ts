@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
+import { CarsProps } from "../contexts/homeContext";
 
 //Screens´s types of authetication (public)
 export type AuthStackParamList = {
@@ -13,9 +14,17 @@ export type AuthStackParamList = {
   };
 };
 
+export type AppStackParamsList = {
+  Home: undefined;
+  FeedCars: {
+    brand: string;
+  };
+};
+
 //Root navigation that rolls all the stacks
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  AppStack: NavigatorScreenParams<AppStackParamsList>;
 };
 
 //Global typing for react navigation
