@@ -1,13 +1,12 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    width: 190,
-    height: Platform.OS === "ios" ? 250 : 270,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    marginBottom: 10,
     backgroundColor: "#fff",
     elevation: 7,
     shadowColor: "#000",
@@ -16,13 +15,12 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
   imageCar: {
-    width: 190,
     height: 160,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
   },
   partialInfoCar: {
-    padding: 7,
+    padding: 10,
   },
   endInfoCar: {
     flexDirection: "row",
@@ -30,6 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 10,
     paddingRight: 10,
+    marginBottom: 12,
   },
   titleDetails: {
     fontSize: 16,

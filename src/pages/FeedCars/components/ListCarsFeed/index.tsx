@@ -1,18 +1,19 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, DimensionValue } from "react-native";
 
-import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons, FontAwesome6 } from "@expo/vector-icons";
 
 import styles from "./style";
 
 import { CarsProps } from "../../../../contexts/homeContext";
 
-type ListCarProps = {
+type ListCarFeedProps = {
   data: CarsProps;
+  widthScreen: DimensionValue;
 };
 
-const ListCars = ({ data }: ListCarProps) => {
+const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={[styles.container, { width: widthScreen }]}>
       <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
 
       <View style={styles.partialInfoCar}>
@@ -35,11 +36,11 @@ const ListCars = ({ data }: ListCarProps) => {
           </Text>
         </View>
         <Text style={styles.textDetails}>
-        <FontAwesome6 name="sack-dollar" />{data.aluguel[0]}/dia
+        <FontAwesome6 name="sack-dollar"/>{data.aluguel[0]}/dia
         </Text>
       </View>
     </Pressable>
   );
 };
 
-export { ListCars };
+export { ListCarsFeed };

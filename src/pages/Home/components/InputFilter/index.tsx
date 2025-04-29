@@ -18,6 +18,8 @@ const InputFilter = ({ setModalVisible, searchInput }: SearchProps) => {
           <TextInput
             style={{ flex: 1 }}
             placeholder="Pesquisar"
+            autoCorrect={false}
+            autoCapitalize="none"
             placeholderTextColor={"#000"}
             onChangeText={(text) => searchInput(text)}
           />

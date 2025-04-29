@@ -1,10 +1,7 @@
 import { View, Text, Image } from "react-native";
 
-import * as Animatable from "react-native-animatable";
-
 import styles from "./style";
 
-const TextAnimated = Animatable.createAnimatableComponent(Text);
 
 const Header = () => {
   return (
@@ -17,14 +14,7 @@ const Header = () => {
           />
         </View>
         <View>
-          <TextAnimated
-            style={styles.titleHeader}
-            animation="pulse"
-            iterationCount={Infinity}
-            duration={2000}
-          >
-            Go Drive
-          </TextAnimated>
+          <Text style={styles.titleHeader}>Go Drive</Text>
         </View>
       </View>
       <View>

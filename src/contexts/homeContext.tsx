@@ -21,6 +21,8 @@ export type CarsProps = {
   placa: string;
   aluguel: string[];
   versao: string;
+  marca_normalized: string;
+  rating: string;
 };
 
 export type BrandProps = {
@@ -74,7 +76,11 @@ export function HomeProvider({ children }: HomeProviderProps) {
         imageMarca: doc.imageMarca,
       }))
 
-      setBrands(brandsList);
+      const uniqueBrandsList = Array.from(
+        new Map(brandsList.map((item) => [item.marca, item])).values()
+      );
+
+      setBrands(uniqueBrandsList);
       setCars(listCars);
       setLoading(false);
     } catch (error) {
@@ -116,13 +122,16 @@ export function HomeProvider({ children }: HomeProviderProps) {
       return;
     }
 
+    //Ignora "espaços" na consultas no banco
+    const normalizedText = text.toLowerCase().replace(/\s/g, "");
+
     setLoading(true);
     try {
       const carsRef = collection(db, "veiculos");
       let queryRef = query(carsRef);
 
-      queryRef = query(queryRef, where("marca", ">=", text));
-      queryRef = query(queryRef, where("marca", "<=", text + "\uf8ff"));
+      queryRef = query(queryRef, where("marca_normalized", ">=", normalizedText));
+      queryRef = query(queryRef, where("marca_normalized", "<=", normalizedText + "\uf8ff"));
 
       const snapshot = await getDocs(queryRef);
 
