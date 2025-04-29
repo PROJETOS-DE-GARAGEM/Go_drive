@@ -1,5 +1,4 @@
 import { NavigatorScreenParams } from "@react-navigation/native";
-import { CarsProps } from "../contexts/homeContext";
 
 //Screens´s types of authetication (public)
 export type AuthStackParamList = {
@@ -18,6 +17,18 @@ export type AppStackParamsList = {
   Home: undefined;
   FeedCars: {
     brand: string;
+  };
+};
+
+export type AppTabParamsList = {
+  Home: undefined;
+  FeedCars: {
+    brand: string;
+  };
+  Maps: undefined;
+  Perfil: {
+    email: string;
+    password: string;
   };
 };
 
