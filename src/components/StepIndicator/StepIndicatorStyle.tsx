@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  activeLine: {
+    backgroundColor: "#28b573", // Cor da linha ativa
+  },
 });
 
 export default styles;

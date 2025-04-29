@@ -58,10 +58,6 @@ export default function FormStepTwo() {
             placeholder="Data de validade"
           />
         </View>
-        <View style={styles.buttonContainer}>
-          <Button style={styles.button} name="Voltar" onPress={() => {}} />
-          <Button style={styles.button} name="Proximo" onPress={() => {}} />
-        </View>
       </View>
     </FormProvider>
   );

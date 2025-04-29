@@ -1,11 +1,23 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor: "white"
-        
-    }
-})
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10
+    
+  },
+
+  button: {
+    width: "48%",
+    padding: 10
+    
+  }
+});
 
 export default styles;
