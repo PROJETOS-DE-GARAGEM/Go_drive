@@ -5,8 +5,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 40,
-    marginTop: 70,
+    marginBottom: 20,
+    marginTop: 50,
   },
   circle: {
     width: 70,

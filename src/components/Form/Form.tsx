@@ -9,6 +9,7 @@ import {
 import styles from "./FormStyle";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useState } from "react";
+import { TextInputMask } from "react-native-masked-text";
 
 //Interface que será utilizada no form
 interface FormProps {
@@ -27,7 +28,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
   return (
     <View style={styles.formContainer}>
       <View style={styles.titleContainer}>
-        {title && <Text style={styles.formTitle}>{title}</Text> }
+        {title && <Text style={styles.formTitle}>{title}</Text>}
       </View>
 
       {fields.map((field) => (
@@ -41,14 +42,39 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
             fieldState: { error },
           }) => (
             <View>
-              <TextInput
-                style={[styles.input, field.style]}
-                placeholder={field.placeholder}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                secureTextEntry={field.name === "password" && !showPassword}
-              />
+              {field.name === "CPF" ? (
+                <TextInputMask
+                  type={"cpf"} // Máscara CPF
+                  style={[styles.input, field.style]}
+                  placeholder={field.placeholder}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="numeric"
+                />
+              ) : field.name === "PhoneNumber" ? (
+                <TextInputMask
+                  type={"custom"}
+                  options={{
+                    mask: "(99) 99999-9999", // Máscara de telefone
+                  }}
+                  style={[styles.input, field.style]}
+                  placeholder={field.placeholder}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="numeric"
+                />
+              ) : (
+                <TextInput
+                  style={[styles.input, field.style]}
+                  placeholder={field.placeholder}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  secureTextEntry={field.name === "password" && !showPassword}
+                />
+              )}
               {field.name === "password" && (
                 <TouchableOpacity
                   style={{

@@ -64,7 +64,7 @@ export default function Login() {
           </View>
 
           <View style={styles.formContainer}>
-            <View style={{marginTop: -200 }}>
+            <View style={{ marginTop: -200 }}>
               <Form
                 title="Login"
                 fields={[

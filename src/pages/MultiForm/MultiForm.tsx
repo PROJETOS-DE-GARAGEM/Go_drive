@@ -8,12 +8,16 @@ import FormStepThree from "../../components/FormStepThree/FormStepThree";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 
+
 export default function MultiForm() {
   const [currentStep, setCurrentStep] = useState(1); // Estado para o passo atual
   const methods = useForm();
 
-  const handleNext = () => {
-    if (currentStep < 3) setCurrentStep(currentStep + 1); // Avança para o próximo passo
+  const handleNext = async () => {
+    const valid = await methods.trigger(); // Valida os campos visíveis
+    if (valid) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const handleBack = () => {
