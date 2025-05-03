@@ -36,7 +36,7 @@ const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
           </Text>
         </View>
         <Text style={styles.textDetails}>
-        <FontAwesome6 name="sack-dollar"/>{data.aluguel[0]}/dia
+        <FontAwesome6 name="sack-dollar" color={"#e6ac00"}/>{data.aluguel[0]}/dia
         </Text>
       </View>
     </Pressable>

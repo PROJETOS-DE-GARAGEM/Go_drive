@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
-import { View, TextInput } from "react-native";
+import { View } from "react-native";
 
 import styles from "./style";
 
-import { FontAwesome6 } from "@expo/vector-icons";
 import { Header } from "../../components/Header";
+import { AccessDeniedLocation } from "./components/AccessDenied";
 import MapView, { Marker } from "react-native-maps";
 
 import { useHome } from "../../hooks/useHome";
 
 type ParkingProps = {
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 };
 
 export default function Maps() {
-  const { cars, location } = useHome();
+  const { cars, location, permissionDenied, openSettingsPermissionLocation } =
+    useHome();
 
   const [region, setRegion] = useState({
-    latitude: location?.coords.latitude,
-    longitude: location?.coords.longitude,
+    latitude: 0,
+    longitude: 0,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
@@ -28,45 +29,59 @@ export default function Maps() {
   useEffect(() => {
     const filteredAdress = cars
       .map((car) => car.parking)
-      .filter((parking) => parking !== undefined);
+      .filter((parking) => parking !== undefined)
+      .map((parking) => ({
+        latitude: Number(parking.latitude),
+        longitude: Number(parking.longitude),
+      }));
 
     setParkings(filteredAdress);
-  }, [cars]);
 
-  if (!location) {
-    alert("Não foi possível obter a sua localização!");
-    return;
+    if (filteredAdress.length > 0) {
+      const avgLatitude =
+        filteredAdress.reduce((sum, loc) => sum + loc.latitude, 0) /
+        filteredAdress.length;
+      const avgLongitude =
+        filteredAdress.reduce((sum, loc) => sum + loc.longitude, 0) /
+        filteredAdress.length;
+      setRegion({
+        latitude: avgLatitude,
+        longitude: avgLongitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    }
+  }, [cars, location]);
+
+  if (permissionDenied) {
+    return (
+      <View style={styles.container}>
+        <AccessDeniedLocation
+          openSettings={openSettingsPermissionLocation}
+          errorPermission={permissionDenied}
+        />
+      </View>
+    );
   }
 
   return (
-    <View style={styles.constainer}>
+    <View style={styles.container}>
       <Header title="Maps" />
-      {/* <View style={styles.inputContainer}>
-        <FontAwesome6 name="location-dot" color={"#FFF"} size={35} />
-        <TextInput 
-          style={styles.input} 
-          placeholder="Pesquise aqui"
-          placeholderTextColor={"#FFF"}
-          numberOfLines={1}
-        />
-      </View> */}
       <MapView
         style={styles.map}
-        showsUserLocation
-        showsMyLocationButton
-        initialRegion={{
-          latitude: location?.coords.latitude,
-          longitude: location?.coords.longitude,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005,
-        }}
+        loadingEnabled={true}
+        zoomEnabled={true}
+        initialRegion={region}
       >
-        <Marker
-          coordinate={{
-            latitude: location?.coords.latitude,
-            longitude: location?.coords.longitude,
-          }}
-        ></Marker>
+        {parkings.map((marker, index) => (
+          <Marker
+            key={index}
+            coordinate={{
+              latitude: marker.latitude,
+              longitude: marker.longitude,
+            }}
+          />
+        ))}
       </MapView>
     </View>
   );
