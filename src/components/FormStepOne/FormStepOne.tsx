@@ -5,45 +5,60 @@ import Button from "../Button/Button";
 import { useForm } from "react-hook-form";
 
 export default function FrmStepOne() {
-  const methods = useForm();
   return (
     <View style={styles.container}>
-      <Form
-        title="Informações Pessoais"
-        fields={[
-          {
-            name: "FullName",
-            placeholder: "Nome completo",
-            rules: { required: "Nome é obrigatório" },
-          },
-          {
-            name: "CPF",
-            placeholder: "CPF",
-            rules: {
-              required: "CPF é obrigatório",
-              validate: (value: string) =>
-                value?.replace(/\D/g, "").length === 11 || "CPF inválido",
+      <View>
+        <Form
+          title="Informações Pessoais"
+          fields={[
+            {
+              name: "FullName",
+              placeholder: "Nome completo",
+              rules: { required: "Nome é obrigatório" },
+              editable: true,
             },
-          },
-          {
-            name: "PhoneNumber",
-            placeholder: "Telefone",
-            rules: {
-              required: "Telefone é obrigatório",
-              pattern: {
-                value: /^\(\d{2}\) \d{4,5}-\d{4}$/,
-                message: "Telefone inválido",
+            {
+              name: "CPF",
+              style: { marginTop: 20 },
+              placeholder: "CPF",
+              rules: {
+                required: "CPF é obrigatório",
+                validate: (value: string) =>
+                  value?.replace(/\D/g, "").length === 11 || "CPF inválido",
+              },
+              editable: true,
+            },
+            {
+              name: "PhoneNumber",
+              style: { marginTop: 20 },
+              placeholder: "Telefone",
+              rules: {
+                required: "Telefone é obrigatório",
+                pattern: {
+                  value: /^\(\d{2}\) \d{4,5}-\d{4}$/,
+                  message: "Telefone inválido",
+                },
               },
             },
-          },
-        ]}
-      />
-      <Form
-        title="Endereço"
-        fields={[
-          { name: "Street", placeholder: "Rua", style: { marginBottom: 0 } },
-        ]}
-      />
+          ]}
+        />
+      </View>
+      <View style={{ marginTop: 10 }}>
+        <Form
+          title="Endereço"
+          fields={[
+            {
+              name: "Street",
+              placeholder: "Rua",
+              style: { marginBottom: 0 },
+              rules: {
+                required: "Endereço é obrigatório",
+              },
+            },
+          ]}
+        />
+      </View>
+
       <View style={styles.row}>
         <Form
           fields={[
@@ -51,6 +66,7 @@ export default function FrmStepOne() {
               name: "Neiborhood",
               placeholder: "Bairro",
               style: { width: 250, marginBottom: 0 },
+              rules: { required: "Bairro é obrigatório" },
             },
           ]}
         />
@@ -68,7 +84,14 @@ export default function FrmStepOne() {
             {
               name: "City",
               placeholder: "Cidade",
-              style: { width: 190, marginBottom: 0 },
+              style: { width: 170, marginBottom: 0 },
+              rules: {
+                required: "A cidade é obrigatória",
+                pattern: {
+                  value: /^[A-Za-zÀ-ÿ\s]+$/, // aceita letras e espaços (com acentos)
+                  message: "Digite apenas letras",
+                },
+              },
             },
           ]}
         />
@@ -78,6 +101,15 @@ export default function FrmStepOne() {
               name: "Cep",
               placeholder: "Cep",
               style: { width: 174, marginBottom: 0 },
+              keyboardType: "numeric",
+              onlyNumbers: true,
+              rules: {
+                required: "O CEP é obrigatório",
+                pattern: {
+                  value: /^\d{5}-\d{3}$/,
+                  message: "O CEP deve conter 8 números",
+                },
+              },
             },
           ]}
         />

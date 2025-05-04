@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,15 +15,21 @@ type DatePickerProps = {
   onChange: (date: Date) => void;
   icon?: string;
   placeholder?: string;
+  value?: Date;
 };
 
 export default function DatePicker({
   onChange,
   icon,
   placeholder,
+  value,
 }: DatePickerProps) {
   const [show, setShow] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
+
+  useEffect(() => {
+    setSelectedDate(value ?? null);
+  }, [value]);
 
   const handleConfirm = (date: Date) => {
     setShow(false);

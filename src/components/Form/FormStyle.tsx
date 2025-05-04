@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 20,
     paddingHorizontal: 9,
-    marginBottom: 20,
     borderWidth: 1.5,
     borderColor: "#f3f5f7",
     backgroundColor: "rgba(255,255,255,0.5)",
@@ -45,6 +44,10 @@ const styles = StyleSheet.create({
     right: 20, // Margem à direita
     alignItems: "center", // Centraliza o botão horizontalmente
     zIndex: 1,
+  },
+  disabledInput: {
+    backgroundColor: "#f0f0f0", // Fundo cinza claro
+    color: "#a0a0a0", // Texto cinza claro
   },
 });
 

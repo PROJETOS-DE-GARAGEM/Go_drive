@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 16,
     borderColor: "#f3f5f7",
-    width: 100,
+    width: 132,
     height: 48,
   },
   overlay: {

@@ -1,64 +1,128 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import styles from "./FormStepTwoStyle";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Form from "../Form/Form";
 import DropDown from "../DropDown/DropDown";
-import { useState } from "react";
 import DatePicker from "../DatePicker/DatePicker";
-import Button from "../Button/Button";
 
 export default function FormStepTwo() {
-  const methods = useForm();
-  const [selectedValue, setSelectedValue] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const handleDateChange = (date: Date) => {
-    console.log("Data selecionada:", date);
-  };
+  const { control, setValue } = useFormContext(); // Acessa o contexto do formulário
+  // Observa o valor de "validityDate"
 
   return (
-    <FormProvider {...methods}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <Form
+        title="Informações da CNH"
+        fields={[
+          {
+            name: "FullName",
+            placeholder: "Nome completo",
+            style: { marginBottom: 20 },
+            editable: false,
+          },
+          {
+            name: "CPF",
+            placeholder: "CPF",
+            style: { marginBottom: 0 },
+            editable: false,
+          },
+        ]}
+      />
+      <View style={styles.row}>
         <Form
-          title="Informações da CNH"
           fields={[
-            { name: "FullName", placeholder: "Nome completo" },
-            { name: "CPF", placeholder: "CPF", style: { marginBottom: 0 } },
+            {
+              name: "RegisterNumber",
+              placeholder: "N° de registro",
+              style: { width: 230, marginBottom: 0, marginRight: 10 },
+              rules: {
+                required: "N de registro é obrigatório",
+                pattern: {
+                  value: /^[0-9]{9}$/,
+                  message: "Número inválido",
+                },
+              },
+            },
           ]}
         />
-        <View style={styles.row}>
-          <Form
-            fields={[
-              {
-                name: "RegisterNumber",
-                placeholder: "N° de registro",
-                style: { width: 260, marginBottom: 0 },
-              },
-            ]}
-          />
-          <DropDown
-            value={selectedValue}
-            onChange={(newValue) => setSelectedValue(newValue)}
-            options={[
-              { label: "A", value: "1" },
-              { label: "B", value: "2" },
-              { label: "AB", value: "3" },
-            ]}
-          />
-        </View>
-        <View style={styles.datePicker}>
-          <DatePicker
-            onChange={handleDateChange}
-            placeholder="Data de Emissão"
-          />
-        </View>
-        <View style={styles.datePicker}>
-          <DatePicker
-            onChange={handleDateChange}
-            placeholder="Data de validade"
-          />
-        </View>
+        <Controller
+          control={control}
+          name="cnhType"
+          rules={{
+            required: "Selecione a cat de CNH", // Mensagem de erro se não for selecionado
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <View>
+              <DropDown
+                value={value} // Observa o valor de "cnhType"
+                onChange={onChange} // Atualiza o valor de "cnhType"
+                options={[
+                  { label: "A", value: "1" },
+                  { label: "B", value: "2" },
+                  { label: "AB", value: "3" },
+                ]}
+              />
+              {error && (
+                <Text style={{ color: "red", marginTop: 5 }}>
+                  {error.message}
+                </Text>
+              )}
+            </View>
+          )}
+        />
       </View>
-    </FormProvider>
+      <View style={styles.datePicker}>
+        <Controller
+          control={control}
+          name="emissionDate"
+          rules={{
+            required: "A data de emissão é obrigatória",
+            validate: (value: Date) =>
+              new Date(value) <= new Date() ||
+              "A data de emissão não pode ser no futuro",
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <>
+              <DatePicker
+                onChange={onChange}
+                value={value} // Usa o valor do formulário ou o valor observado
+                placeholder="Data de Emissão"
+              />
+              {error && (
+                <Text style={{ color: "red", marginTop: 5 }}>
+                  {error.message}
+                </Text>
+              )}
+            </>
+          )}
+        />
+      </View>
+      <View style={styles.datePicker}>
+        <Controller
+          control={control}
+          name="validityDate"
+          rules={{
+            required: "A data de validade é obrigatória",
+            validate: (value: Date) =>
+              new Date(value) > new Date() ||
+              "A data de validade deve ser posterior à data de emissão",
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <>
+              <DatePicker
+                onChange={onChange}
+                value={value}
+                placeholder="Data de Validade"
+              />
+              {error && (
+                <Text style={{ color: "red", marginTop: 5 }}>
+                  {error.message}
+                </Text>
+              )}
+            </>
+          )}
+        />
+      </View>
+    </View>
   );
 }

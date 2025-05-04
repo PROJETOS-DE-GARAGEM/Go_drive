@@ -19,6 +19,9 @@ interface FormProps {
     placeholder: string;
     rules?: object;
     style?: ViewStyle;
+    keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
+    editable?: boolean;
+    onlyNumbers?: boolean;
   }[];
 }
 
@@ -45,12 +48,32 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
               {field.name === "CPF" ? (
                 <TextInputMask
                   type={"cpf"} // Máscara CPF
-                  style={[styles.input, field.style]}
+                  style={[
+                    styles.input,
+                    field.style,
+                    !field.editable && styles.disabledInput,
+                    error && { borderColor: "red" },
+                  ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
                   keyboardType="numeric"
+                  editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
+                />
+              ) : field.name === "FullName" ? (
+                <TextInput
+                  style={[
+                    styles.input,
+                    field.style,
+                    !field.editable && styles.disabledInput, // Aplica o estilo desabilitado
+                    error && { borderColor: "red", }, // Estilo de erro
+                  ]}
+                  placeholder={field.placeholder}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
                 />
               ) : field.name === "PhoneNumber" ? (
                 <TextInputMask
@@ -58,7 +81,26 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   options={{
                     mask: "(99) 99999-9999", // Máscara de telefone
                   }}
-                  style={[styles.input, field.style]}
+                  style={[
+                    styles.input,
+                    field.style,
+                    error && { borderColor: "red" },
+                  ]}
+                  placeholder={field.placeholder}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  keyboardType="numeric"
+                />
+              ) : field.name === "Cep" ? (
+                <TextInputMask
+                  type={"custom"}
+                  options={{ mask: "99999-999" }}
+                  style={[
+                    styles.input,
+                    field.style,
+                    error && { borderColor: "red" },
+                  ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -67,7 +109,11 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                 />
               ) : (
                 <TextInput
-                  style={[styles.input, field.style]}
+                  style={[
+                    styles.input,
+                    field.style,
+                    error && { borderColor: "red" },
+                  ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
@@ -95,9 +141,8 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                 <Text
                   style={{
                     color: "red",
-                    marginBottom: 20,
-                    marginTop: -17,
                     marginLeft: 8,
+                    marginTop: 3,
                   }}
                 >
                   {error.message}
