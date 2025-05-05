@@ -2,7 +2,7 @@ import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import styles from "./ButtonStyle";
 interface ButtonProps {
   name: string;
-  onPress: () => void;
+  onPress?: () => void;
   style?: ViewStyle
 }
 

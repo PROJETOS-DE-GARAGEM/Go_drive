@@ -12,7 +12,10 @@ export type AuthStackParamList = {
     CNHnumber: number;
   };
   MultiForm: undefined;
+  RegisterConfirmation: undefined;
 };
+
+
 
 //Root navigation that rolls all the stacks
 export type RootStackParamList = {

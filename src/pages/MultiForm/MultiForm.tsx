@@ -12,10 +12,12 @@ import FormStepTwo from "../../components/FormStepTwo/FormStepTwo";
 import FormStepThree from "../../components/FormStepThree/FormStepThree";
 import { useState } from "react";
 import Button from "../../components/Button/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export default function MultiForm() {
   const [currentStep, setCurrentStep] = useState(1); // Estado para o passo atual
   const methods = useForm({ mode: "onChange", shouldUnregister: false });
+  const navigation = useNavigation();
 
   const handleNext = async () => {
     const valid = await methods.trigger(); // Valida os campos visíveis
@@ -30,6 +32,9 @@ export default function MultiForm() {
 
   const handleSubmit = methods.handleSubmit((data) => {
     console.log("Dados do formulario:", data);
+    navigation.navigate("AuthStack", {
+      screen: "RegisterConfirmation",
+    });
   });
 
   return (
