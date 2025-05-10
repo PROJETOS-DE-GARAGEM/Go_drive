@@ -21,7 +21,11 @@
       ]
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ads.godrive",
+      "config": {
+        "googleMapsApiKey":  "process.env.GOOGLE_MAPS_API_KEY"
+        }
     },
     "android": {
       "adaptiveIcon": {

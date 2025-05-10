@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#1f51d8",
     borderTopWidth: 0,
-    bottom: Platform.OS === "android" ? 30 : 50,
+    bottom: Platform.OS === "android" ? 0 : 50,
     left: 20,
     right: 20,
     elevation: 5,

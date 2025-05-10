@@ -28,9 +28,11 @@ export type CarsProps = {
   created: string;
   rating: string;
   parking: {
+    parkingName: any;
     latitude: string;
     longitude: string;
   };
+  parkingName: string;
 };
 
 export type BrandProps = {
