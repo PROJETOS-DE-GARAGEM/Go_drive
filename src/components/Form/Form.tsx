@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, RegisterOptions, useFormContext } from "react-hook-form";
 import {
   Text,
   TextInput,
@@ -17,7 +17,7 @@ interface FormProps {
   fields: {
     name: string;
     placeholder: string;
-    rules?: object;
+    rules?: RegisterOptions;
     style?: ViewStyle;
     keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
     editable?: boolean;
@@ -67,7 +67,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     styles.input,
                     field.style,
                     !field.editable && styles.disabledInput, // Aplica o estilo desabilitado
-                    error && { borderColor: "red", }, // Estilo de erro
+                    error && { borderColor: "red" }, // Estilo de erro
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}

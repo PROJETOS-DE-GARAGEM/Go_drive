@@ -14,15 +14,35 @@ import { useState } from "react";
 import Button from "../../components/Button/Button";
 import { useNavigation } from "@react-navigation/native";
 
+type RegisterFormData = {
+  FullName: string;
+  CPF: string;
+  PhoneNumber: string;
+  Street: string;
+  Neighborhood: string;
+  Number: String;
+  City: string;
+  cep: string;
+  RegisterNumber: string;
+  EmissionDate: Date;
+  ValidDate: Date;
+  Email: string;
+  password: string;
+  ConfirmPassword: string;
+};
+
 export default function MultiForm() {
   const [currentStep, setCurrentStep] = useState(1); // Estado para o passo atual
-  const methods = useForm({ mode: "onChange", shouldUnregister: false });
+  const methods = useForm<RegisterFormData>({
+    mode: "onChange",
+    shouldUnregister: false,
+  });
   const navigation = useNavigation();
 
   const handleNext = async () => {
-    const valid = await methods.trigger(); // Valida os campos visíveis
+    const valid = await methods.trigger(); // Valida todos os campos registrados
     if (valid) {
-      setCurrentStep(currentStep + 1);
+      setCurrentStep(currentStep + 1); // Avanca se estiver tudo certo
     }
   };
 
@@ -30,7 +50,7 @@ export default function MultiForm() {
     if (currentStep > 1) setCurrentStep(currentStep - 1); // Volta para o passo anterior
   };
 
-  const handleSubmit = methods.handleSubmit((data) => {
+  const handleSubmit = methods.handleSubmit((data: RegisterFormData) => {
     console.log("Dados do formulario:", data);
     navigation.navigate("AuthStack", {
       screen: "RegisterConfirmation",

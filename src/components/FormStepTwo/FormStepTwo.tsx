@@ -6,8 +6,7 @@ import DropDown from "../DropDown/DropDown";
 import DatePicker from "../DatePicker/DatePicker";
 
 export default function FormStepTwo() {
-  const { control, setValue } = useFormContext(); // Acessa o contexto do formulário
-  // Observa o valor de "validityDate"
+  const { control } = useFormContext(); // Acessa o contexto do formulário
 
   return (
     <View style={styles.container}>
@@ -61,6 +60,7 @@ export default function FormStepTwo() {
                   { label: "B", value: "2" },
                   { label: "AB", value: "3" },
                 ]}
+                
               />
               {error && (
                 <Text style={{ color: "red", marginTop: 5 }}>

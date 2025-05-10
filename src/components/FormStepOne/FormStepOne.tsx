@@ -1,8 +1,6 @@
 import { View } from "react-native";
 import Form from "../Form/Form";
 import styles from "./FormStepOneStyle";
-import Button from "../Button/Button";
-import { useForm } from "react-hook-form";
 
 export default function FrmStepOne() {
   return (
