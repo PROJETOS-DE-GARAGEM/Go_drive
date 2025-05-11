@@ -15,11 +15,31 @@ export type AuthStackParamList = {
   RegisterConfirmation: undefined;
 };
 
+export type AppStackParamsList = {
+  Home: undefined;
+  FeedCars: {
+    brand: string;
+  };
+};
+
+export type AppTabParamsList = {
+  Home: undefined;
+  FeedCars: {
+    brand: string;
+  };
+  Maps: undefined;
+  Perfil: {
+    email: string;
+    password: string;
+  };
+};
+
 
 
 //Root navigation that rolls all the stacks
 export type RootStackParamList = {
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
+  AppStack: NavigatorScreenParams<AppStackParamsList>;
 };
 
 //Global typing for react navigation
