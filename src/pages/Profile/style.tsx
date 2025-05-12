@@ -4,15 +4,14 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 30,
-    paddingTop: 70,
+    padding: 20,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     height: '8%',
     marginBottom: 10,
-    
+    padding: 10,
   },
   title: {
     fontSize: 35,
@@ -62,7 +61,7 @@ export default StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 20,
     paddingHorizontal: 10,
-    paddingVertical: 15,
+    paddingVertical: 20,
     marginBottom: 25,
     fontSize: 20,
   },
@@ -71,7 +70,6 @@ export default StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 30,
     alignItems: 'center',
-    marginTop: 'auto'
   },
   saveButtonText: {
     color: '#fff',
@@ -80,7 +78,6 @@ export default StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#ccc', 
-    marginVertical: 12,
+    backgroundColor: '#ccc',
   },  
 });
