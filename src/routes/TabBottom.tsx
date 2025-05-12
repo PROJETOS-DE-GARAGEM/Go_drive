@@ -1,6 +1,5 @@
 import { Platform, View, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AppTabParamsList } from "../types/navigation";
 
 import { Entypo, FontAwesome6, FontAwesome5 } from "@expo/vector-icons";
 
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#1f51d8",
     borderTopWidth: 0,
-    bottom: Platform.OS === "android" ? 0 : 50,
+    bottom: Platform.OS === "android" ? "5%" : "6%",
     left: 20,
     right: 20,
     elevation: 5,
