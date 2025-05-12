@@ -1,0 +1,32 @@
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { AppStackParamsList } from "../types/navigation";
+
+import FeedCars from "../pages/FeedCars";
+import TabRoutes from "./TabBottom";
+
+const Stack = createNativeStackNavigator<AppStackParamsList>();
+
+export default function AppStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Home" component={TabRoutes} />
+      <Stack.Screen
+        name="FeedCars"
+        component={FeedCars}
+        options={{
+          headerBackVisible: false,
+          headerTitleAlign: "center",
+          animation: "slide_from_right",
+          gestureEnabled: true,
+          gestureDirection: "horizontal",
+          keyboardHandlingEnabled: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
