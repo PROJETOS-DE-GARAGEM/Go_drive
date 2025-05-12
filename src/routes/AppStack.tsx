@@ -4,6 +4,7 @@ import { AppStackParamsList } from "../types/navigation";
 
 import FeedCars from "../pages/FeedCars";
 import TabRoutes from "./TabBottom";
+import { DetailsCars } from "../pages/DetailsCars/screen";
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -25,6 +26,13 @@ export default function AppStack() {
           gestureEnabled: true,
           gestureDirection: "horizontal",
           keyboardHandlingEnabled: true,
+        }}
+      />
+      <Stack.Screen
+        name="DetailsCars"
+        component={DetailsCars}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
