@@ -126,7 +126,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   style={{
                     position: "absolute",
                     right: 10,
-                    top: 14,
+                    top: 35,
                   }}
                   onPress={() => setShowPassword(!showPassword)}
                 >

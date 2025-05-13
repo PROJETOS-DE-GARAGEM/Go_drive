@@ -60,7 +60,6 @@ export default function FormStepTwo() {
                   { label: "B", value: "2" },
                   { label: "AB", value: "3" },
                 ]}
-                
               />
               {error && (
                 <Text style={{ color: "red", marginTop: 5 }}>
@@ -89,7 +88,9 @@ export default function FormStepTwo() {
                 placeholder="Data de Emissão"
               />
               {error && (
-                <Text style={{ color: "red", marginTop: 5 }}>
+                <Text
+                  style={{ color: "red", marginTop: 5, borderColor: "red" }}
+                >
                   {error.message}
                 </Text>
               )}

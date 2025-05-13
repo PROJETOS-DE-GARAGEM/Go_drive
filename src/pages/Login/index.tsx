@@ -14,9 +14,6 @@ import styles from "./style";
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import Form from "../../components/Form/Form";
 import Button from "../../components/Button/Button";
-
-import { collection, addDoc, setDoc } from "firebase/firestore";
-import { db } from "../../services/firabaseConnection";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigation } from "@react-navigation/native";
 
@@ -71,6 +68,7 @@ export default function Login() {
                   {
                     name: "email",
                     placeholder: "Email",
+
                     rules: {
                       required: "Email é obrigatório",
                       pattern: {
@@ -82,6 +80,8 @@ export default function Login() {
                   {
                     name: "password",
                     placeholder: "Senha",
+                    style: { marginTop: 20 },
+
                     rules: {
                       required: "Senha é obrigatória",
                       minLength: {

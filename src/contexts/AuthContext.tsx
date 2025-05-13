@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firabaseConnection";
 
 //User typing
 type User = {
+  uid: string;
   email: string;
-  password: String;
 };
 
 //Context typing
@@ -28,13 +30,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   //Login Simulation
 
   const signIn = async (email: string, password: string) => {
-    if (email !== "" && password !== "") {
-      setUser({
-        email: email,
-        password: password,
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userData = userCredential.user;
 
-      navigation.navigate("AuthStack", { screen: "Welcome" });
+      setUser({
+        uid: userData.uid,
+        email: userData.email ?? "",
+      });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "AppStack", params: { screen: "Home" } }],
+      });
+    } catch (error: any) {
+      console.error("Erro ao fazer login:", error.message);
+      throw new Error("Email ou senha inválidos.");
     }
   };
 
