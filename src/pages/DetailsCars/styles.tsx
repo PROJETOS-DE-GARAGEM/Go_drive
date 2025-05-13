@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   containerDetailsCars: {
-    marginHorizontal: 10
+    flex: 1,
   },
   containerRentNowButton: {
     display: "flex",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 40
   },
   buttonIcon: {
     backgroundColor: "none"
@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     height: 280, 
     borderRadius: 12,
     paddingHorizontal: 8 
+  },
+  containerCaracters: {
+    flexDirection: "row",
+    justifyContent: "center",
   },
   buttonCardCarousel: {
     borderRadius: 50,

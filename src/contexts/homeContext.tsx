@@ -33,6 +33,7 @@ export type CarsProps = {
     longitude: string;
   };
   parkingName: string;
+  description: string;
 };
 
 export type BrandProps = {
