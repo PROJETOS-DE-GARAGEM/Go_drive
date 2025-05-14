@@ -11,7 +11,15 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+
+let auth;
+
+try {
+  auth = getAuth(app);
+} catch (error) {
+  console.log("Erro ao inicializar auth", auth);
+}
+
 const db = getFirestore(app);
 
 export { db, auth };

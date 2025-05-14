@@ -1,16 +1,23 @@
 import { useContext } from "react";
-import { View, ActivityIndicator } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AuthContext } from "../contexts/AuthContext";
 import AppStack from "./AppStack";
 import AuthStack from "./AuthStack";
 
+const Stack = createNativeStackNavigator();
+
 const AuthRoutes = () => {
   const { user } = useContext(AuthContext);
 
-  // Aqui você pode mostrar um loading se quiser verificar persistência
-  // const [loading, setLoading] = useState(true); ← você pode usar isso futuramente
-
-  return user ? <AppStack /> : <AuthStack />;
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {user ? (
+        <Stack.Screen name="AppStack" component={AppStack} />
+      ) : (
+        <Stack.Screen name="AuthStack" component={AuthStack} />
+      )}
+    </Stack.Navigator>
+  );
 };
 
 export default AuthRoutes;

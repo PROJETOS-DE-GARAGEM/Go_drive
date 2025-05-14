@@ -8,7 +8,7 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   const handleNavigateToLogin = () => {
-    navigation.navigate("AuthStack", { screen: "Login"});
+    navigation.navigate("AuthStack",  { screen: "Login"});
   };
 
   return (
@@ -31,7 +31,7 @@ export default function Welcome() {
           style={{ backgroundColor: "rgba(255,255,255,0.3)" }}
           onPress={handleNavigateToLogin}
         />
-      </View>
+      </View>m
     </View>
   );
 }
