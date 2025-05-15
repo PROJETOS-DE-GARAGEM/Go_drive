@@ -15,25 +15,23 @@ import FormStepTwo from "../../components/FormStepTwo/FormStepTwo";
 import FormStepThree from "../../components/FormStepThree/FormStepThree";
 import { useState, useContext } from "react";
 import Button from "../../components/Button/Button";
-import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../../contexts/AuthContext";
 import { register } from "../../services/AuthService";
 
 type RegisterFormData = {
-  FullName: string;
+  fullName: string;
   CPF: string;
-  PhoneNumber: string;
-  Street: string;
-  Neighborhood: string;
-  Number: string;
-  City: string;
+  phoneNumber: string;
+  street: string;
+  neighborhood: string;
+  number: string;
+  city: string;
   cep: string;
-  RegisterNumber: string;
-  EmissionDate: Date;
-  ValidDate: Date;
-  Email: string;
+  registerNumber: string;
+  emissionDate: Date;
+  validDate: Date;
+  email: string;
   password: string;
-  ConfirmPassword: string;
+  confirmPassword: string;
 };
 
 export default function MultiForm() {
@@ -42,9 +40,6 @@ export default function MultiForm() {
     mode: "onChange",
     shouldUnregister: false,
   });
-  const { signIn } = useContext(AuthContext); // 👈 acesso ao contexto
-
-  const navigation = useNavigation();
 
   const handleNext = async () => {
     const valid = await methods.trigger(); // Valida todos os campos registrados
@@ -61,14 +56,11 @@ export default function MultiForm() {
     try {
       await register({
         ...data,
-        Password: data.password,
-        ConfirmPassword: data.ConfirmPassword,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+        
       });
-
-      await signIn(data.Email, data.password); // 👈 login automático
-
-      // Se quiser, pode navegar manualmente após login
-      // navigation.navigate("AppStack", { screen: "Home" });
+      console.log(data);
     } catch (error: any) {
       Alert.alert("Erro", error.message || "Não foi possível criar a conta.");
     }

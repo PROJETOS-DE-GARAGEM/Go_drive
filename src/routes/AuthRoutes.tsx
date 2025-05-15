@@ -11,6 +11,7 @@ const AuthRoutes = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {/* Rota temporária */}
       {user ? (
         <Stack.Screen name="AppStack" component={AppStack} />
       ) : (

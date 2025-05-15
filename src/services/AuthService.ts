@@ -1,47 +1,52 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../services/firabaseConnection";
 
 export const register = async (formData: {
-  FullName: string;
+  fullName: string;
   CPF: string;
-  PhoneNumber: string;
-  Street: string;
-  Neighborhood: string;
-  Number: string;
-  City: string;
+  phoneNumber: string;
+  street: string;
+  neighborhood: string;
+  number: string;
+  city: string;
   cep: string;
-  RegisterNumber: string;
-  EmissionDate: Date;
-  ValidDate: Date;
-  Email: string;
-  Password: string;
-  ConfirmPassword: string;
+  registerNumber: string;
+  emissionDate: Date;
+  validDate: Date;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }) => {
   try {
     //Cria um usuario no Firebase Auth
+    // Garante que ninguém está autenticado
+    console.log("Usuário atual antes do cadastro:", auth.currentUser);
+    await signOut(auth);
+    console.log("Usuário após signOut:", auth.currentUser);
+
     const userCredencial = await createUserWithEmailAndPassword(
       auth,
-      formData.Email,
-      formData.Password
+      formData.email,
+      formData.password
     );
 
     const user = userCredencial.user;
 
     // Salva os dados adicionais no firestone
     await setDoc(doc(db, "usuarios", user.uid), {
-      nomeCompleto: formData.FullName,
+      nomeCompleto: formData.fullName,
       CPF: formData.CPF,
-      numeroTelefone: formData.PhoneNumber,
-      rua: formData.Street,
-      bairro: formData.Neighborhood,
-      numero: formData.Number,
-      cidade: formData.City,
+      numeroTelefone: formData.phoneNumber,
+      rua: formData.street,
+      bairro: formData.neighborhood,
+      numero: formData.number,
+      cidade: formData.city,
       cep: formData.cep,
-      numeroRegistro: formData.RegisterNumber,
-      dataDeEmissao: formData.EmissionDate,
-      dataDeValidade: formData.ValidDate,
-      email: formData.Email,
+      numeroRegistro: formData.registerNumber,
+      dataDeEmissao: formData.emissionDate,
+      dataDeValidade: formData.validDate,
+      email: formData.email,
       criadoEm: new Date(),
     });
 
