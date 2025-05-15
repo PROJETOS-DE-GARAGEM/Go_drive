@@ -12,9 +12,7 @@ type User = {
 //Context typing
 type AuthContextType = {
   user: User | null;
-  //   IsAuthticated: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  //   logout: () => Promise<void>;
 };
 
 //Create the context

@@ -21,9 +21,10 @@ export const register = async (formData: {
   try {
     //Cria um usuario no Firebase Auth
     // Garante que ninguém está autenticado
-    console.log("Usuário atual antes do cadastro:", auth.currentUser);
+    console.log("1 - Fazendo signOut...");
     await signOut(auth);
-    console.log("Usuário após signOut:", auth.currentUser);
+
+    console.log("2 - Criando usuário com email e senha...");
 
     const userCredencial = await createUserWithEmailAndPassword(
       auth,
@@ -31,7 +32,11 @@ export const register = async (formData: {
       formData.password
     );
 
+    console.log("3 - Usuário criado com sucesso.");
+
     const user = userCredencial.user;
+
+    console.log("Dados para salvar no Firestore:", formData);
 
     // Salva os dados adicionais no firestone
     await setDoc(doc(db, "usuarios", user.uid), {
@@ -47,14 +52,13 @@ export const register = async (formData: {
       dataDeEmissao: formData.emissionDate,
       dataDeValidade: formData.validDate,
       email: formData.email,
-      criadoEm: new Date(),
     });
 
     console.log("Usuário registrado com sucesso!");
 
     return user;
   } catch (error: any) {
-    console.log("Erro ao registrar:", error.message);
+    console.log("❌ Erro ao registrar:", error.code, error.message);
     throw error;
   }
 };

@@ -53,11 +53,14 @@ export default function MultiForm() {
   };
 
   const handleSubmit = methods.handleSubmit(async (data) => {
+      console.log("Dados enviados:", data); 
+
     try {
       await register({
         ...data,
         password: data.password,
         confirmPassword: data.confirmPassword,
+        
         
       });
       console.log(data);

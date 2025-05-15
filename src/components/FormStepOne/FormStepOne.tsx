@@ -10,7 +10,7 @@ export default function FrmStepOne() {
           title="Informações Pessoais"
           fields={[
             {
-              name: "FullName",
+              name: "fullName",
               placeholder: "Nome completo",
               rules: { required: "Nome é obrigatório" },
               editable: true,
@@ -27,7 +27,7 @@ export default function FrmStepOne() {
               editable: true,
             },
             {
-              name: "PhoneNumber",
+              name: "phoneNumber",
               style: { marginTop: 20 },
               placeholder: "Telefone",
               rules: {
@@ -46,7 +46,7 @@ export default function FrmStepOne() {
           title="Endereço"
           fields={[
             {
-              name: "Street",
+              name: "street",
               placeholder: "Rua",
               style: { marginBottom: 0 },
               rules: {
@@ -61,7 +61,7 @@ export default function FrmStepOne() {
         <Form
           fields={[
             {
-              name: "Neiborhood",
+              name: "neiborhood",
               placeholder: "Bairro",
               style: { width: 250, marginBottom: 0 },
               rules: { required: "Bairro é obrigatório" },
@@ -71,7 +71,7 @@ export default function FrmStepOne() {
         <Form
           fields={[
             {
-              name: "Number",
+              name: "number",
               placeholder: "N°",
               style: { width: 114, marginBottom: 0 },
             },
@@ -80,7 +80,7 @@ export default function FrmStepOne() {
         <Form
           fields={[
             {
-              name: "City",
+              name: "city",
               placeholder: "Cidade",
               style: { width: 170, marginBottom: 0 },
               rules: {
@@ -96,7 +96,7 @@ export default function FrmStepOne() {
         <Form
           fields={[
             {
-              name: "Cep",
+              name: "cep",
               placeholder: "Cep",
               style: { width: 174, marginBottom: 0 },
               keyboardType: "numeric",

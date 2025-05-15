@@ -19,7 +19,7 @@ export default function FormStepThree() {
         title="Cadastro de Login"
         fields={[
           {
-            name: "Email",
+            name: "email",
             placeholder: "Email",
             style: { marginBottom: 2 },
             rules: {
@@ -31,7 +31,7 @@ export default function FormStepThree() {
             },
           },
           {
-            name: "Password",
+            name: "password",
             placeholder: "Senha",
             style: { marginBottom: 2, marginTop: 20 },
             rules: {
@@ -43,7 +43,7 @@ export default function FormStepThree() {
             },
           },
           {
-            name: "PasswordConfirm",
+            name: "passwordConfirm",
             placeholder: "Confirmar",
             style: { marginTop: 20 },
 

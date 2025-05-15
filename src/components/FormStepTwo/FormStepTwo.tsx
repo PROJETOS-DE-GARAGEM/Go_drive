@@ -14,7 +14,7 @@ export default function FormStepTwo() {
         title="Informações da CNH"
         fields={[
           {
-            name: "FullName",
+            name: "fullName",
             placeholder: "Nome completo",
             style: { marginBottom: 20 },
             editable: false,
@@ -31,7 +31,7 @@ export default function FormStepTwo() {
         <Form
           fields={[
             {
-              name: "RegisterNumber",
+              name: "registerNumber",
               placeholder: "N° de registro",
               style: { width: 230, marginBottom: 0, marginRight: 10 },
               rules: {
