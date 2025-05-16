@@ -35,7 +35,7 @@ export default function FormStepTwo() {
               placeholder: "N° de registro",
               style: { width: 230, marginBottom: 0, marginRight: 10 },
               rules: {
-                required: "N de registro é obrigatório",
+                required: "N° de registro é obrigatório",
                 pattern: {
                   value: /^[0-9]{9}$/,
                   message: "Número inválido",

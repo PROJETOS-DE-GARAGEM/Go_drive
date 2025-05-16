@@ -1,6 +1,13 @@
 import { signOut, createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../services/firabaseConnection";
+import {
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { auth, db } from "./firabaseConnection";
 
 export type RegisterProps = {
   fullName: string;
@@ -22,24 +29,17 @@ export type RegisterProps = {
 
 export const register = async (formData: RegisterProps) => {
   try {
-    //Cria um usuario no Firebase Auth
     // Garante que ninguém está autenticado
-    console.log("1 - Fazendo signOut...");
     await signOut(auth);
 
-    console.log("2 - Criando usuário com email e senha...");
-
+    //Cria um usuario no Firebase Auth
     const userCredencial = await createUserWithEmailAndPassword(
       auth,
       formData.email,
       formData.password
     );
 
-    console.log("3 - Usuário criado com sucesso.");
-
     const user = userCredencial.user;
-
-    console.log("Dados para salvar no Firestore:", formData);
 
     // Salva os dados adicionais no firestone
     await setDoc(doc(db, "usuarios", user.uid), {

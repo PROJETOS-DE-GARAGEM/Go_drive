@@ -31,7 +31,7 @@ export default function Welcome() {
           style={{ backgroundColor: "rgba(255,255,255,0.3)" }}
           onPress={handleNavigateToLogin}
         />
-      </View>m
+      </View>
     </View>
   );
 }

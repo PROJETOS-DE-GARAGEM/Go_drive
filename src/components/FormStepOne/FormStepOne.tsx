@@ -1,8 +1,9 @@
 import { View } from "react-native";
 import Form from "../Form/Form";
 import styles from "./FormStepOneStyle";
+import { validateUniqueField } from "../../services/validators";
 
-export default function FrmStepOne() {
+export default function FormStepOne() {
   return (
     <View style={styles.container}>
       <View>
@@ -21,8 +22,17 @@ export default function FrmStepOne() {
               placeholder: "CPF",
               rules: {
                 required: "CPF é obrigatório",
-                validate: (value: string) =>
-                  value?.replace(/\D/g, "").length === 11 || "CPF inválido",
+                validate: async (value: string) => {
+                  // Validação local
+                  if (value?.replace(/\D/g, "").length !== 11) return "CPF inválido";
+                  // Validação de unicidade no Firestore
+                  return await validateUniqueField(
+                    "usuarios",
+                    "CPF",
+                    value,
+                    "CPF já cadastrado."
+                  );
+                },
               },
               editable: true,
             },

@@ -19,7 +19,7 @@ export default function StepIndicator({ currentStep }: StepIndicatorProps) {
               <FontAwesome name="check" size={30} color="white" />
             ) : (
               <Text style={styles.circleText}>{step}</Text>
-            )}{" "}
+            )}
           </View>
           {step < 3 && (
             <View
