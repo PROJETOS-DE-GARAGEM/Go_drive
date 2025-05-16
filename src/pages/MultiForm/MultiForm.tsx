@@ -17,6 +17,8 @@ import { useState, useContext } from "react";
 import Button from "../../components/Button/Button";
 import { register } from "../../services/AuthService";
 import { RegisterProps } from "../../services/AuthService";
+import { useNavigation } from "@react-navigation/native";
+import { ActivityIndicator } from "react-native";
 
 type RegisterFormData = RegisterProps;
 
@@ -26,6 +28,8 @@ export default function MultiForm() {
     mode: "onChange",
     shouldUnregister: false,
   });
+  const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
 
   const handleNext = async () => {
     const valid = await methods.trigger(); // Valida todos os campos registrados
@@ -39,17 +43,19 @@ export default function MultiForm() {
   };
 
   const handleSubmit = methods.handleSubmit(async (data) => {
-    console.log("Dados enviados:", data);
-
+    setLoading(true);
     try {
       await register({
         ...data,
         password: data.password,
         confirmPassword: data.confirmPassword,
       });
-      console.log(data);
+
+      navigation.navigate("AuthStack", { screen: "RegisterConfirmation" });
     } catch (error: any) {
       Alert.alert("Erro", error.message || "Não foi possível criar a conta.");
+    } finally {
+      setLoading(false);
     }
   });
 
@@ -57,37 +63,45 @@ export default function MultiForm() {
     <FormProvider {...methods}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"} // Ajusta o comportamento com base na plataforma
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <ScrollView style={styles.container}>
-            <StepIndicator currentStep={currentStep} />
-            {currentStep === 1 && <FormStepOne />}
-            {currentStep === 2 && <FormStepTwo />}
-            {currentStep === 3 && <FormStepThree />}
-            <View style={styles.buttonContainer}>
-              {currentStep > 0 && (
-                <Button
-                  name="Voltar"
-                  onPress={handleBack}
-                  style={styles.button}
-                />
-              )}
-              {currentStep < 3 ? (
-                <Button
-                  name="Próximo"
-                  onPress={handleNext}
-                  style={styles.button}
-                />
-              ) : (
-                <Button
-                  name="Enviar"
-                  onPress={handleSubmit}
-                  style={styles.button}
-                />
-              )}
-            </View>
-          </ScrollView>
+          <View style={{ flex: 1 }}>
+            {loading ? (
+              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <ActivityIndicator size="large" color="#1f51d8" />
+              </View>
+            ) : (
+              <ScrollView style={styles.container}>
+                <StepIndicator currentStep={currentStep} />
+                {currentStep === 1 && <FormStepOne />}
+                {currentStep === 2 && <FormStepTwo />}
+                {currentStep === 3 && <FormStepThree />}
+                <View style={styles.buttonContainer}>
+                  {currentStep > 0 && (
+                    <Button
+                      name="Voltar"
+                      onPress={handleBack}
+                      style={styles.button}
+                    />
+                  )}
+                  {currentStep < 3 ? (
+                    <Button
+                      name="Próximo"
+                      onPress={handleNext}
+                      style={styles.button}
+                    />
+                  ) : (
+                    <Button
+                      name="Enviar"
+                      onPress={handleSubmit}
+                      style={styles.button}
+                    />
+                  )}
+                </View>
+              </ScrollView>
+            )}
+          </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </FormProvider>
