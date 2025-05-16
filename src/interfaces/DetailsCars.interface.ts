@@ -23,7 +23,7 @@ export interface IDataDetailsCar extends ICharactersCar{
   available?: number | null | undefined
   nameCharacters?:  string;
   descriptionCharacters?: string
-  buttonIcon: React.ReactNode
+  buttonIcon?: React.ReactNode
 }
 
 export interface IImageCarProps {

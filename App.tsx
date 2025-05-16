@@ -4,6 +4,7 @@ import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
 import RootStack from "./src/routes/RootStack";
 import { HomeProvider } from "./src/contexts/homeContext";
+import { VehicleRelease } from "./src/pages/VehicleRelease/screenVehicleRelease"
 
 export default function App() {
   return (

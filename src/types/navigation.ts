@@ -22,6 +22,9 @@ export type AppStackParamsList = {
   DetailsCars: {
     cars: CarsProps;
   };
+  VehicleRelease: { 
+    cars: CarsProps 
+  };
 };
 
 export type AppTabParamsList = {

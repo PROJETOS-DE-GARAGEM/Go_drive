@@ -1,15 +1,16 @@
+import React from "react";
 import { View } from "react-native";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { ComponentImage } from "../../components/Image/component.Image";
 import {
   CardDetailsCar,
   CardDetailsCarousel,
 } from "../../components/CardDetailsCar/screen";
-import { useRoute, RouteProp } from "@react-navigation/native";
-import { CarsProps } from "../../contexts/homeContext";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import Button from "../../components/Button/Button";
-import styles from "./styles";
 import { Header } from "../../components/Header";
+import styles from "./styles";
+import { CarsProps } from "../../contexts/homeContext";
 
 type DetailsCarsProps = {
   DetailCars: {
@@ -19,22 +20,32 @@ type DetailsCarsProps = {
 
 type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
-export const DetailsCars = () => {
+export const DetailsCars: React.FC = () => {
   const route = useRoute<DetailRouteProp>();
+  const navigation = useNavigation();
+
+  const { cars } = route.params;
+
+  const handleNavigateVehicleRelease = () => {
+    navigation.navigate("AppStack", {
+      screen: "VehicleRelease",
+      params: { cars },
+    });
+  };
 
   return (
     <View style={styles.containerDetailsCars}>
       <Header title="Detalhes" />
       <View>
         <ComponentImage
-          uri={`${route.params.cars.imageUrl}`}
-          resizeMode={"cover"}
+          uri={cars.imageUrl}
+          resizeMode="cover"
           style={styles.imageCar}
         />
         <CardDetailsCar
-          brand={`${route.params.cars.marca} ${route.params.cars.modelo}`}
-          available={Number(route.params.cars.rating)}
-          description={`${route.params.cars.description}`}
+          brand={`${cars.marca} ${cars.modelo}`}
+          available={Number(cars.rating)}
+          description={cars.description}
           buttonIcon={
             <ButtonIcon
               iconName="star"
@@ -58,7 +69,7 @@ export const DetailsCars = () => {
             />
           }
           nameCharacters="Capacidade"
-          descriptionCharacters={`${route.params.cars.capacidade} Lugares`}
+          descriptionCharacters={`${cars.capacidade} Lugares`}
         />
         <CardDetailsCarousel
           buttonIcon={
@@ -70,7 +81,7 @@ export const DetailsCars = () => {
             />
           }
           nameCharacters="Câmbio"
-          descriptionCharacters={`${route.params.cars.cambio}`}
+          descriptionCharacters={cars.cambio}
         />
         <CardDetailsCarousel
           buttonIcon={
@@ -82,12 +93,12 @@ export const DetailsCars = () => {
             />
           }
           nameCharacters="Km"
-          descriptionCharacters={`${route.params.cars.km}`}
+          descriptionCharacters={cars.km}
         />
       </View>
 
       <View style={styles.containerRentNowButton}>
-        <Button onPress={() => alert("Carro alugado")} name="Alugar Agora" />
+        <Button onPress={handleNavigateVehicleRelease} name="Alugar Agora" />
       </View>
     </View>
   );
