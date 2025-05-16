@@ -42,7 +42,7 @@ export default function Maps() {
 
   useEffect(() => {
     const filteredAdress = cars.map((car) => ({
-      name: car.parkingName, // ou qualquer campo de nome
+      name: car.parkingName,
       latitude: Number(car.parking.latitude),
       longitude: Number(car.parking.longitude),
     }));
@@ -96,7 +96,7 @@ export default function Maps() {
 
   return (
     <View style={styles.container}>
-      <Header title="Maps" />
+      <Header title="Estacionamentos" />
       <MapView
         style={{ width: width, height: height }}
         provider={PROVIDER_GOOGLE}
