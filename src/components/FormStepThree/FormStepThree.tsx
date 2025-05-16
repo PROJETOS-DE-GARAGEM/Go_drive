@@ -7,7 +7,7 @@ export default function FormStepThree() {
   const { getValues } = useFormContext(); // Acessa o método getValues diretamente
 
   const validatePasswordMatch = (value: string) => {
-    const password = getValues("Password"); // Recupera o valor da senha
+    const password = getValues("password"); // Recupera o valor da senha
     if (password && value !== password) {
       return "As senhas não coincidem";
     }
@@ -43,7 +43,7 @@ export default function FormStepThree() {
             },
           },
           {
-            name: "passwordConfirm",
+            name: "confirmPassword",
             placeholder: "Confirmar",
             style: { marginTop: 20 },
 

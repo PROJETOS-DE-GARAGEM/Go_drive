@@ -61,7 +61,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   keyboardType="numeric"
                   editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
                 />
-              ) : field.name === "FullName" ? (
+              ) : field.name === "fullName" ? (
                 <TextInput
                   style={[
                     styles.input,
@@ -75,7 +75,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   value={value}
                   editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
                 />
-              ) : field.name === "PhoneNumber" ? (
+              ) : field.name === "phoneNumber" ? (
                 <TextInputMask
                   type={"custom"}
                   options={{
@@ -92,7 +92,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   value={value}
                   keyboardType="numeric"
                 />
-              ) : field.name === "Cep" ? (
+              ) : field.name === "cep" ? (
                 <TextInputMask
                   type={"custom"}
                   options={{ mask: "99999-999" }}

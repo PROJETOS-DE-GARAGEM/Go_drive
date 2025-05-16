@@ -16,23 +16,9 @@ import FormStepThree from "../../components/FormStepThree/FormStepThree";
 import { useState, useContext } from "react";
 import Button from "../../components/Button/Button";
 import { register } from "../../services/AuthService";
+import { RegisterProps } from "../../services/AuthService";
 
-type RegisterFormData = {
-  fullName: string;
-  CPF: string;
-  phoneNumber: string;
-  street: string;
-  neighborhood: string;
-  number: string;
-  city: string;
-  cep: string;
-  registerNumber: string;
-  emissionDate: Date;
-  validDate: Date;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+type RegisterFormData = RegisterProps;
 
 export default function MultiForm() {
   const [currentStep, setCurrentStep] = useState(1); // Estado para o passo atual
@@ -53,15 +39,13 @@ export default function MultiForm() {
   };
 
   const handleSubmit = methods.handleSubmit(async (data) => {
-      console.log("Dados enviados:", data); 
+    console.log("Dados enviados:", data);
 
     try {
       await register({
         ...data,
         password: data.password,
         confirmPassword: data.confirmPassword,
-        
-        
       });
       console.log(data);
     } catch (error: any) {

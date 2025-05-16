@@ -56,9 +56,9 @@ export default function FormStepTwo() {
                 value={value} // Observa o valor de "cnhType"
                 onChange={onChange} // Atualiza o valor de "cnhType"
                 options={[
-                  { label: "A", value: "1" },
-                  { label: "B", value: "2" },
-                  { label: "AB", value: "3" },
+                  { label: "A", value: "A" },
+                  { label: "B", value: "B" },
+                  { label: "AB", value: "AB" },
                 ]}
               />
               {error && (
@@ -101,7 +101,7 @@ export default function FormStepTwo() {
       <View style={styles.datePicker}>
         <Controller
           control={control}
-          name="validityDate"
+          name="validDate"
           rules={{
             required: "A data de validade é obrigatória",
             validate: (value: Date) =>

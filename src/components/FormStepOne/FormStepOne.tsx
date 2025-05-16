@@ -61,7 +61,7 @@ export default function FrmStepOne() {
         <Form
           fields={[
             {
-              name: "neiborhood",
+              name: "neighborhood",
               placeholder: "Bairro",
               style: { width: 250, marginBottom: 0 },
               rules: { required: "Bairro é obrigatório" },

@@ -2,7 +2,7 @@ import { signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../services/firabaseConnection";
 
-export const register = async (formData: {
+export type RegisterProps = {
   fullName: string;
   CPF: string;
   phoneNumber: string;
@@ -12,12 +12,15 @@ export const register = async (formData: {
   city: string;
   cep: string;
   registerNumber: string;
+  cnhType: string;
   emissionDate: Date;
   validDate: Date;
   email: string;
   password: string;
   confirmPassword: string;
-}) => {
+};
+
+export const register = async (formData: RegisterProps) => {
   try {
     //Cria um usuario no Firebase Auth
     // Garante que ninguém está autenticado
@@ -49,6 +52,7 @@ export const register = async (formData: {
       cidade: formData.city,
       cep: formData.cep,
       numeroRegistro: formData.registerNumber,
+      cnhCategory: formData.cnhType,
       dataDeEmissao: formData.emissionDate,
       dataDeValidade: formData.validDate,
       email: formData.email,
