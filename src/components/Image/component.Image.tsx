@@ -4,14 +4,14 @@ import styles from './styles'
 import Carousel from 'react-native-reanimated-carousel';
 
 export const ComponentImage: React.FC<IImageCarProps> = ({
-  uris,
+  uri,
   resizeMode="cover",
   style
 }) => {
 
   const { width } = Dimensions.get('screen')
 
-  const images = uris.map(uri => ({ uri }))
+  const images = uri.map(uri => ({ uri }))
 
   return (
     <>
