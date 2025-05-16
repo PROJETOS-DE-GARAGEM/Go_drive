@@ -1,4 +1,5 @@
-import { View } from "react-native";
+import React, { useState } from "react";
+import { View, Modal } from "react-native";
 import { ComponentImage } from "../../components/Image/component.Image";
 import {
   CardDetailsCar,
@@ -6,10 +7,11 @@ import {
 } from "../../components/CardDetailsCar/screen";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { CarsProps } from "../../contexts/homeContext";
+import { Header } from "../../components/Header";
+import { TermsRent } from "../../components/Terms";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import Button from "../../components/Button/Button";
 import styles from "./styles";
-import { Header } from "../../components/Header";
 
 type DetailsCarsProps = {
   DetailCars: {
@@ -21,6 +23,8 @@ type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
 export const DetailsCars = () => {
   const route = useRoute<DetailRouteProp>();
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.containerDetailsCars}>
@@ -87,8 +91,18 @@ export const DetailsCars = () => {
       </View>
 
       <View style={styles.containerRentNowButton}>
-        <Button onPress={() => alert("Carro alugado")} name="Alugar Agora" />
+        <Button onPress={() => setModalVisible(true)} name="Avançar" />
       </View>
+
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+        statusBarTranslucent={true}
+      >
+        <TermsRent closeModal={() => setModalVisible(false)}/>
+      </Modal>
     </View>
   );
 };
