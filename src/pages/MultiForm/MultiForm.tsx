@@ -19,6 +19,7 @@ import { register } from "../../services/AuthService";
 import { RegisterProps } from "../../services/AuthService";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 type RegisterFormData = RegisterProps;
 
@@ -39,7 +40,11 @@ export default function MultiForm() {
   };
 
   const handleBack = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1); // Volta para o passo anterior
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1); // Volta para o passo anterior
+    } else {
+      navigation.goBack(); // Volta para a tela anterior (Login)
+    }
   };
 
   const handleSubmit = methods.handleSubmit(async (data) => {
@@ -81,10 +86,21 @@ export default function MultiForm() {
             ) : (
               <ScrollView style={styles.container}>
                 <StepIndicator currentStep={currentStep} />
-                {currentStep === 1 && <FormStepOne />}
-                {currentStep === 2 && <FormStepTwo />}
-                {currentStep === 3 && <FormStepThree />}
-                <View style={styles.buttonContainer}>
+                <Animatable.View
+                  animation="slideInUp"
+                  duration={300}
+                  key={currentStep}
+                >
+                  {currentStep === 1 && <FormStepOne />}
+                  {currentStep === 2 && <FormStepTwo />}
+                  {currentStep === 3 && <FormStepThree />}
+                </Animatable.View>
+                <Animatable.View
+                  animation="slideInUp"
+                  duration={300} 
+                  key={`btn-${currentStep}`}
+                  style={styles.buttonContainer}
+                >
                   {currentStep > 0 && (
                     <Button
                       name="Voltar"
@@ -105,7 +121,7 @@ export default function MultiForm() {
                       style={styles.button}
                     />
                   )}
-                </View>
+                </Animatable.View>
               </ScrollView>
             )}
           </View>

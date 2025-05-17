@@ -74,7 +74,7 @@ export default function FormStepOne() {
             {
               name: "neighborhood",
               placeholder: "Bairro",
-              style: { width: 250, marginBottom: 0 },
+              style: { width: 240, marginBottom: 0 },
               rules: { required: "Bairro é obrigatório" },
             },
           ]}
@@ -84,7 +84,17 @@ export default function FormStepOne() {
             {
               name: "number",
               placeholder: "N°",
-              style: { width: 114, marginBottom: 0 },
+              style: { width: 120, marginBottom: 0 },
+              maxLength: 6, // <-- Adicione aqui!
+
+              rules: {
+                required: "Campo obrigatório",
+                pattern: {
+                  value: /^[0-9]+$|^s\/n$/i,
+                  message: "Número invalido",
+                },
+                maxLength: { value: 6, message: "No máximo 6 caracteres" },
+              },
             },
           ]}
         />

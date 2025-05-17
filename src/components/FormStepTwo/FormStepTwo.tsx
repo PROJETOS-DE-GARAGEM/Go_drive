@@ -34,6 +34,9 @@ export default function FormStepTwo() {
               name: "registerNumber",
               placeholder: "N° de registro",
               style: { width: 230, marginBottom: 0, marginRight: 10 },
+              keyboardType: "numeric",
+              onlyNumbers: true,
+              maxLength: 9, // Limita a digitação a 9 caracteres
               rules: {
                 required: "N° de registro é obrigatório",
                 pattern: {
@@ -54,6 +57,7 @@ export default function FormStepTwo() {
             <View>
               <DropDown
                 value={value} // Observa o valor de "cnhType"
+                error={error?.message}
                 onChange={onChange} // Atualiza o valor de "cnhType"
                 options={[
                   { label: "A", value: "A" },
@@ -83,6 +87,7 @@ export default function FormStepTwo() {
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
               <DatePicker
+                error={error?.message}
                 onChange={onChange}
                 value={value} // Usa o valor do formulário ou o valor observado
                 placeholder="Data de Emissão"
@@ -111,6 +116,7 @@ export default function FormStepTwo() {
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <>
               <DatePicker
+                error={error?.message}
                 onChange={onChange}
                 value={value}
                 placeholder="Data de Validade"

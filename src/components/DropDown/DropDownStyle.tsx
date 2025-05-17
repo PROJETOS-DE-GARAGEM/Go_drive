@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderColor: "#f3f5f7",
     width: 132,
-    height: 48,
+    height: 55,
   },
   overlay: {
     flex: 1,
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     color: "#C7C7CD",
     fontSize: 16,
     fontWeight: "500",
-
   },
   selectedOptionText: {
     // Cor do texto quando selecionado

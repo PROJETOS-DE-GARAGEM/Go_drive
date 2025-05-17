@@ -22,12 +22,15 @@ interface FormProps {
     keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
     editable?: boolean;
     onlyNumbers?: boolean;
+    maxLength?: number; // <-- Adicione aqui!
   }[];
 }
 
 const Form: React.FC<FormProps> = ({ title, fields }) => {
   const { control } = useFormContext();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<{ [key: string]: boolean }>(
+    {}
+  );
   return (
     <View style={styles.formContainer}>
       <View style={styles.titleContainer}>
@@ -52,14 +55,15 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     styles.input,
                     field.style,
                     !field.editable && styles.disabledInput,
-                    error && { borderColor: "red" },
+                    error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
                   keyboardType="numeric"
-                  editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
+                  editable={field.editable !== false}
+                  maxLength={field.maxLength} // <-- Adicione aqui!
                 />
               ) : field.name === "fullName" ? (
                 <TextInput
@@ -67,12 +71,13 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     styles.input,
                     field.style,
                     !field.editable && styles.disabledInput, // Aplica o estilo desabilitado
-                    error && { borderColor: "red" }, // Estilo de erro
+                    error && { borderColor: "red", borderWidth: 2 }, // Estilo de erro
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  maxLength={field.maxLength} // <-- Adicione aqui!
                   editable={field.editable !== false} // Permite edição apenas se `editable` não for `false`
                 />
               ) : field.name === "phoneNumber" ? (
@@ -84,12 +89,13 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   style={[
                     styles.input,
                     field.style,
-                    error && { borderColor: "red" },
+                    error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  maxLength={field.maxLength} // <-- Adicione aqui!
                   keyboardType="numeric"
                 />
               ) : field.name === "cep" ? (
@@ -99,12 +105,13 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   style={[
                     styles.input,
                     field.style,
-                    error && { borderColor: "red" },
+                    error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  maxLength={field.maxLength} // <-- Adicione aqui!
                   keyboardType="numeric"
                 />
               ) : (
@@ -112,26 +119,40 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                   style={[
                     styles.input,
                     field.style,
-                    error && { borderColor: "red" },
+                    error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  secureTextEntry={field.name === "password" && !showPassword}
+                  keyboardType={field.keyboardType}
+                  secureTextEntry={
+                    (field.name === "password" ||
+                      field.name === "confirmPassword") &&
+                    !showPassword[field.name]
+                  }
+                  maxLength={field.maxLength} // <-- Adicione aqui!
                 />
               )}
-              {field.name === "password" && (
+              {(field.name === "password" ||
+                field.name === "confirmPassword") && (
                 <TouchableOpacity
                   style={{
                     position: "absolute",
                     right: 10,
                     top: 35,
                   }}
-                  onPress={() => setShowPassword(!showPassword)}
+                  onPress={() =>
+                    setShowPassword((prev) => ({
+                      ...prev,
+                      [field.name]: !prev[field.name],
+                    }))
+                  }
                 >
                   <Icon
-                    name={showPassword ? "visibility" : "visibility-off"}
+                    name={
+                      showPassword[field.name] ? "visibility" : "visibility-off"
+                    }
                     size={20}
                     color={"gray"}
                   />

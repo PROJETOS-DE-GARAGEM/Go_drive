@@ -16,6 +16,7 @@ type DatePickerProps = {
   icon?: string;
   placeholder?: string;
   value?: Date;
+  error?: string;
 };
 
 export default function DatePicker({
@@ -23,6 +24,7 @@ export default function DatePicker({
   icon,
   placeholder,
   value,
+  error
 }: DatePickerProps) {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
@@ -46,7 +48,10 @@ export default function DatePicker({
       <View style={styles.containerInput}>
         <TextInput
           onPress={() => setShow(true)}
-          style={styles.inputText}
+          style={[
+            styles.inputText,
+            error && { borderColor: "red", borderWidth: 2 }, // <-- Estilo de erro
+          ]}
           placeholder={placeholder}
           placeholderTextColor={"#C7C7CD"}
           value={selectedDate ? format(selectedDate, "dd/MM/yyyy") : ""}

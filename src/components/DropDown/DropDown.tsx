@@ -12,9 +12,16 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   options: Option[];
+  error?: string; // <-- Adicione esta linha
 };
 
-export default function DropDown({ label, value, onChange, options }: Props) {
+export default function DropDown({
+  label,
+  value,
+  onChange,
+  options,
+  error,
+}: Props) {
   const [modalVisible, setModalVisible] = useState(false);
   const selectedLabel =
     options.find((opt) => opt.value === value)?.label || "Cat.";
@@ -24,7 +31,10 @@ export default function DropDown({ label, value, onChange, options }: Props) {
       {label && <Text style={styles.label}>{label}</Text>}
 
       <TouchableOpacity
-        style={styles.dropdown}
+        style={[
+          styles.dropdown,
+          error && { borderColor: "red", borderWidth: 2 }, 
+        ]}
         onPress={() => setModalVisible(true)}
       >
         <Text

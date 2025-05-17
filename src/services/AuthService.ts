@@ -35,7 +35,7 @@ export const register = async (formData: RegisterProps) => {
     //Cria um usuario no Firebase Auth
     const userCredencial = await createUserWithEmailAndPassword(
       auth,
-      formData.email,
+      formData.email.toLowerCase(),
       formData.password
     );
 
@@ -55,7 +55,7 @@ export const register = async (formData: RegisterProps) => {
       cnhCategory: formData.cnhType,
       dataDeEmissao: formData.emissionDate,
       dataDeValidade: formData.validDate,
-      email: formData.email,
+      email: formData.email.toLowerCase(),
     });
 
     console.log("Usuário registrado com sucesso!");

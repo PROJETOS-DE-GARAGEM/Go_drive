@@ -33,7 +33,7 @@ export default function FormStepThree() {
                 return await validateUniqueField(
                   "usuarios", // coleção
                   "email", // campo
-                  value,
+                  value.toLowerCase(), // Sempre minúsculo
                   "Este e-mail já está cadastrado."
                 );
               },
