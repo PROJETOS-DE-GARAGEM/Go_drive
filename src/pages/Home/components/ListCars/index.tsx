@@ -1,6 +1,7 @@
 import { View, Text, Image, Pressable } from "react-native";
 
 import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./style";
 
@@ -11,8 +12,14 @@ type ListCarProps = {
 };
 
 const ListCars = ({ data }: ListCarProps) => {
+  const navigation = useNavigation();
+
+const handleNavigateDetailCar = () => {
+  navigation.navigate("AppStack", {screen: "DetailsCars", params: {cars: data}})
+}
+
   return (
-    <Pressable style={styles.container}>
+    <Pressable onPress={handleNavigateDetailCar} style={styles.container}>
       <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
 
       <View style={styles.partialInfoCar}>
@@ -35,7 +42,8 @@ const ListCars = ({ data }: ListCarProps) => {
           </Text>
         </View>
         <Text style={styles.textDetails}>
-        <FontAwesome6 name="sack-dollar" />{data.aluguel[0]}/dia
+          <FontAwesome6 name="sack-dollar" color={"#e6ac00"} />
+          {data.aluguel[0]}/dia
         </Text>
       </View>
     </Pressable>

@@ -1,4 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { Linking } from "react-native";
+
+import * as Location from "expo-location";
 
 import { db } from "../services/firabaseConnection";
 import { collection, getDocs, query, orderBy, where } from "firebase/firestore";
@@ -22,22 +25,34 @@ export type CarsProps = {
   aluguel: string[];
   versao: string;
   marca_normalized: string;
+  created: string;
   rating: string;
+  parking: {
+    parkingName: any;
+    latitude: string;
+    longitude: string;
+  };
+  parkingName: string;
+  description: string;
 };
 
 export type BrandProps = {
   id: string;
   marca: string;
   imageMarca: string;
-}
+};
 
 type HomeContextData = {
   cars: CarsProps[];
   brands: BrandProps[];
   loading: boolean;
+  location: Location.LocationObject | null;
+  permissionDenied: string | null;
   fetchCarsFiltered: (brand: string | undefined) => Promise<void>;
   searchBrands: (text: string | "") => Promise<void>;
   fetchAllCars: () => Promise<void>;
+  getCurrentLocation: () => Promise<void>;
+  openSettingsPermissionLocation: () => void;
 };
 
 type HomeProviderProps = {
@@ -49,11 +64,16 @@ export const HomeContext = createContext({} as HomeContextData);
 export function HomeProvider({ children }: HomeProviderProps) {
   const [cars, setCars] = useState<CarsProps[]>([]);
   const [brands, setBrands] = useState<BrandProps[]>([]);
+  const [location, setLocation] = useState<Location.LocationObject | null>(
+    null
+  );
+  const [permissionDenied, setPermissionDenied] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAllCars() {
       await fetchAllCars();
+      await getCurrentLocation();
     }
 
     getAllCars();
@@ -74,7 +94,7 @@ export function HomeProvider({ children }: HomeProviderProps) {
         uuid: doc.uuid,
         marca: doc.marca,
         imageMarca: doc.imageMarca,
-      }))
+      }));
 
       const uniqueBrandsList = Array.from(
         new Map(brandsList.map((item) => [item.marca, item])).values()
@@ -130,8 +150,14 @@ export function HomeProvider({ children }: HomeProviderProps) {
       const carsRef = collection(db, "veiculos");
       let queryRef = query(carsRef);
 
-      queryRef = query(queryRef, where("marca_normalized", ">=", normalizedText));
-      queryRef = query(queryRef, where("marca_normalized", "<=", normalizedText + "\uf8ff"));
+      queryRef = query(
+        queryRef,
+        where("marca_normalized", ">=", normalizedText)
+      );
+      queryRef = query(
+        queryRef,
+        where("marca_normalized", "<=", normalizedText + "\uf8ff")
+      );
 
       const snapshot = await getDocs(queryRef);
 
@@ -148,6 +174,22 @@ export function HomeProvider({ children }: HomeProviderProps) {
     }
   }
 
+  async function getCurrentLocation() {
+    let { granted } = await Location.requestForegroundPermissionsAsync();
+
+    if (granted) {
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    } else {
+      setPermissionDenied("A permissão para acessar a localização foi negada");
+      return;
+    }
+  }
+
+  function openSettingsPermissionLocation() {
+    Linking.openSettings();
+  }
+
   return (
     <HomeContext.Provider
       value={{
@@ -157,6 +199,10 @@ export function HomeProvider({ children }: HomeProviderProps) {
         searchBrands,
         fetchAllCars,
         brands,
+        getCurrentLocation,
+        location,
+        permissionDenied,
+        openSettingsPermissionLocation,
       }}
     >
       {children}

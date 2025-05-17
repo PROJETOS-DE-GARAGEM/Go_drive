@@ -5,6 +5,7 @@ import { AntDesign, MaterialIcons, FontAwesome6 } from "@expo/vector-icons";
 import styles from "./style";
 
 import { CarsProps } from "../../../../contexts/homeContext";
+import { useNavigation } from "@react-navigation/native";
 
 type ListCarFeedProps = {
   data: CarsProps;
@@ -12,8 +13,20 @@ type ListCarFeedProps = {
 };
 
 const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
+  const navigation = useNavigation();
+
+  const handleNavigateDetailCar = () => {
+    navigation.navigate("AppStack", {
+      screen: "DetailsCars",
+      params: { cars: data },
+    });
+  };
+
   return (
-    <Pressable style={[styles.container, { width: widthScreen }]}>
+    <Pressable
+      style={[styles.container, { width: widthScreen }]}
+      onPress={handleNavigateDetailCar}
+    >
       <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
 
       <View style={styles.partialInfoCar}>
@@ -36,7 +49,8 @@ const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
           </Text>
         </View>
         <Text style={styles.textDetails}>
-        <FontAwesome6 name="sack-dollar"/>{data.aluguel[0]}/dia
+          <FontAwesome6 name="sack-dollar" color={"#e6ac00"} />
+          {data.aluguel[0]}/dia
         </Text>
       </View>
     </Pressable>

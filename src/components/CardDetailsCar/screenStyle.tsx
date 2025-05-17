@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   containerCardDetails: {
-     marginHorizontal: 15,
+     marginHorizontal: 4,
      paddingVertical: 5,
      boxShadow: '0px -1px px 0px rgba(196,197,202,0.75)'
   },
@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   description: {
-    color: "#C4C5CA",
-    maxWidth: 180,
+    color: "#000",
+    textAlign: "left",
+    maxWidth: 340,
   },
   conteinerAvailableButtonIcon: {
     flexDirection: "row",
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   detailsCarousel: {
     display: "flex",
     justifyContent: "flex-start",
-    width: 130,
+    width: 125,
     height: 150,
     backgroundColor: "#EBEBEB",
     borderRadius: 30,

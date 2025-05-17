@@ -4,6 +4,8 @@ import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthProvider } from "./src/contexts/AuthContext";
 import AuthRoutes from "./src/routes/AuthRoutes";
+import { HomeProvider } from "./src/contexts/homeContext";
+
 
 export default function App() {
   return (
