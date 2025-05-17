@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "#fff",
     width: "85%",
-    height: "50%",
+    height: "45%",
     borderRadius: 30,
     padding: 25,
   },

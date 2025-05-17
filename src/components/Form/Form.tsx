@@ -141,8 +141,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                 <Text
                   style={{
                     color: "red",
-                    marginLeft: 8,
-                    marginTop: 3,
+                    marginTop: 5,
                   }}
                 >
                   {error.message}

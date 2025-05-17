@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingLeft: 20,
-    paddingRight: 20
+    paddingRight: 20,
+    paddingTop: 20
   },
   headerScrollContainer: {
     height: 20,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginBottom: Platform.OS === "android" ? 20 : 40,
-    marginTop: 20
+    marginTop: 20,
   },
   linkButton: {
     justifyContent: "center",
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
   linkText: {
     color: "#333",
     fontSize: 15,
-  }
+  },
 });
 
 export default styles;

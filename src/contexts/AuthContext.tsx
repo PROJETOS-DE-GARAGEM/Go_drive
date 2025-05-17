@@ -27,7 +27,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   //Login Simulation
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (email: string
+    , password: string) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -45,8 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         routes: [{ name: "AppStack", params: { screen: "Home" } }],
       });
     } catch (error: any) {
-      console.error("Erro ao fazer login:", error.message);
-      throw new Error("Email ou senha inválidos.");
+      throw error;
     }
   };
 

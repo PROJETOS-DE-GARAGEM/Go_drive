@@ -43,6 +43,7 @@ export default function MultiForm() {
   };
 
   const handleSubmit = methods.handleSubmit(async (data) => {
+    console.log(data);
     setLoading(true);
     try {
       await register({
@@ -68,7 +69,13 @@ export default function MultiForm() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{ flex: 1 }}>
             {loading ? (
-              <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <ActivityIndicator size="large" color="#1f51d8" />
               </View>
             ) : (

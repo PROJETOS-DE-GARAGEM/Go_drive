@@ -2,6 +2,7 @@ import { View } from "react-native";
 import Form from "../Form/Form";
 import styles from "./FormStepThreeStyle";
 import { useFormContext } from "react-hook-form";
+import { validateUniqueField } from "../../services/validators";
 
 export default function FormStepThree() {
   const { getValues } = useFormContext(); // Acessa o método getValues diretamente
@@ -28,6 +29,14 @@ export default function FormStepThree() {
                 value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
                 message: "Email inválido",
               },
+              validate: async (value: string) => {
+                return await validateUniqueField(
+                  "usuarios", // coleção
+                  "email", // campo
+                  value,
+                  "Este e-mail já está cadastrado."
+                );
+              },
             },
           },
           {
@@ -39,6 +48,12 @@ export default function FormStepThree() {
               minLength: {
                 value: 6,
                 message: "A senha deve ter pelo menos 6 caracteres",
+              },
+              pattern: {
+                value:
+                  /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
+                message:
+                  "A senha deve ter ao menos 1 letra maiúscula e 1 caractere especial",
               },
             },
           },

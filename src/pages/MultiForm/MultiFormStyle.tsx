@@ -9,13 +9,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10
+    padding: 10, 
+    marginBottom: 20
     
   },
 
   button: {
     width: "48%",
-    padding: 10
+    padding: 10,
+    
     
   }
 });

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
   input: {
     width: "100%",
-    height: 48,
+    height: 55,
     borderRadius: 16,
     fontSize: 16,
     fontFamily: "Catamaran",

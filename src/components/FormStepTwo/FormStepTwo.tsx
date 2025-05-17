@@ -48,7 +48,7 @@ export default function FormStepTwo() {
           control={control}
           name="cnhType"
           rules={{
-            required: "Selecione a cat de CNH", // Mensagem de erro se não for selecionado
+            required: "Selecione a categoria", // Mensagem de erro se não for selecionado
           }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <View>

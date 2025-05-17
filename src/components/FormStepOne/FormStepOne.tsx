@@ -24,7 +24,8 @@ export default function FormStepOne() {
                 required: "CPF é obrigatório",
                 validate: async (value: string) => {
                   // Validação local
-                  if (value?.replace(/\D/g, "").length !== 11) return "CPF inválido";
+                  if (value?.replace(/\D/g, "").length !== 11)
+                    return "CPF inválido";
                   // Validação de unicidade no Firestore
                   return await validateUniqueField(
                     "usuarios",
@@ -92,7 +93,7 @@ export default function FormStepOne() {
             {
               name: "city",
               placeholder: "Cidade",
-              style: { width: 170, marginBottom: 0 },
+              style: { width: 175, marginBottom: 0 },
               rules: {
                 required: "A cidade é obrigatória",
                 pattern: {
@@ -108,14 +109,14 @@ export default function FormStepOne() {
             {
               name: "cep",
               placeholder: "Cep",
-              style: { width: 174, marginBottom: 0 },
+              style: { width: 185, marginBottom: 0 },
               keyboardType: "numeric",
               onlyNumbers: true,
               rules: {
                 required: "O CEP é obrigatório",
                 pattern: {
                   value: /^\d{5}-\d{3}$/,
-                  message: "O CEP deve conter 8 números",
+                  message: "CEP inválido",
                 },
               },
             },
