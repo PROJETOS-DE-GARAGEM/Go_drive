@@ -2,17 +2,19 @@ import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
-import RootStack from "./src/routes/RootStack";
+import { AuthProvider } from "./src/contexts/AuthContext";
+import AuthRoutes from "./src/routes/AuthRoutes";
 import { HomeProvider } from "./src/contexts/homeContext";
+
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <CustomStatusBar backgroundColor="#1f51d8" barStyle="light-content" />
       <NavigationContainer>
-        <HomeProvider>
-          <RootStack />
-        </HomeProvider>
+        <AuthProvider>
+          <AuthRoutes/>
+        </AuthProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   );
