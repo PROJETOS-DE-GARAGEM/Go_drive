@@ -39,18 +39,21 @@ export const DetailsCars = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const carAttribuites = Object.entries(item).filter(([key]) => nameCharactersIcon[key]).map(([key, value]) => ({
-    key,
-    label: key.charAt(0).toUpperCase() + key.slice(1),
-    icon: nameCharactersIcon[key],
-    value: key === 'capacidade' ? `${value} Lugares` : String(value),
-  }))
+  const carAttribuites = Object.entries(item)
+    .filter(([key]) => nameCharactersIcon[key])
+    .map(([key, value]) => ({
+      key,
+      label: key.charAt(0).toUpperCase() + key.slice(1),
+      icon: nameCharactersIcon[key],
+      value: key === 'capacidade' ? `${value} Lugares` : String(value),
+    }));
+
   return (
     <View style={styles.containerDetailsCars}>
       <Header title="Detalhes" />
       <View>
         <ComponentImage
-          uri={[`${item.imageUrl}`]}
+          uri={Array.isArray(item.imageUrl) ? item.imageUrl : [item.imageUrl]}
           resizeMode={"cover"}
           style={styles.imageCar}
         />
@@ -82,7 +85,7 @@ export const DetailsCars = () => {
               <ButtonIcon iconName={item.icon} iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
             }
             nameCharacters={item.label}
-            descriptionCharacters={`${item.value} Lugares`}
+            descriptionCharacters={`${item.value}`}
           />
         )}
       />

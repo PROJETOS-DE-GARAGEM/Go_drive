@@ -11,7 +11,7 @@ export const ComponentImage: React.FC<IImageCarProps> = ({
 
   const { width } = Dimensions.get('screen')
 
-  const images = uri.map(uri => ({ uri }))
+  const images = Array.isArray(uri) ? uri : [uri];
 
   return (
     <>
@@ -25,7 +25,7 @@ export const ComponentImage: React.FC<IImageCarProps> = ({
           style={styles.carousel}
           renderItem={({item}) => (
             <Image 
-            source={{ uri: item.uri }}
+            source={{ uri: item }}
             resizeMode={resizeMode}
             style={style}
             />
