@@ -12,12 +12,14 @@ export type AuthStackParamList = {
     password: string;
     CNHnumber: number;
   };
+  MultiForm: undefined;
+  RegisterConfirmation: undefined;
 };
 
 export type AppStackParamsList = {
   Home: undefined;
   FeedCars: {
-    brand: string;
+    brand?: string;
   };
   DetailsCars: {
     cars: CarsProps;
@@ -35,6 +37,8 @@ export type AppTabParamsList = {
     password: string;
   };
 };
+
+
 
 //Root navigation that rolls all the stacks
 export type RootStackParamList = {

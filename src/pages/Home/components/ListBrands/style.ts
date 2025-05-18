@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   brandContainer: {
-    marginTop: 6,
     flexDirection: "column",
-    paddingLeft: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   iconBrand: {
     width: 80,

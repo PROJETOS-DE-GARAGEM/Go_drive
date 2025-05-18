@@ -14,17 +14,12 @@ const styles = StyleSheet.create({
   listCarsContainer: {
     flex: 1,
     backgroundColor: "#FAFCFD",
-    marginTop: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
   },
   headerCarsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     paddingStart: 5,
-    paddingEnd: 5,
-    marginBottom: 5,
+    marginBottom: 20,
   },
   buttonSpectAll: {
     top: 10,
