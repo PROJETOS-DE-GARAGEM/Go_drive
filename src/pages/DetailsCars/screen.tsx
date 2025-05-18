@@ -39,9 +39,9 @@ export const DetailsCars = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const carAttribuites = Object.entries(item).filter(([key], value) => nameCharactersIcon[key]).map(([key], value) => ({
+  const carAttribuites = Object.entries(item).filter(([key]) => nameCharactersIcon[key]).map(([key, value]) => ({
     key,
-    label: key.charAt(0).toUpperCase().slice(1),
+    label: key.charAt(0).toUpperCase() + key.slice(1),
     icon: nameCharactersIcon[key],
     value: key === 'capacidade' ? `${value} Lugares` : String(value),
   }))
@@ -79,7 +79,7 @@ export const DetailsCars = () => {
         renderItem={({ item }) => (     
           <CardDetailsCarousel 
             buttonIcon={
-              <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
+              <ButtonIcon iconName={item.icon} iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
             }
             nameCharacters={item.label}
             descriptionCharacters={`${item.value} Lugares`}
