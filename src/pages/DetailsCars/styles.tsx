@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     width: 'auto', 
     height: 280, 
     borderRadius: 12,
-    paddingHorizontal: 8 
   },
   containerCaracters: {
     flexDirection: "row",
@@ -27,7 +26,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fdfdfd",
     maxWidth: 40,
     maxHeight: 50,
-  }
+  },
+  titleCharacters: {
+    fontSize: 18,
+    fontWeight: 600,
+    paddingVertical: 10,
+    marginVertical: 10,
+    marginLeft: 12
+  },
 });
 
 export default styles;

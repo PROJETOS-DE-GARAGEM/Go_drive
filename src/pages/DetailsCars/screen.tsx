@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Modal } from "react-native";
+import { View, FlatList, Text, Modal } from "react-native";
 import { ComponentImage } from "../../components/Image/component.Image";
 import {
   CardDetailsCar,
@@ -19,26 +19,45 @@ type DetailsCarsProps = {
   };
 };
 
+type iconName = {
+  [key: string]: string;
+};
+
+const nameCharactersIcon: iconName = {
+  capacidade: "event-seat",
+  câmbio: "car-crash",
+  km: "directions-car",
+  cor: 'palette',
+  motor: 'speed',
+} 
+
 type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
 export const DetailsCars = () => {
   const route = useRoute<DetailRouteProp>();
+  const item = route.params.cars;
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const carAttribuites = Object.entries(item).filter(([key], value) => nameCharactersIcon[key]).map(([key], value) => ({
+    key,
+    label: key.charAt(0).toUpperCase().slice(1),
+    icon: nameCharactersIcon[key],
+    value: key === 'capacidade' ? `${value} Lugares` : String(value),
+  }))
   return (
     <View style={styles.containerDetailsCars}>
       <Header title="Detalhes" />
       <View>
         <ComponentImage
-          uri={`${route.params.cars.imageUrl}`}
+          uri={[`${item.imageUrl}`]}
           resizeMode={"cover"}
           style={styles.imageCar}
         />
         <CardDetailsCar
-          brand={`${route.params.cars.marca} ${route.params.cars.modelo}`}
-          available={Number(route.params.cars.rating)}
-          description={`${route.params.cars.description}`}
+          brand={`${item.marca} ${item.modelo}`}
+          available={Number(item.rating)}
+          description={`${item.description}`}
           buttonIcon={
             <ButtonIcon
               iconName="star"
@@ -50,46 +69,23 @@ export const DetailsCars = () => {
         />
       </View>
 
-      <View style={styles.containerCaracters}>
-        <CardDetailsCarousel
-          title="Caracteristicas"
-          buttonIcon={
-            <ButtonIcon
-              iconName="event-seat"
-              iconSize={20}
-              iconColor="gray"
-              style={styles.buttonCardCarousel}
-            />
-          }
-          nameCharacters="Capacidade"
-          descriptionCharacters={`${route.params.cars.capacidade} Lugares`}
-        />
-        <CardDetailsCarousel
-          buttonIcon={
-            <ButtonIcon
-              iconName="car-crash"
-              iconSize={20}
-              iconColor="gray"
-              style={styles.buttonCardCarousel}
-            />
-          }
-          nameCharacters="Câmbio"
-          descriptionCharacters={`${route.params.cars.cambio}`}
-        />
-        <CardDetailsCarousel
-          buttonIcon={
-            <ButtonIcon
-              iconName="directions-car"
-              iconSize={20}
-              iconColor="gray"
-              style={styles.buttonCardCarousel}
-            />
-          }
-          nameCharacters="Km"
-          descriptionCharacters={`${route.params.cars.km}`}
-        />
-      </View>
+      <Text style={styles.titleCharacters}>Caracteristicas</Text>
 
+      <FlatList
+        data={carAttribuites}
+        keyExtractor={(item) => item.key}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => (     
+          <CardDetailsCarousel 
+            buttonIcon={
+              <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
+            }
+            nameCharacters={item.label}
+            descriptionCharacters={`${item.value} Lugares`}
+          />
+        )}
+      />
       <View style={styles.containerRentNowButton}>
         <Button onPress={() => setModalVisible(true)} name="Avançar" />
       </View>

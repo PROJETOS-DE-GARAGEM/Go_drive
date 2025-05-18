@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    paddingLeft: 5
   },
   titleBrand: {
     fontSize: 18,
