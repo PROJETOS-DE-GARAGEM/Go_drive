@@ -1,10 +1,9 @@
-import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
-import { AuthProvider } from "./src/contexts/AuthContext";
+import { AppProvider } from "./src/contexts/RootProvider";
+
 import AuthRoutes from "./src/routes/AuthRoutes";
-import { HomeProvider } from "./src/contexts/homeContext";
 
 
 export default function App() {
@@ -12,16 +11,10 @@ export default function App() {
     <SafeAreaProvider>
       <CustomStatusBar backgroundColor="#1f51d8" barStyle="light-content" />
       <NavigationContainer>
-        <AuthProvider>
+        <AppProvider>
           <AuthRoutes/>
-        </AuthProvider>
+        </AppProvider>
       </NavigationContainer>
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

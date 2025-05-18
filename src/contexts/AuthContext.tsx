@@ -41,10 +41,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         uid: userData.uid,
         email: userData.email ?? "",
       });
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "AppStack", params: { screen: "Home" } }],
-      });
     } catch (error: any) {
       throw error;
     }
