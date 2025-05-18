@@ -19,7 +19,7 @@ export type AuthStackParamList = {
 export type AppStackParamsList = {
   Home: undefined;
   FeedCars: {
-    brand: string;
+    brand?: string;
   };
   DetailsCars: {
     cars: CarsProps;

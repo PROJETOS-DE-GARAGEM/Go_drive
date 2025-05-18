@@ -15,6 +15,7 @@ import { Header } from "./components/Header";
 import { ListBrands } from "./components/ListBrands";
 import { ListCars } from "./components/ListCars";
 import { FilterModal } from "./components/FilterModal";
+import { SeeMore } from "../../components/SeeMore";
 
 import { useHome } from "../../hooks/useHome";
 
@@ -56,26 +57,21 @@ export default function Home() {
           />
           <View style={styles.listCarsContainer}>
             <View style={styles.headerCarsContainer}>
-              <Text style={styles.title}>Carros</Text>
-              <TouchableOpacity
-                style={styles.buttonSpectAll}
-                onPress={() => fetchCarsFiltered(undefined)}
-              >
-                <Text style={styles.buttonSpectAllText}>Todos</Text>
-              </TouchableOpacity>
+              <Text style={styles.title}>Veículos</Text>
             </View>
             <FlatList
-              data={cars}
+              data={cars.slice(0, 3)}
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{
                 paddingBottom: 14,
-                padding: 5,
                 gap: 8,
                 paddingHorizontal: 10,
               }}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => <ListCars data={item} />}
+              ListFooterComponent={<SeeMore/>}
+              ListFooterComponentStyle={{ top: 100 }}
             />
           </View>
         </>
