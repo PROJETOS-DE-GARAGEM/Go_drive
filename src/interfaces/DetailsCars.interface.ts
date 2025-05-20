@@ -23,11 +23,11 @@ export interface IDataDetailsCar extends ICharactersCar{
   available?: number | null | undefined
   nameCharacters?:  string;
   descriptionCharacters?: string
-  buttonIcon: React.ReactNode
+  buttonIcon?: React.ReactNode
 }
 
 export interface IImageCarProps {
-  uri: string | string[];
+  uri: string;
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
   style?: StyleProp<ImageStyle>
 }

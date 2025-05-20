@@ -5,21 +5,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerRentNowButton: {
-    display: "flex",
+    marginTop: 50,
     alignItems: "center",
-    marginTop: 40
   },
   buttonIcon: {
-    backgroundColor: "none"
+    backgroundColor: "none",
   },
   imageCar: {
-    width: 'auto', 
-    height: 280, 
+    width: "auto",
+    height: 240,
     borderRadius: 12,
   },
   containerCaracters: {
     flexDirection: "row",
     justifyContent: "center",
+    marginHorizontal: 10,
   },
   buttonCardCarousel: {
     borderRadius: 50,
@@ -32,7 +32,13 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     paddingVertical: 10,
     marginVertical: 10,
-    marginLeft: 12
+    marginLeft: 12,
+  },
+  cardsCharacters: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 10,
   },
 });
 
