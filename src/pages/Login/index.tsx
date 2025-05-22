@@ -11,7 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./style";
 
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
@@ -48,11 +48,12 @@ export default function Login() {
 
   return (
     <FormProvider {...methods}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      <KeyboardAwareScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        enableOnAndroid
+        extraScrollHeight={20}
+        keyboardShouldPersistTaps="handled"
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.registerContainer}>
             {loading ? (
               <View
@@ -130,8 +131,7 @@ export default function Login() {
               </>
             )}
           </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </FormProvider>
   );
 }
