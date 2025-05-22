@@ -1,37 +1,31 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, Button, SafeAreaView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Button, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import { Ionicons } from '@expo/vector-icons';
-
+import { Header } from '../../components/Header';
+import { useForm, FormProvider } from 'react-hook-form';
+import Form from '../../components/Form/Form';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const [firstName, setFirstName] = useState('Ernando');
-  const [lastName, setLastName] = useState('Tomé');
-  const [email, setEmail] = useState('ernando@gmail.com');
 
-  const handleSave = () => {
+  const methods = useForm({
+  defaultValues: {
+    firstName: 'Ernando',
+    lastName: 'Tomé',
+    email: 'ernando@gmail.com',
+  },
+});
 
-    console.log({ firstName, lastName, email });
-  };
+const onSubmit = (data: any) => {
+  console.log("Dados atualizados:", data);
+};
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={30} color="black" />
-        </TouchableOpacity>
-        
-        <Text style={styles.title}>Profile</Text>
-        
-        <TouchableOpacity>
-          <Ionicons name="create-outline" size={35} color="black"/>
-          <Text style={styles.editText}>Editar</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.divider}/>
+    <SafeAreaView>
+      <FormProvider {...methods}>
+        <Header title="Profile"/>
 
       <View style={styles.profileSection}>
         <View style={styles.avatarContainer}>
@@ -40,34 +34,22 @@ const ProfileScreen = () => {
             <Ionicons name="create-outline" size={28} color="black" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.profileName}>{`${firstName} ${lastName}`}</Text>
+        <Text style={styles.profileName}>{`${methods.getValues("firstName")} ${methods.getValues("lastName")}`}</Text>
       </View>
 
+        <Form
+        title="Editar perfil"
+        fields={[
+          { name: 'firstName', placeholder: 'Primeiro Nome', rules: { required: 'Obrigatório' } },
+          { name: 'lastName', placeholder: 'Sobrenome', rules: { required: 'Obrigatório' } },
+          { name: 'email', placeholder: 'Email', rules: { required: 'Obrigatório' } },
+        ]}
+        />
 
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          value={firstName}
-          onChangeText={setFirstName}
-          placeholder="First Name"
-        />
-        <TextInput
-          style={styles.input}
-          value={lastName}
-          onChangeText={setLastName}
-          placeholder="Last Name"
-        />
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          placeholder="Email"
-        />
-      </View>
-
-      <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+      <TouchableOpacity style={styles.saveButton} onPress={methods.handleSubmit(onSubmit)}>
         <Text style={styles.saveButtonText}>Salvar</Text>
       </TouchableOpacity>
+      </FormProvider>
     </SafeAreaView>
   );
 };
