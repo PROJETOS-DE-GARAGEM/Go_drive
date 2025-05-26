@@ -7,13 +7,9 @@ import {
   Keyboard,
   Alert,
   ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import { useForm, FormProvider } from "react-hook-form";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./style";
-
 import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import Form from "../../components/Form/Form";
 import Button from "../../components/Button/Button";
@@ -48,90 +44,85 @@ export default function Login() {
 
   return (
     <FormProvider {...methods}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        enableOnAndroid
-        extraScrollHeight={20}
-        keyboardShouldPersistTaps="handled"
-      >
-          <View style={styles.registerContainer}>
-            {loading ? (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <ActivityIndicator size="large" color="#1f51d8" />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.registerContainer}>
+          {loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color="#1f51d8" />
+            </View>
+          ) : (
+            <>
+              <BgGradient />
+              <View style={styles.registerImageContainer}>
+                <Image
+                  style={styles.registerImage}
+                  source={require("../../../assets/image (5).png")}
+                />
+                <Text style={styles.registerTitle}>Go Drive</Text>
+                <Text style={styles.registerText}>
+                  Alugue agora, movimente-se rápido
+                </Text>
               </View>
-            ) : (
-              <>
-                <BgGradient />
-                <View style={styles.registerImageContainer}>
-                  <Image
-                    style={styles.registerImage}
-                    source={require("../../../assets/image (5).png")}
+
+              <View style={styles.formContainer}>
+                <View>
+                  <Form
+                    title="Login"
+                    fields={[
+                      {
+                        name: "email",
+                        placeholder: "Email",
+                        rules: {
+                          required: "Email é obrigatório",
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: "Email inválido",
+                          },
+                        },
+                      },
+                      {
+                        name: "password",
+                        placeholder: "Senha",
+                        style: { marginTop: 20 },
+                        rules: {
+                          required: "Senha é obrigatória",
+                        },
+                      },
+                    ]}
                   />
-                  <Text style={styles.registerTitle}>Go Drive</Text>
-                  <Text style={styles.registerText}>
-                    Alugue agora, movimente-se rápido
-                  </Text>
                 </View>
 
-                <View style={styles.formContainer}>
-                  <View>
-                    <Form
-                      title="Login"
-                      fields={[
-                        {
-                          name: "email",
-                          placeholder: "Email",
-                          rules: {
-                            required: "Email é obrigatório",
-                            pattern: {
-                              value: /\S+@\S+\.\S+/,
-                              message: "Email inválido",
-                            },
-                          },
-                        },
-                        {
-                          name: "password",
-                          placeholder: "Senha",
-                          style: { marginTop: 20 },
-                          rules: {
-                            required: "Senha é obrigatória",
-                          },
-                        },
-                      ]}
-                    />
-                  </View>
-
-                  <View style={styles.buttonInput}>
-                    <Button
-                      name="Entrar"
-                      onPress={methods.handleSubmit(loginUser)}
-                    />
-                    <TouchableOpacity
-                      style={styles.linkButton}
-                      activeOpacity={0.6}
-                      onPress={() =>
-                        navigation.navigate("AuthStack", {
-                          screen: "MultiForm",
-                        })
-                      }
-                    >
-                      <Text style={styles.linkText}>
-                        Não possuí uma conta?{" "}
-                        <Text style={{ color: "#1f51d8" }}>Cadastrar-se</Text>.
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                <View style={styles.buttonInput}>
+                  <Button
+                    name="Entrar"
+                    onPress={methods.handleSubmit(loginUser)}
+                  />
+                  <TouchableOpacity
+                    style={styles.linkButton}
+                    activeOpacity={0.6}
+                    onPress={() =>
+                      navigation.navigate("AuthStack", {
+                        screen: "MultiForm",
+                      })
+                    }
+                  >
+                    <Text style={styles.linkText}>
+                      Não possuí uma conta?{" "}
+                      <Text style={{ color: "#1f51d8" }}>Cadastrar-se</Text>.
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-              </>
-            )}
-          </View>
-      </KeyboardAwareScrollView>
+              </View>
+            </>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     </FormProvider>
   );
 }
