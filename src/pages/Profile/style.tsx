@@ -3,43 +3,66 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   profileSection: {
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
+    padding: 10,
+    borderRadius: 12,
   },
   avatar: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100, 
     borderRadius: 50,
     alignSelf: 'center',
   },
-  avatarContainer: {
-  },
   editAvatarIcon: {
     position: 'absolute',
-    bottom: 24,
-    right: 10,
+    bottom: 6,
+    right: 6,
     backgroundColor: '#EEE',
     borderRadius: 50,
     padding: 4,
   },
   profileName: {
-    marginTop: 10,
-    marginBottom: 50,
-    fontSize: 30,
+    marginTop: 8,
+    fontSize: 24,
     fontWeight: '600',
-    width: 'auto',
-    height: 'auto',
-    textAlign: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+    textAlign: "center"
   },
+
   saveButton: {
     backgroundColor: '#2454E0',
-    paddingVertical: 20,
+    paddingVertical: 18, 
     borderRadius: 30,
     alignItems: 'center',
-    marginTop: '60%',
+    marginHorizontal: 30,
   },
   saveButtonText: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  input: {
+    paddingVertical: 16,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 16,
+    padding: 10,
+    marginBottom: 12,
+    fontSize: 16,
+    backgroundColor: '#fff',
+  },
+  inputLabel: {
+    fontSize: 13,
+    color: '#555',
+    marginBottom: 2,
+    left: 10
+  },
+  formContainer: {
+    paddingHorizontal: "6%",
+    marginTop: 10,
+    paddingVertical: 10,
+    borderRadius: 12,
   },
 });
