@@ -5,7 +5,6 @@ import {
   FlatList,
   ActivityIndicator,
   Modal,
-  TouchableOpacity,
 } from "react-native";
 
 import styles from "./style";
@@ -23,7 +22,7 @@ export default function Home() {
   const [modalVisible, setModalVisible] = useState(false);
   const [search, setSearch] = useState<string>("");
 
-  const { cars, brands ,loading, fetchCarsFiltered, searchBrands } = useHome();
+  const { cars, brands ,loading, searchBrands } = useHome();
 
   useEffect(() => {
     const delay = setTimeout(() => {

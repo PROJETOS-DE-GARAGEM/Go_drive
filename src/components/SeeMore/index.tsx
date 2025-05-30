@@ -16,7 +16,7 @@ const SeeMore = () => {
     <TouchableOpacity 
       onPress={handleNavigateDetailCar}
       style={styles.container}>
-      <Text style={styles.buttonText}>Ver mais</Text>
+      <Text style={styles.buttonText}>Ver todos</Text>
       <Entypo name="chevron-right" size={30} color="black" />
     </TouchableOpacity>
   )
