@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.registerContainer}>
+        <View style={styles.registerContainer}> 
           {loading ? (
             <View
               style={{

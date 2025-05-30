@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { validateUniqueField } from "../../services/validators";
 
 export default function FormStepThree() {
+  const textRules = "Campo obrigatório";
   const { getValues } = useFormContext(); // Acessa o método getValues diretamente
 
   const validatePasswordMatch = (value: string) => {
@@ -24,7 +25,7 @@ export default function FormStepThree() {
             placeholder: "Email",
             style: { marginBottom: 2 },
             rules: {
-              required: "O email é obrigatório",
+              required: textRules,
               pattern: {
                 value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
                 message: "Email inválido",
@@ -44,7 +45,7 @@ export default function FormStepThree() {
             placeholder: "Senha",
             style: { marginBottom: 2, marginTop: 20 },
             rules: {
-              required: "A senha é obrigatória",
+              required: textRules,
               minLength: {
                 value: 6,
                 message: "A senha deve ter pelo menos 6 caracteres",
