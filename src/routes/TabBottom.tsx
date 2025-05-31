@@ -23,7 +23,7 @@ export default function TabRoutes() {
     >
       <Tab.Screen
         name="HomeStack"
-        component={Home}
+        component={Profile}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => {

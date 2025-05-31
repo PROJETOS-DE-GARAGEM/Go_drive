@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   View, 
   Text, 
@@ -16,6 +16,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { Header } from '../../components/Header';
 import { useForm, Controller } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
+import { useAuth } from '../../hooks/useAuth';
+import { getMe } from '../../services/AuthService';
+import { changeProfile } from '../../services/profileService';
 
 interface ProfileFormData {
   firstName: string;
@@ -25,11 +28,13 @@ interface ProfileFormData {
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const { control, handleSubmit, watch, formState } = useForm<ProfileFormData>({
+  const { user }= useAuth();
+
+  const { control, handleSubmit, watch, formState, reset } = useForm<ProfileFormData>({
     defaultValues: {
-      firstName: 'Ernando',
-      lastName: 'Tomé',
-      email: 'ernando@gmail.com',
+      firstName: "",
+      lastName: "",
+      email: "",
     },
   });
 
@@ -57,10 +62,35 @@ const ProfileScreen = () => {
     }
   };
 
-  const onSubmit = (data: ProfileFormData) => {
-    console.log("Dados atualizados:", data);
-    Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
+  const onSubmit = async (data: ProfileFormData) => {
+    try {
+      if(user){
+        await changeProfile(user?.uid, data)
+        console.log("Dados atualizados:", data);
+        Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
+      }
+    } catch (error) {
+      console.error(error)
+      Alert.alert('Erro ao alterar informações!');
+    }
   };
+
+  useEffect(()=>{
+    async function loadingMe(){
+      if(user) {
+        const response = await getMe(user.uid)
+        if(response){
+          const [firstName, lastName] = response.nomeCompleto.split(" ");
+          reset({
+            firstName,
+            lastName,
+            email: response.email
+          })
+        }
+      }
+    }
+    loadingMe()
+  },[])
 
   return (
     <SafeAreaView style={{ flex: 1, }}>

@@ -6,8 +6,10 @@ import {
   query,
   where,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 import { auth, db } from "./firabaseConnection";
+import { IMe } from "../types/me";
 
 export type RegisterProps = {
   fullName: string;
@@ -66,3 +68,20 @@ export const register = async (formData: RegisterProps) => {
     throw error;
   }
 };
+
+
+export async function getMe(id: string) {
+  try {
+    const docRef = doc(db, 'usuarios', id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data() as IMe;
+    } else {
+      console.log('Documento não encontrado');
+    }
+  } catch (error) {
+    console.error('Erro ao buscar documento:', error);
+  }
+}
+
