@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     paddingHorizontal: 9,
     borderWidth: 1.5,
-    borderColor: "#f3f5f7",
+    borderColor: "#b0b8c1", // cor mais visível e elegante
     backgroundColor: "rgba(255,255,255,0.5)",
     color: "#333",
   },

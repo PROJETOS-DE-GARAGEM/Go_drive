@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 25,
-    marginTop: 70,
+    marginTop: 40,
   },
   circle: {
     width: 70,
