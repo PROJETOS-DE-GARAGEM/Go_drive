@@ -2,28 +2,44 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   containerDetailsCars: {
-    marginHorizontal: 10
+    flex: 1,
   },
   containerRentNowButton: {
-    display: "flex",
+    marginTop: 50,
     alignItems: "center",
-    marginTop: 20
   },
   buttonIcon: {
-    backgroundColor: "none"
+    backgroundColor: "none",
   },
   imageCar: {
-    width: 'auto', 
-    height: 280, 
+    width: "auto",
+    height: 240,
     borderRadius: 12,
-    paddingHorizontal: 8 
+  },
+  containerCaracters: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginHorizontal: 10,
   },
   buttonCardCarousel: {
     borderRadius: 50,
     backgroundColor: "#fdfdfd",
     maxWidth: 40,
     maxHeight: 50,
-  }
+  },
+  titleCharacters: {
+    fontSize: 18,
+    fontWeight: 600,
+    paddingVertical: 10,
+    marginVertical: 10,
+    marginLeft: 12,
+  },
+  cardsCharacters: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 10,
+  },
 });
 
 export default styles;

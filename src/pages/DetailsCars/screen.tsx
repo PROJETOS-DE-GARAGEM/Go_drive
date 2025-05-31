@@ -1,46 +1,117 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { ComponentImage } from '../../components/Image/component.Image';
-import { CardDetailsCar, CardDetailsCarousel } from '../../components/CardDetailsCar/screen';
-import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
-import Button from '../../components/Button/Button'
-import styles from './styles'
+import React, { useState } from "react";
+import { View, Text, Modal } from "react-native";
 
+import { ComponentImage } from "../../components/Image/component.Image";
+import { CardDetailsCar } from "./components/CardDetailsCar/screen";
+import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";;
+import { useRoute, RouteProp } from "@react-navigation/native";
+import { CarsProps } from "../../contexts/homeContext";
+import { Header } from "../../components/Header";
+import { TermsRent } from "../../components/Terms";
+import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import Button from "../../components/Button/Button";
+
+import styles from "./styles";
+
+type DetailsCarsProps = {
+  DetailCars: {
+    cars: CarsProps;
+  };
+};
+
+type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
 export const DetailsCars = () => {
+  const route = useRoute<DetailRouteProp>();
+  const item = route.params.cars;
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const carAttributes = item.funcionalidades.map((func) => ({
+    attribute: func,
+  }));
+
   return (
     <View style={styles.containerDetailsCars}>
-      {/* componentHeader ou Nav*/}
-      <Text style={{fontSize: 18, fontWeight: 600, color: "#CED2D6", textAlign: "center", marginVertical: 15, marginTop: 40}}>componentHeader ou Nav</Text>
-      <View>
-        <ComponentImage 
-          uri='https://t.ctcdn.com.br/z65Pikc6Z7My2T04IuMJ7ajKPl0=/1200x675/smart/i900301.png'        // query API uri
-          resizeMode={'cover'} 
+      <Header title="Detalhes do Veículo" />
+      <View style={{ marginHorizontal: 10 }}>
+        <ComponentImage
+          uri={`${item.imageUrl}`}
+          resizeMode={"cover"}
           style={styles.imageCar}
         />
         <CardDetailsCar
-          brand='Audi'                         // query API brand, available e desc
-          available={4.2} 
-          description='sofisticação, desempenho e inovação.'
+          brand={`${item.marca} ${item.modelo}`}
+          available={Number(item.rating)}
+          description={`${item.description}`}
           buttonIcon={
-            <ButtonIcon iconName='star' iconSize={16} iconColor='orange' style={styles.buttonIcon}/>
+            <ButtonIcon
+              iconName="star"
+              iconSize={16}
+              iconColor="orange"
+              style={styles.buttonIcon}
+            />
           }
         />
       </View>
 
-      <CardDetailsCarousel 
-        title='Caracteristicas'
-        buttonIcon={
-          <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
-        }
-        nameCharacters='Capacidade'
-        descriptionCharacters='4 cadeiras'
-      />
-      <View style={styles.containerRentNowButton}>
-        <Button 
-          onPress={() => alert("Carro alugado")}
-          name='Alugar Agora'
+      <Text style={styles.titleCharacters}>Caracteristicas</Text>
+
+      <View style={styles.containerCaracters}>
+        <CardDetailsCarousel
+          title="Capacidade"
+          buttonIcon={
+            <ButtonIcon
+              iconName="event-seat"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Capacidade"
+          descriptionCharacters={`${route.params.cars.capacidade} Lugares`}
+        />
+        <CardDetailsCarousel
+          title="Câmbio"
+          buttonIcon={
+            <ButtonIcon
+              iconName="car-crash"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Câmbio"
+          descriptionCharacters={`${route.params.cars.cambio}`}
+        />
+        <CardDetailsCarousel
+          title="KM"
+          buttonIcon={
+            <ButtonIcon
+              iconName="directions-car"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Km"
+          descriptionCharacters={`${route.params.cars.km}`}
         />
       </View>
+
+      <View style={styles.containerRentNowButton}>
+        <Button onPress={() => setModalVisible(true)} name="Avançar" />
+      </View>
+
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+        statusBarTranslucent={true}
+      >
+        <TermsRent closeModal={() => setModalVisible(false)} />
+      </Modal>
     </View>
   );
 };

@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootStack(){
     return(
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="AppStack">
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="AuthStack">
             <Stack.Screen name="AuthStack" component={AuthStack}/>
             <Stack.Screen name="AppStack" component={AppStack}/>
         </Stack.Navigator>

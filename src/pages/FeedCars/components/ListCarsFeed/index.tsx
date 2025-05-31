@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { View, Text, Image, Pressable, DimensionValue } from "react-native";
 
 import { AntDesign, MaterialIcons, FontAwesome6 } from "@expo/vector-icons";
 
-import styles from "./style";
-
 import { CarsProps } from "../../../../contexts/homeContext";
+import { useNavigation } from "@react-navigation/native";
+
+import { SkeletonLoading } from "../../../../components/Skeleton";
+import styles from "./style";
 
 type ListCarFeedProps = {
   data: CarsProps;
@@ -12,9 +15,28 @@ type ListCarFeedProps = {
 };
 
 const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+
+  const handleNavigateDetailCar = () => {
+    navigation.navigate("AppStack", {
+      screen: "DetailsCars",
+      params: { cars: data },
+    });
+  };
+
   return (
-    <Pressable style={[styles.container, { width: widthScreen }]}>
-      <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
+    <Pressable
+      style={[styles.container, { width: widthScreen }]}
+      onPress={handleNavigateDetailCar}
+    >
+      <SkeletonLoading isLoading={loading}>
+      <Image 
+        style={styles.imageCar} 
+        source={{ uri: data.imageUrl }} 
+        onLoadEnd={() => setLoading(false)}
+      />
+      </SkeletonLoading>
 
       <View style={styles.partialInfoCar}>
         <Text style={styles.titleDetails}>
@@ -36,7 +58,8 @@ const ListCarsFeed = ({ data, widthScreen }: ListCarFeedProps) => {
           </Text>
         </View>
         <Text style={styles.textDetails}>
-        <FontAwesome6 name="sack-dollar"/>{data.aluguel[0]}/dia
+          <FontAwesome6 name="sack-dollar" color={"#e6ac00"} />
+          {data.aluguel[0]}/dia
         </Text>
       </View>
     </Pressable>
