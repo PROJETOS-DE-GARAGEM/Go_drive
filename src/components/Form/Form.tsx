@@ -22,7 +22,8 @@ interface FormProps {
     keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
     editable?: boolean;
     onlyNumbers?: boolean;
-    maxLength?: number; // <-- Adicione aqui!
+    maxLength?: number;
+    onBlur?: () => void;
   }[];
 }
 
@@ -108,7 +109,10 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
-                  onBlur={onBlur}
+                  onBlur={() => {
+                    onBlur(); // do React Hook Form
+                    field.onBlur && field.onBlur(); // seu customizado, se existir
+                  }}
                   onChangeText={onChange}
                   value={value}
                   maxLength={field.maxLength} // <-- Adicione aqui!

@@ -6,6 +6,7 @@ import DropDown from "../DropDown/DropDown";
 import DatePicker from "../DatePicker/DatePicker";
 
 export default function FormStepTwo() {
+  const textRules = "Campo obrigatório";
   const { control } = useFormContext(); // Acessa o contexto do formulário
 
   return (
@@ -38,7 +39,7 @@ export default function FormStepTwo() {
               onlyNumbers: true,
               maxLength: 9, // Limita a digitação a 9 caracteres
               rules: {
-                required: "N° de registro é obrigatório",
+                required: textRules,
                 pattern: {
                   value: /^[0-9]{9}$/,
                   message: "Número inválido",
@@ -79,7 +80,7 @@ export default function FormStepTwo() {
           control={control}
           name="emissionDate"
           rules={{
-            required: "A data de emissão é obrigatória",
+            required: textRules,
             validate: (value: Date) =>
               new Date(value) <= new Date() ||
               "A data de emissão não pode ser no futuro",
@@ -108,7 +109,7 @@ export default function FormStepTwo() {
           control={control}
           name="validDate"
           rules={{
-            required: "A data de validade é obrigatória",
+            required: textRules,
             validate: (value: Date) =>
               new Date(value) > new Date() ||
               "A data de validade deve ser posterior à data de emissão",

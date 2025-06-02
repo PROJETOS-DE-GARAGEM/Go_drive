@@ -18,6 +18,7 @@ export type RegisterProps = {
   number: string;
   city: string;
   cep: string;
+  uf: string;
   registerNumber: string;
   cnhType: string;
   emissionDate: Date;
@@ -51,6 +52,7 @@ export const register = async (formData: RegisterProps) => {
       numero: formData.number,
       cidade: formData.city,
       cep: formData.cep,
+      uf: formData.uf,
       numeroRegistro: formData.registerNumber,
       cnhCategory: formData.cnhType,
       dataDeEmissao: formData.emissionDate,
