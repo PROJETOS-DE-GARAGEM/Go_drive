@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Linking, Alert } from "react-native";
 
 import { ListClause } from "../Clause";
 import { terms } from "../../utils/document";
@@ -8,12 +8,41 @@ import { AntDesign } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import styles from "./style";
 
+// import axios from 'axios';
+// import { openBrowserAsync } from 'expo-web-browser';
+
 type TermsProps = {
   closeModal: () => void;
 }
 
 const TermsRent = ({ closeModal }: TermsProps) => {
   const [isChecked, setChecked] = useState(false);
+
+//   const createPreference = async () => {
+
+//     const ngrokUrl = "https://c67f-2804-2d5c-a0-b3ea-45c9-f31c-65cf-6209.ngrok-free.app";
+
+//   try {
+//     const response = await axios.post(`${ngrokUrl}/create_preference`, {
+//       id: "1234",
+//       title: "Produto Teste",
+//       quantity: 1,
+//       price: 10.0,
+//     });
+
+//     const initPoint = response.data.order;
+
+//     if (initPoint) {
+//       await openBrowserAsync(initPoint);
+//     } else {
+//       Alert.alert("Erro", "Falha ao criar preferência de pagamento.");
+//     }
+
+//   } catch (error) {
+//     console.error("Erro ao criar preferência:", error);
+//     Alert.alert("Erro", "Não foi possível criar a preferência.");
+//   }
+// };
 
   return (
     <View style={styles.container}>
