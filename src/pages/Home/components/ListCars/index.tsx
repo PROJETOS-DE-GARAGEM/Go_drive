@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 
 import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+import { SkeletonLoading } from "../../../../components/Skeleton";
 import styles from "./style";
 
 import { CarsProps } from "../../../../contexts/homeContext";
@@ -12,6 +14,7 @@ type ListCarProps = {
 };
 
 const ListCars = ({ data }: ListCarProps) => {
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
 const handleNavigateDetailCar = () => {
@@ -20,7 +23,13 @@ const handleNavigateDetailCar = () => {
 
   return (
     <Pressable onPress={handleNavigateDetailCar} style={styles.container}>
-      <Image style={styles.imageCar} source={{ uri: data.imageUrl }} />
+      <SkeletonLoading isLoading={loading}>
+          <Image 
+            style={styles.imageCar} 
+            source={{ uri: data.imageUrl }}
+            onLoadEnd={() => setLoading(false)}
+          /> 
+      </SkeletonLoading>
 
       <View style={styles.partialInfoCar}>
         <Text style={styles.titleDetails}>

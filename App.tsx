@@ -1,3 +1,6 @@
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
+
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
