@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AppProvider } from "./src/contexts/RootProvider";
 
 import AuthRoutes from "./src/routes/AuthRoutes";
+import PaymentScreen from './src/pages/PaymentScreen/PaymentSreen';
 
 
 export default function App() {
@@ -14,10 +15,12 @@ export default function App() {
     <SafeAreaProvider>
       <CustomStatusBar backgroundColor="#1f51d8" barStyle="light-content" />
       <NavigationContainer>
-        <AppProvider>
+        {/* <AppProvider>
           <AuthRoutes/>
-        </AppProvider>
+        </AppProvider> */}
+         <PaymentScreen/>
       </NavigationContainer>
+     
     </SafeAreaProvider>
   );
 }
