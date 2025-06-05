@@ -22,7 +22,7 @@ export default function ButtonIcon({
       <TouchableOpacity
         style={[styles.button, style]}
         onPress={onPress}
-        disabled
+        disabled={disabled}
       >
         <Icon name={iconName} size={iconSize} color={iconColor} />
       </TouchableOpacity>

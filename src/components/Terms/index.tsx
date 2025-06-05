@@ -10,18 +10,16 @@ import styles from "./style";
 
 type TermsProps = {
   closeModal: () => void;
-}
+  onAcceptTerms: () => void;
+};
 
-const TermsRent = ({ closeModal }: TermsProps) => {
+const TermsRent = ({ closeModal, onAcceptTerms }: TermsProps) => {
   const [isChecked, setChecked] = useState(false);
 
   return (
     <View style={styles.container}>
       <View style={styles.containerTerms}>
-
-        <TouchableOpacity
-          onPress={closeModal}
-        >
+        <TouchableOpacity onPress={closeModal}>
           <AntDesign name="closecircle" size={24} />
         </TouchableOpacity>
 
@@ -56,7 +54,7 @@ const TermsRent = ({ closeModal }: TermsProps) => {
 
         {isChecked && (
           <View style={styles.contentButton}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={onAcceptTerms}>
               <Text style={styles.buttonText}>Prosseguir</Text>
             </TouchableOpacity>
           </View>

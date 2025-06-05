@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ViewStyle,
+  Appearance,
 } from "react-native";
 import DatePickerModal from "react-native-modal-datetime-picker";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -31,6 +32,8 @@ export default function DatePicker({
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
 
+  const colorScheme = Appearance.getColorScheme() === "dark" ? "dark" : "light";
+  // ...existing code...
   useEffect(() => {
     setSelectedDate(value ?? null);
   }, [value]);
@@ -79,6 +82,7 @@ export default function DatePicker({
         mode="date" // Define o modo (date, time ou datetime)
         onConfirm={handleConfirm} // Chamado ao confirmar a data
         onCancel={handleCancel} // Chamado ao cancelar
+        themeVariant={colorScheme}
       />
     </View>
   );
