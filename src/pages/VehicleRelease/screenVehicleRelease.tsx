@@ -10,6 +10,7 @@ import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import Button from "../../components/Button/Button";
 import styles from "./styles";
 import { Header } from "../../components/Header";
+import { useMemo } from "react";
 
 type VehicleReleaseProps = {
   VehicleRelease: {
@@ -22,9 +23,13 @@ type VehicleReleaseRouteProps = RouteProp<
   "VehicleRelease"
 >;
 
-export const VehicleRelease = ({ codigo = "5864" }) => {
+export const VehicleRelease = () => {
   const route = useRoute<VehicleReleaseRouteProps>();
   const car = route.params.cars;
+
+  const codigo = useMemo(() => {
+    return Array.from({length: 4}, () => Math.floor(Math.random() * 9)).join("");
+  }, [])
 
   return (
     <View style={{ flex: 1 }}>
