@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-
 import { ListClause } from "../Clause";
 import { terms } from "../../utils/document";
-
 import { AntDesign } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import styles from "./style";

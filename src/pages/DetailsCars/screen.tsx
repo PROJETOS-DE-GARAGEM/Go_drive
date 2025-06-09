@@ -13,7 +13,7 @@ import Button from "../../components/Button/Button";
 
 import styles from "./styles";
 
-type DetailsCarsProps = {
+ type DetailsCarsProps = {
   DetailCars: {
     cars: CarsProps;
   };

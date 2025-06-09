@@ -19,6 +19,7 @@ type DatePickerProps = {
   value?: Date;
   error?: string;
   style?: ViewStyle;
+  disabled?: boolean;
 };
 
 export default function DatePicker({
@@ -28,6 +29,7 @@ export default function DatePicker({
   value,
   error,
   style,
+  disabled,
 }: DatePickerProps) {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
@@ -52,10 +54,11 @@ export default function DatePicker({
     <View style={style}>
       <View style={styles.containerInput}>
         <TextInput
-          onPress={() => setShow(true)}
+          onPress={() => !disabled && setShow(true)}
           style={[
             styles.inputText,
-            error && { borderColor: "red", borderWidth: 2 }, // <-- Estilo de erro
+            error && { borderColor: "red", borderWidth: 2 },
+            disabled && { backgroundColor: "#f0f0f0" }, // cor diferente se desabilitado
           ]}
           placeholder={placeholder}
           placeholderTextColor={"#C7C7CD"}
@@ -63,8 +66,9 @@ export default function DatePicker({
           editable={false}
         />
         <TouchableOpacity
-          onPress={() => setShow(true)} // Abre o modal
+          onPress={() => !disabled && setShow(true)}
           style={styles.buttonIconPicker}
+          disabled={disabled}
         >
           <View>
             <FontAwesome
