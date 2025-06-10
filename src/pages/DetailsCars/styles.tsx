@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   containerDetailsCars: {
     flex: 1,
+    backgroundColor: "#fff"
   },
   containerRentNowButton: {
     marginTop: 50,
