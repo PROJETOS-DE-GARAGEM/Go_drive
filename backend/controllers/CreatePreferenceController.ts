@@ -16,7 +16,6 @@ class CreatePreferenceController {
     //   return res.status(400).json({ error: "Header 'origin' ausente ou inválido." });
     // }
 
-		const origin = 'https://ce2d-2804-2d5c-a0-b3ea-7115-49c5-cf78-ccae.ngrok-free.app';
 
 		const createPreferenceService = new CreatePreferenceService();
 		try{
@@ -25,7 +24,7 @@ class CreatePreferenceController {
 				title,
 				quantity,
 				price,
-			}, origin);
+			});
 			
 			return res.status(200).json({ order })
 			} catch (error){

@@ -3,7 +3,7 @@ import { client } from "../config/mercado-pago";
 import { PreferenceRequest } from "../types/payment.types";
 
 class CreatePreferenceService {
-    async exec(data: PreferenceRequest, origin: string){
+    async exec(data: PreferenceRequest){
 
       try {
         const preference = new Preference(client);
