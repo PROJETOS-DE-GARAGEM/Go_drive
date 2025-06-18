@@ -30,7 +30,19 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "intentFilters": [
+          {
+            "action": "VIEW", "data": [
+              {
+                "scheme": "godrive", 
+                "host": "checkout",
+                "pathPrefix": "/congrats"
+              }
+            ],
+            "category": ["BROWSABLE", "DEFAULT"]
+          }
+        ]
       }
     },
     "web": {
