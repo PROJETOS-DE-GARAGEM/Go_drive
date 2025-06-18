@@ -4,22 +4,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10, 
-    marginBottom: 20
-    
+    paddingHorizontal: 10, 
+    marginBottom: 20,
   },
 
   button: {
     width: "48%",
     padding: 10,
-    
-    
-  }
+  },
 });
 
 export default styles;

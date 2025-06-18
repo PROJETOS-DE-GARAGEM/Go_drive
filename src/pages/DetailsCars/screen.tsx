@@ -3,8 +3,8 @@ import { View, Text, Modal } from "react-native";
 
 import { ComponentImage } from "../../components/Image/component.Image";
 import { CardDetailsCar } from "./components/CardDetailsCar/screen";
-import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";;
-import { useRoute, RouteProp } from "@react-navigation/native";
+import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { CarsProps } from "../../contexts/homeContext";
 import { Header } from "../../components/Header";
 import { TermsRent } from "../../components/Terms";
@@ -13,7 +13,7 @@ import Button from "../../components/Button/Button";
 
 import styles from "./styles";
 
-type DetailsCarsProps = {
+ type DetailsCarsProps = {
   DetailCars: {
     cars: CarsProps;
   };
@@ -30,6 +30,15 @@ export const DetailsCars = () => {
   const carAttributes = item.funcionalidades.map((func) => ({
     attribute: func,
   }));
+  const navigation = useNavigation();
+  const handleAcceptTermsAndNavigateToPayment = () => {
+    setModalVisible(false); // Primeiro, fecha o modal dos termos
+    // Agora, navega para a 'PaymentScreen' e passa o objeto 'item' (o carro selecionado)
+    navigation.navigate("AppStack", {
+      screen: "PaymentScreen",
+      params: { selectedCar: item },
+    });
+  };
 
   return (
     <View style={styles.containerDetailsCars}>
@@ -110,7 +119,10 @@ export const DetailsCars = () => {
         onRequestClose={() => setModalVisible(false)}
         statusBarTranslucent={true}
       >
-        <TermsRent closeModal={() => setModalVisible(false)} />
+        <TermsRent
+          closeModal={() => setModalVisible(false)}
+          onAcceptTerms={handleAcceptTermsAndNavigateToPayment}
+        />
       </Modal>
     </View>
   );

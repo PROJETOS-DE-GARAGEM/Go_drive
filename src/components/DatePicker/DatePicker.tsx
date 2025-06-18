@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ViewStyle,
+  Appearance,
 } from "react-native";
 import DatePickerModal from "react-native-modal-datetime-picker";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -17,6 +18,8 @@ type DatePickerProps = {
   placeholder?: string;
   value?: Date;
   error?: string;
+  style?: ViewStyle;
+  disabled?: boolean;
 };
 
 export default function DatePicker({
@@ -24,11 +27,15 @@ export default function DatePicker({
   icon,
   placeholder,
   value,
-  error
+  error,
+  style,
+  disabled,
 }: DatePickerProps) {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
 
+  const colorScheme = Appearance.getColorScheme() === "dark" ? "dark" : "light";
+  // ...existing code...
   useEffect(() => {
     setSelectedDate(value ?? null);
   }, [value]);
@@ -44,13 +51,14 @@ export default function DatePicker({
   };
 
   return (
-    <View>
+    <View style={style}>
       <View style={styles.containerInput}>
         <TextInput
-          onPress={() => setShow(true)}
+          onPress={() => !disabled && setShow(true)}
           style={[
             styles.inputText,
-            error && { borderColor: "red", borderWidth: 2 }, // <-- Estilo de erro
+            error && { borderColor: "red", borderWidth: 2 },
+            disabled && { backgroundColor: "#f0f0f0" }, // cor diferente se desabilitado
           ]}
           placeholder={placeholder}
           placeholderTextColor={"#C7C7CD"}
@@ -58,8 +66,9 @@ export default function DatePicker({
           editable={false}
         />
         <TouchableOpacity
-          onPress={() => setShow(true)} // Abre o modal
+          onPress={() => !disabled && setShow(true)}
           style={styles.buttonIconPicker}
+          disabled={disabled}
         >
           <View>
             <FontAwesome
@@ -77,6 +86,7 @@ export default function DatePicker({
         mode="date" // Define o modo (date, time ou datetime)
         onConfirm={handleConfirm} // Chamado ao confirmar a data
         onCancel={handleCancel} // Chamado ao cancelar
+        themeVariant={colorScheme}
       />
     </View>
   );

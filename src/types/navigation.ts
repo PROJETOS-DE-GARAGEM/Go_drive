@@ -24,6 +24,7 @@ export type AppStackParamsList = {
   DetailsCars: {
     cars: CarsProps;
   };
+  PaymentScreen: { selectedCar: CarsProps };
 };
 
 export type AppTabParamsList = {
@@ -37,8 +38,6 @@ export type AppTabParamsList = {
     password: string;
   };
 };
-
-
 
 //Root navigation that rolls all the stacks
 export type RootStackParamList = {

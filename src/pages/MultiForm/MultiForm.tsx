@@ -20,6 +20,7 @@ import { RegisterProps } from "../../services/AuthService";
 import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native";
 import * as Animatable from "react-native-animatable";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 type RegisterFormData = RegisterProps;
 
@@ -67,66 +68,69 @@ export default function MultiForm() {
 
   return (
     <FormProvider {...methods}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={{ flex: 1 }}>
-            {loading ? (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          enableOnAndroid
+          extraScrollHeight={20}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          {loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <ActivityIndicator size="large" color="#1f51d8" />
+            </View>
+          ) : (
+            <>
+              <StepIndicator currentStep={currentStep} />
+              <Animatable.View
+                animation="slideInUp"
+                duration={300}
+                key={currentStep}
               >
-                <ActivityIndicator size="large" color="#1f51d8" />
-              </View>
-            ) : (
-              <ScrollView style={styles.container}>
-                <StepIndicator currentStep={currentStep} />
-                <Animatable.View
-                  animation="slideInUp"
-                  duration={300}
-                  key={currentStep}
-                >
-                  {currentStep === 1 && <FormStepOne />}
-                  {currentStep === 2 && <FormStepTwo />}
-                  {currentStep === 3 && <FormStepThree />}
-                </Animatable.View>
-                <Animatable.View
-                  animation="slideInUp"
-                  duration={300} 
-                  key={`btn-${currentStep}`}
-                  style={styles.buttonContainer}
-                >
-                  {currentStep > 0 && (
-                    <Button
-                      name="Voltar"
-                      onPress={handleBack}
-                      style={styles.button}
-                    />
-                  )}
-                  {currentStep < 3 ? (
-                    <Button
-                      name="Próximo"
-                      onPress={handleNext}
-                      style={styles.button}
-                    />
-                  ) : (
-                    <Button
-                      name="Enviar"
-                      onPress={handleSubmit}
-                      style={styles.button}
-                    />
-                  )}
-                </Animatable.View>
-              </ScrollView>
-            )}
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    </FormProvider>
+                {currentStep === 1 && <FormStepOne />}
+                {currentStep === 2 && <FormStepTwo />}
+                {currentStep === 3 && <FormStepThree />}
+              </Animatable.View>
+              <Animatable.View
+                animation="slideInUp"
+                duration={300}
+                key={`btn-${currentStep}`}
+                style={styles.buttonContainer}
+              >
+                {currentStep > 0 && (
+                  <Button
+                    name="Voltar"
+                    onPress={handleBack}
+                    style={styles.button}
+                  />
+                )}
+                {currentStep < 3 ? (
+                  <Button
+                    name="Próximo"
+                    onPress={handleNext}
+                    style={styles.button}
+                  />
+                ) : (
+                  <Button
+                    name="Enviar"
+                    onPress={handleSubmit}
+                    style={styles.button}
+                  />
+                )}
+              </Animatable.View>
+            </>
+          )}
+        </KeyboardAwareScrollView>
+      </View>
+    </TouchableWithoutFeedback>
+  </FormProvider>
   );
 }
