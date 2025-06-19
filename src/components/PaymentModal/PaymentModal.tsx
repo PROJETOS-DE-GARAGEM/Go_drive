@@ -1,10 +1,9 @@
-import { Modal, Text, View, TouchableOpacity } from "react-native";
-import Checkbox from "expo-checkbox";
-import { useState } from "react";
-import { Linking } from "react-native";
+import { Linking, Modal, Text, View } from "react-native";
 import styles from "./PaymentModalStyle";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import Button from "../Button/Button";
+import { openBrowserAsync } from 'expo-web-browser';
+import { createPayment } from "../../services/CreatePayment";
 
 type PaymentModalProps = {
   visible: boolean;
@@ -45,6 +44,21 @@ export default function PaymentModal({
   const taxaServico = 5;
   const seguro = 10;
   const total = valorBase + taxaServico + seguro;
+
+  async function paymentCar() {
+    try{
+      const data = await createPayment(plano.id, carName, total);
+
+      if(data){
+        await openBrowserAsync(data);
+      }
+
+    } catch(error){
+      alert("Ocorreu um erro ao realizar o pagamento")
+      console.log(error);
+    }
+  }
+
   return (
     <Modal
       visible={visible}
@@ -128,7 +142,7 @@ export default function PaymentModal({
               <Text style={styles.totalText}>{total.toFixed(2)} </Text>
             </View>
           </View>
-          <Button style={{borderRadius: 12, marginTop: 200}} name={`Confirmar e Pagar R$ ${total.toFixed(2)}`} />
+          <Button onPress={paymentCar} style={{borderRadius: 12, marginTop: 200}} name={`Confirmar e Pagar R$ ${total.toFixed(2)}`} />
         </View>
       </View>
     </Modal>

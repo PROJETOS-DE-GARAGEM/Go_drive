@@ -25,6 +25,7 @@ export type AppStackParamsList = {
     cars: CarsProps;
   };
   PaymentScreen: { selectedCar: CarsProps };
+  VehicleRelease: { status: string };
 };
 
 export type AppTabParamsList = {
