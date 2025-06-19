@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { View, FlatList, Text } from "react-native";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
@@ -11,24 +12,28 @@ import Button from "../../components/Button/Button";
 import { Header } from "../../components/Header";
 import styles from "./styles";
 import { CarsProps } from "../../contexts/homeContext";
+=======
+import React, { useState } from "react";
+import { View, Text, Modal } from "react-native";
 
-type DetailsCarsProps = {
+import { ComponentImage } from "../../components/Image/component.Image";
+import { CardDetailsCar } from "./components/CardDetailsCar/screen";
+import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
+import { CarsProps } from "../../contexts/homeContext";
+import { Header } from "../../components/Header";
+import { TermsRent } from "../../components/Terms";
+import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import Button from "../../components/Button/Button";
+>>>>>>> 71d32aea8d8c014dff7884ec760c5dc8e5fccd55
+
+import styles from "./styles";
+
+ type DetailsCarsProps = {
   DetailCars: {
     cars: CarsProps;
   };
 };
-
-type iconName = {
-  [key: string]: string;
-};
-
-const nameCharactersIcon: iconName = {
-  capacidade: "event-seat",
-  câmbio: "car-crash",
-  km: "directions-car",
-  cor: 'palette',
-  motor: 'speed',
-} 
 
 type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
@@ -46,18 +51,27 @@ export const DetailsCars: React.FC = () => {
   };
   const item = route.params.cars;
 
-  const carAttribuites = Object.entries(item).filter(([key], value) => nameCharactersIcon[key]).map(([key], value) => ({
-    key,
-    label: key.charAt(0).toUpperCase().slice(1),
-    icon: nameCharactersIcon[key],
-    value: key === 'capacidade' ? `${value} Lugares` : String(value),
-  }))
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const carAttributes = item.funcionalidades.map((func) => ({
+    attribute: func,
+  }));
+  const navigation = useNavigation();
+  const handleAcceptTermsAndNavigateToPayment = () => {
+    setModalVisible(false); // Primeiro, fecha o modal dos termos
+    // Agora, navega para a 'PaymentScreen' e passa o objeto 'item' (o carro selecionado)
+    navigation.navigate("AppStack", {
+      screen: "PaymentScreen",
+      params: { selectedCar: item },
+    });
+  };
+
   return (
     <View style={styles.containerDetailsCars}>
-      <Header title="Detalhes" />
-      <View>
+      <Header title="Detalhes do Veículo" />
+      <View style={{ marginHorizontal: 10 }}>
         <ComponentImage
-          uri={[`${item.imageUrl}`]}
+          uri={`${item.imageUrl}`}
           resizeMode={"cover"}
           style={styles.imageCar}
         />
@@ -78,6 +92,7 @@ export const DetailsCars: React.FC = () => {
 
       <Text style={styles.titleCharacters}>Caracteristicas</Text>
 
+<<<<<<< HEAD
       <FlatList
         data={carAttribuites}
         keyExtractor={(item) => item.key}
@@ -95,7 +110,66 @@ export const DetailsCars: React.FC = () => {
       />
       <View style={styles.containerRentNowButton}>
         <Button onPress={handleNavigateVehicleRelease} name="Alugar Agora" />
+=======
+      <View style={styles.containerCaracters}>
+        <CardDetailsCarousel
+          title="Capacidade"
+          buttonIcon={
+            <ButtonIcon
+              iconName="event-seat"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Capacidade"
+          descriptionCharacters={`${route.params.cars.capacidade} Lugares`}
+        />
+        <CardDetailsCarousel
+          title="Câmbio"
+          buttonIcon={
+            <ButtonIcon
+              iconName="car-crash"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Câmbio"
+          descriptionCharacters={`${route.params.cars.cambio}`}
+        />
+        <CardDetailsCarousel
+          title="KM"
+          buttonIcon={
+            <ButtonIcon
+              iconName="directions-car"
+              iconSize={20}
+              iconColor="gray"
+              style={styles.buttonCardCarousel}
+            />
+          }
+          nameCharacters="Km"
+          descriptionCharacters={`${route.params.cars.km}`}
+        />
+>>>>>>> 71d32aea8d8c014dff7884ec760c5dc8e5fccd55
       </View>
+
+      <View style={styles.containerRentNowButton}>
+        <Button onPress={() => setModalVisible(true)} name="Avançar" />
+      </View>
+
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+        statusBarTranslucent={true}
+      >
+        <TermsRent
+          closeModal={() => setModalVisible(false)}
+          onAcceptTerms={handleAcceptTermsAndNavigateToPayment}
+        />
+      </Modal>
     </View>
   );
 };

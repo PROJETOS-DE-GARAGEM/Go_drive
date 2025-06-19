@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY_SECRET,
+  apiKey: "AIzaSyDgtqQJqO6-mCNFOtHUlbxevGvMrDC_k14",
   authDomain: "godrive-2827a.firebaseapp.com",
   projectId: "godrive-2827a",
   storageBucket: "godrive-2827a.firebasestorage.app",
@@ -12,5 +13,11 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-export { db };
+// Inicializa o Firebase Auth com persistência em memória
+// const auth = initializeAuth(app, {
+//   persistence: inMemoryPersistence,
+// });
+
+export { db, auth };

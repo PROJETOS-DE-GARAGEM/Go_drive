@@ -7,9 +7,6 @@ import BgGradient from "../../components/BgGradient/BgGradientStyle";
 import Form from "../../components/Form/Form";
 import Button from "../../components/Button/Button";
 
-import { collection, addDoc, setDoc } from "firebase/firestore";
-import { db } from "../../services/firabaseConnection";
-
 type UserProps = {
   name: string;
   surname: string;

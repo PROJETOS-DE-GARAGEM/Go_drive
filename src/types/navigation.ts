@@ -12,19 +12,20 @@ export type AuthStackParamList = {
     password: string;
     CNHnumber: number;
   };
+  MultiForm: undefined;
+  RegisterConfirmation: undefined;
 };
 
 export type AppStackParamsList = {
   Home: undefined;
   FeedCars: {
-    brand: string;
+    brand?: string;
   };
   DetailsCars: {
     cars: CarsProps;
   };
-  VehicleRelease: { 
-    cars: CarsProps 
-  };
+  PaymentScreen: { selectedCar: CarsProps };
+  VehicleRelease: { status: string };
 };
 
 export type AppTabParamsList = {

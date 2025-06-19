@@ -7,17 +7,23 @@ interface IconProps {
   iconColor?: string;
   style?: ViewStyle;
   onPress?: () => void;
+  disabled?: boolean;
 }
 export default function ButtonIcon({
   iconName,
   iconSize,
   iconColor,
   style,
+  disabled,
   onPress,
 }: IconProps) {
   return (
     <View>
-      <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+      <TouchableOpacity
+        style={[styles.button, style]}
+        onPress={onPress}
+        disabled={disabled}
+      >
         <Icon name={iconName} size={iconSize} color={iconColor} />
       </TouchableOpacity>
     </View>

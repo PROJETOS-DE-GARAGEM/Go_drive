@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, FontAwesome6, FontAwesome5 } from "@expo/vector-icons";
 
 import Home from "../pages/Home";
+import FeedCars from "../pages/FeedCars";
 import Maps from "../pages/Maps";
 import Profile from "../pages/Profile";
 
@@ -42,8 +43,8 @@ export default function TabRoutes() {
       />
 
       <Tab.Screen
-        name="Search"
-        component={Maps}
+        name="Feed"
+        component={FeedCars}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => {
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     backgroundColor: "#1f51d8",
     borderTopWidth: 0,
-    bottom: Platform.OS === "android" ? "5%" : "6%",
+    bottom: Platform.OS === "android" ? "3%" : "7%",
     left: 20,
     right: 20,
     elevation: 5,

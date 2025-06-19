@@ -9,30 +9,28 @@ export const ComponentImage: React.FC<IImageCarProps> = ({
   style
 }) => {
 
-  const { width } = Dimensions.get('screen')
-
-  const images = uri.map(uri => ({ uri }))
+  // const { width } = Dimensions.get('screen')
+  // const images = Array.isArray(uri) ? uri : [uri];
 
   return (
-    <>
+    // <>
       <View style={styles.containerImage}>
-        <Carousel
+        {/* <Carousel
           width={width}
           height={250}
           data={images}
           scrollAnimationDuration={1000}
           mode='horizontal-stack'
           style={styles.carousel}
-          renderItem={({item}) => (
+          renderItem={({item}) => ( */}
             <Image 
-            source={{ uri: item.uri }}
+            source={{ uri: uri }}
             resizeMode={resizeMode}
             style={style}
             />
-          )}
+          {/* )}
         >
-        </Carousel>
+        </Carousel> */}
       </View>
-    </>
   );
 }

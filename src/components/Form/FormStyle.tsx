@@ -2,11 +2,10 @@ import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   formContainer: {
-    flex: 1,
     backgroundColor: "#fff",
     borderTopEndRadius: 24,
     borderTopStartRadius: 24,
-    padding: 20,
+    
   },
 
   formTitle: {
@@ -19,16 +18,15 @@ const styles = StyleSheet.create({
 
   input: {
     width: "100%",
-    height: 48,
+    height: 55,
     borderRadius: 16,
     fontSize: 16,
     fontFamily: "Catamaran",
     fontWeight: "500",
     lineHeight: 20,
     paddingHorizontal: 9,
-    marginBottom: 20,
     borderWidth: 1.5,
-    borderColor: "#f3f5f7",
+    borderColor: "#b0b8c1", // cor mais visível e elegante
     backgroundColor: "rgba(255,255,255,0.5)",
     color: "#333",
   },
@@ -46,6 +44,10 @@ const styles = StyleSheet.create({
     right: 20, // Margem à direita
     alignItems: "center", // Centraliza o botão horizontalmente
     zIndex: 1,
+  },
+  disabledInput: {
+    backgroundColor: "#f0f0f0", // Fundo cinza claro
+    color: "#a0a0a0", // Texto cinza claro
   },
 });
 
