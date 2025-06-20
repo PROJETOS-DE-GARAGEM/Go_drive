@@ -1,35 +1,18 @@
-<<<<<<< HEAD
-import React from "react";
-import { View, FlatList, Text } from "react-native";
-import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
-import { ComponentImage } from "../../components/Image/component.Image";
-import {
-  CardDetailsCar,
-  CardDetailsCarousel,
-} from "../../components/CardDetailsCar/screen";
-import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
-import Button from "../../components/Button/Button";
-import { Header } from "../../components/Header";
-import styles from "./styles";
-import { CarsProps } from "../../contexts/homeContext";
-=======
 import React, { useState } from "react";
 import { View, Text, Modal } from "react-native";
-
+import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
+import { Header } from "../../components/Header";
+import { CarsProps } from "../../contexts/homeContext";
 import { ComponentImage } from "../../components/Image/component.Image";
 import { CardDetailsCar } from "./components/CardDetailsCar/screen";
 import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";
-import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
-import { CarsProps } from "../../contexts/homeContext";
-import { Header } from "../../components/Header";
 import { TermsRent } from "../../components/Terms";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import Button from "../../components/Button/Button";
->>>>>>> 71d32aea8d8c014dff7884ec760c5dc8e5fccd55
 
 import styles from "./styles";
 
- type DetailsCarsProps = {
+type DetailsCarsProps = {
   DetailCars: {
     cars: CarsProps;
   };
@@ -39,16 +22,16 @@ type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
 export const DetailsCars: React.FC = () => {
   const route = useRoute<DetailRouteProp>();
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   const { cars } = route.params;
 
-  const handleNavigateVehicleRelease = () => {
-    navigation.navigate("AppStack", {
-      screen: "VehicleRelease",
-      params: { cars },
-    });
-  };
+  // const handleNavigateVehicleRelease = () => {
+  //   navigation.navigate("AppStack", {
+  //     screen: "VehicleRelease",
+  //     params: { cars },
+  //   });
+  // };
   const item = route.params.cars;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -91,26 +74,6 @@ export const DetailsCars: React.FC = () => {
       </View>
 
       <Text style={styles.titleCharacters}>Caracteristicas</Text>
-
-<<<<<<< HEAD
-      <FlatList
-        data={carAttribuites}
-        keyExtractor={(item) => item.key}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (     
-          <CardDetailsCarousel 
-            buttonIcon={
-              <ButtonIcon iconName='event-seat' iconSize={20} iconColor='gray' style={styles.buttonCardCarousel}/>
-            }
-            nameCharacters={item.label}
-            descriptionCharacters={`${item.value} Lugares`}
-          />
-        )}
-      />
-      <View style={styles.containerRentNowButton}>
-        <Button onPress={handleNavigateVehicleRelease} name="Alugar Agora" />
-=======
       <View style={styles.containerCaracters}>
         <CardDetailsCarousel
           title="Capacidade"
@@ -151,7 +114,6 @@ export const DetailsCars: React.FC = () => {
           nameCharacters="Km"
           descriptionCharacters={`${route.params.cars.km}`}
         />
->>>>>>> 71d32aea8d8c014dff7884ec760c5dc8e5fccd55
       </View>
 
       <View style={styles.containerRentNowButton}>
