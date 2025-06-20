@@ -1,6 +1,12 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firabaseConnection";
 
 //User typing
@@ -13,6 +19,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   signIn: (email: string, password: string) => Promise<void>;
+  loading: boolean;
 };
 
 //Create the context
@@ -23,12 +30,26 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  //Login Simulation
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (userData) => {
+      if (userData) {
+        setUser({
+          uid: userData.uid,
+          email: userData.email ?? "",
+        });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
 
-  const signIn = async (email: string
-    , password: string) => {
+    return unsubscribe;
+  }, []);
+
+  const signIn = async (email: string, password: string) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -51,6 +72,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         signIn,
+        loading,
       }}
     >
       {children}
