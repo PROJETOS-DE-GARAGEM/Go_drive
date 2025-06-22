@@ -1,9 +1,9 @@
-import { Linking, Modal, Text, View } from "react-native";
-import styles from "./PaymentModalStyle";
-import ButtonIcon from "../ButtonIcon/ButtonIcon";
-import Button from "../Button/Button";
+import { Modal, Text, View } from "react-native";
 import { openBrowserAsync } from 'expo-web-browser';
 import { createPayment } from "../../services/CreatePayment";
+import ButtonIcon from "../ButtonIcon/ButtonIcon";
+import Button from "../Button/Button";
+import styles from "./PaymentModalStyle";
 
 type PaymentModalProps = {
   visible: boolean;

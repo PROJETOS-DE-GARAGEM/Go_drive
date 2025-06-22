@@ -5,7 +5,7 @@ export const linking = {
     screens: {
       AppStack: {
         screens: {
-          Checkout: {
+          VehicleRelease: {
             path: 'checkout/congrats',
             parse: {
               status: (status: string) => `${status}`,
