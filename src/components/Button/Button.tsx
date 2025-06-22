@@ -14,3 +14,4 @@ export default function Button({ name, onPress, style, children }: ButtonProps) 
     </TouchableOpacity>
   );
 }
+ 

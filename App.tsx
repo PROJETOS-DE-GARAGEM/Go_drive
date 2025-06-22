@@ -8,6 +8,7 @@ import { linking } from "./src/routes/Linking";
 import { AppProvider } from "./src/contexts/RootProvider";
 
 import AuthRoutes from "./src/routes/AuthRoutes";
+import PaymentDeepLinkHandler from "./src/components/PaymentDeepLinkHandler/PaymentDeepLinkHadler";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <CustomStatusBar backgroundColor="#1f51d8" barStyle="light-content" />
       <NavigationContainer>
         <AppProvider>
+          <PaymentDeepLinkHandler />
           <AuthRoutes />
         </AppProvider>
       </NavigationContainer>

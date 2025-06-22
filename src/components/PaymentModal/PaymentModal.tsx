@@ -2,8 +2,11 @@ import { Linking, Modal, Text, View } from "react-native";
 import styles from "./PaymentModalStyle";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import Button from "../Button/Button";
-import { openBrowserAsync } from 'expo-web-browser';
+import { openBrowserAsync } from "expo-web-browser";
 import { createPayment } from "../../services/CreatePayment";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext } from "react";
+import { startPayment } from "../../services/paymentService";
 
 type PaymentModalProps = {
   visible: boolean;
@@ -45,17 +48,24 @@ export default function PaymentModal({
   const seguro = 10;
   const total = valorBase + taxaServico + seguro;
 
+  const { user } = useContext(AuthContext);
   async function paymentCar() {
-    try{
-      const data = await createPayment(plano.id, carName, total);
+    const userId = user?.uid || "anon";
 
-      if(data){
-        await openBrowserAsync(data);
-      }
+    try {
+      console.log("Chamando startPayment...");
 
-    } catch(error){
-      alert("Ocorreu um erro ao realizar o pagamento")
-      console.log(error);
+      await startPayment({
+        id: plano.id,
+        title: carName,
+        quantity: 1,
+        price: total,
+        external_reference: userId,
+      });
+      console.log("Pagamento iniciado com sucesso");
+    } catch (error) {
+      alert("Ocorreu um erro ao realizar o pagamento");
+      console.log("Erro no pagamento:", error);
     }
   }
 
@@ -142,7 +152,11 @@ export default function PaymentModal({
               <Text style={styles.totalText}>{total.toFixed(2)} </Text>
             </View>
           </View>
-          <Button onPress={paymentCar} style={{borderRadius: 12, marginTop: 200}} name={`Confirmar e Pagar R$ ${total.toFixed(2)}`} />
+          <Button
+            onPress={paymentCar}
+            style={{ borderRadius: 12, marginTop: 200 }}
+            name={`Confirmar e Pagar R$ ${total.toFixed(2)}`}
+          />
         </View>
       </View>
     </Modal>

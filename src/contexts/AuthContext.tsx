@@ -5,45 +5,61 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut as firebaseSignOut,
+} from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "../services/firabaseConnection";
 
-//User typing
+// User typing
 type User = {
   uid: string;
   email: string;
 };
 
-//Context typing
+// Context typing
 type AuthContextType = {
   user: User | null;
   signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
   loading: boolean;
 };
 
-//Create the context
-
+// Create the context
 export const AuthContext = createContext({} as AuthContextType);
 
-//Provider
-
+// Provider
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (userData) => {
-      if (userData) {
-        setUser({
-          uid: userData.uid,
-          email: userData.email ?? "",
-        });
-      } else {
-        setUser(null);
+    const loadStoredUser = async () => {
+      const userJson = await AsyncStorage.getItem("userData");
+      if (userJson) {
+        const userStored: User = JSON.parse(userJson);
+        setUser(userStored);
       }
       setLoading(false);
+    };
+
+    loadStoredUser();
+
+    const unsubscribe = onAuthStateChanged(auth, async (userData) => {
+      if (userData) {
+        const formattedUser = {
+          uid: userData.uid,
+          email: userData.email ?? "",
+        };
+
+        setUser(formattedUser);
+        await AsyncStorage.setItem("userData", JSON.stringify(formattedUser));
+      } else {
+        setUser(null);
+        await AsyncStorage.removeItem("userData");
+      }
     });
 
     return unsubscribe;
@@ -51,20 +67,25 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const userData = userCredential.user;
 
-      setUser({
+      const formattedUser = {
         uid: userData.uid,
         email: userData.email ?? "",
-      });
+      };
+
+      setUser(formattedUser);
+      await AsyncStorage.setItem("userData", JSON.stringify(formattedUser));
     } catch (error: any) {
       throw error;
     }
+  };
+
+  const signOut = async () => {
+    await firebaseSignOut(auth);
+    await AsyncStorage.removeItem("userData");
+    setUser(null);
   };
 
   return (
@@ -72,6 +93,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         signIn,
+        signOut,
         loading,
       }}
     >
