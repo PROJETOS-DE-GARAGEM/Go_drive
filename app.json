@@ -27,6 +27,9 @@
       "bundleIdentifier": "com.ads.godrive",
       "config": {
         "googleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -44,17 +47,17 @@
               "pathPrefix": "/congrats"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ],
       "permissions": [
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION"
       ],
-      "package": "com.ads.godrive"
+      "package": "com.ads.godrive",
+      "config": {
+        "googleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

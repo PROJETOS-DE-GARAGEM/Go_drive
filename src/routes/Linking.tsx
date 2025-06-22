@@ -1,17 +1,25 @@
-
 export const linking = {
-  prefixes: ['godrive://'],
+  prefixes: ['yourapp://'],
   config: {
     screens: {
       AppStack: {
         screens: {
-          Checkout: {
-            path: 'checkout/congrats',
+          Home: {
+            path: 'home/:status',
             parse: {
               status: (status: string) => `${status}`,
             },
           },
         },
+      } as {
+        screens: {
+          Home: {
+            path: string;
+            parse: {
+              status: (status: string) => string;
+            };
+          };
+        };
       },
     },
   },

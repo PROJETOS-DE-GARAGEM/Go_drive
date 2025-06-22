@@ -68,69 +68,69 @@ export default function MultiForm() {
 
   return (
     <FormProvider {...methods}>
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ flex: 1, backgroundColor: "white" }}>
-        <KeyboardAwareScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          enableOnAndroid
-          extraScrollHeight={20}
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
-        >
-          {loading ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <ActivityIndicator size="large" color="#1f51d8" />
-            </View>
-          ) : (
-            <>
-              <StepIndicator currentStep={currentStep} />
-              <Animatable.View
-                animation="slideInUp"
-                duration={300}
-                key={currentStep}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+          <KeyboardAwareScrollView
+            contentContainerStyle={{ flexGrow: 1 }}
+            enableOnAndroid
+            extraScrollHeight={20}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            {loading ? (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                {currentStep === 1 && <FormStepOne />}
-                {currentStep === 2 && <FormStepTwo />}
-                {currentStep === 3 && <FormStepThree />}
-              </Animatable.View>
-              <Animatable.View
-                animation="slideInUp"
-                duration={300}
-                key={`btn-${currentStep}`}
-                style={styles.buttonContainer}
-              >
-                {currentStep > 0 && (
-                  <Button
-                    name="Voltar"
-                    onPress={handleBack}
-                    style={styles.button}
-                  />
-                )}
-                {currentStep < 3 ? (
-                  <Button
-                    name="Próximo"
-                    onPress={handleNext}
-                    style={styles.button}
-                  />
-                ) : (
-                  <Button
-                    name="Enviar"
-                    onPress={handleSubmit}
-                    style={styles.button}
-                  />
-                )}
-              </Animatable.View>
-            </>
-          )}
-        </KeyboardAwareScrollView>
-      </View>
-    </TouchableWithoutFeedback>
-  </FormProvider>
+                <ActivityIndicator size="large" color="#1f51d8" />
+              </View>
+            ) : (
+              <>
+                <StepIndicator currentStep={currentStep} />
+                <Animatable.View
+                  animation="slideInUp"
+                  duration={300}
+                  key={currentStep}
+                >
+                  {currentStep === 1 && <FormStepOne />}
+                  {currentStep === 2 && <FormStepTwo />}
+                  {currentStep === 3 && <FormStepThree />}
+                </Animatable.View>
+                <Animatable.View
+                  animation="slideInUp"
+                  duration={300}
+                  key={`btn-${currentStep}`}
+                  style={styles.buttonContainer}
+                >
+                  {currentStep > 0 && (
+                    <Button
+                      name="Voltar"
+                      onPress={handleBack}
+                      style={styles.button}
+                    />
+                  )}
+                  {currentStep < 3 ? (
+                    <Button
+                      name="Próximo"
+                      onPress={handleNext}
+                      style={styles.button}
+                    />
+                  ) : (
+                    <Button
+                      name="Enviar"
+                      onPress={handleSubmit}
+                      style={styles.button}
+                    />
+                  )}
+                </Animatable.View>
+              </>
+            )}
+          </KeyboardAwareScrollView>
+        </View>
+      </TouchableWithoutFeedback>
+    </FormProvider>
   );
 }
