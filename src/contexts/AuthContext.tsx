@@ -25,6 +25,8 @@ type AuthContextType = {
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   loading: boolean;
+  isRegistering: boolean;
+  setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // Create the context
@@ -34,6 +36,7 @@ export const AuthContext = createContext({} as AuthContextType);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isRegistering, setIsRegistering] = useState(false);
 
   useEffect(() => {
     const loadStoredUser = async () => {
@@ -48,7 +51,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     loadStoredUser();
 
     const unsubscribe = onAuthStateChanged(auth, async (userData) => {
-      if (userData) {
+      if (userData && !isRegistering) {
         const formattedUser = {
           uid: userData.uid,
           email: userData.email ?? "",
@@ -56,18 +59,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         setUser(formattedUser);
         await AsyncStorage.setItem("userData", JSON.stringify(formattedUser));
-      } else {
+      } else if (!userData) {
         setUser(null);
         await AsyncStorage.removeItem("userData");
       }
     });
 
     return unsubscribe;
-  }, []);
+  }, [isRegistering]);
 
   const signIn = async (email: string, password: string) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const userData = userCredential.user;
 
       const formattedUser = {
@@ -95,6 +102,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signIn,
         signOut,
         loading,
+        isRegistering,
+        setIsRegistering,
       }}
     >
       {children}
