@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
   containerTitleFilter: {
     margin: 15,
     height: 45,
-    borderBottomStartRadius: "10%",
-    borderBottomEndRadius: "10%",
     paddingHorizontal: 5,
   },
   textTitleFilter: {

@@ -1,16 +1,13 @@
+import { useMemo } from "react";
 import { View, Text } from "react-native";
 import { ComponentImage } from "../../components/Image/component.Image";
-import {
-  CardDetailsCar,
-  CardDetailsCarousel,
-} from "../../components/CardDetailsCar/screen";
+import { CardDetailsCar } from "../DetailsCars/components/CardDetailsCar/screen";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { CarsProps } from "../../contexts/homeContext";
-import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
+import { Header } from "../../components/Header";
+
 import Button from "../../components/Button/Button";
 import styles from "./styles";
-import { Header } from "../../components/Header";
-import { useMemo } from "react";
 
 type VehicleReleaseProps = {
   VehicleRelease: {
