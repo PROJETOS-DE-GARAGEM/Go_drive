@@ -13,7 +13,9 @@ export default function PaymentDeepLinkHandler() {
 
       if (status === "approved") {
         Alert.alert("Pagamento Aprovado");
-        navigation.navigate("AppStack", { screen: "Home" });
+        navigation.navigate("AppStack", {
+          screen: "VehicleRelease",
+        });
       } else if (status === "failure") {
         Alert.alert("Pagamento Falhou");
         navigation.goBack(); // ou uma tela de erro

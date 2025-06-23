@@ -1,9 +1,5 @@
 import { View, Text } from "react-native";
 import { ComponentImage } from "../../components/Image/component.Image";
-import {
-  CardDetailsCar,
-  CardDetailsCarousel,
-} from "../../components/CardDetailsCar/screen";
 import { useRoute, RouteProp } from "@react-navigation/native";
 import { CarsProps } from "../../contexts/homeContext";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
@@ -11,6 +7,7 @@ import Button from "../../components/Button/Button";
 import styles from "./styles";
 import { Header } from "../../components/Header";
 import { useMemo } from "react";
+import { CardDetailsCar } from "../DetailsCars/components/CardDetailsCar/screen";
 
 type VehicleReleaseProps = {
   VehicleRelease: {
@@ -28,8 +25,10 @@ export const VehicleRelease = () => {
   const car = route.params.cars;
 
   const codigo = useMemo(() => {
-    return Array.from({length: 4}, () => Math.floor(Math.random() * 9)).join("");
-  }, [])
+    return Array.from({ length: 4 }, () => Math.floor(Math.random() * 9)).join(
+      ""
+    );
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
