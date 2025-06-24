@@ -41,8 +41,6 @@ export const DetailsCars: React.FC = () => {
   }));
   const navigation = useNavigation();
   const handleAcceptTermsAndNavigateToPayment = () => {
-    setModalVisible(false); // Primeiro, fecha o modal dos termos
-    // Agora, navega para a 'PaymentScreen' e passa o objeto 'item' (o carro selecionado)
     navigation.navigate("AppStack", {
       screen: "PaymentScreen",
       params: { selectedCar: item },
@@ -73,6 +71,15 @@ export const DetailsCars: React.FC = () => {
         />
       </View>
 
+      <View
+        style={{
+          borderBottomColor: "#ccc",
+          borderBottomWidth: 1 ,
+          marginVertical: 20, // menos espaço
+          width: "93%", // menor que a tela toda
+          alignSelf: "center",
+        }}
+      />
       <Text style={styles.titleCharacters}>Caracteristicas</Text>
       <View style={styles.containerCaracters}>
         <CardDetailsCarousel
@@ -117,21 +124,11 @@ export const DetailsCars: React.FC = () => {
       </View>
 
       <View style={styles.containerRentNowButton}>
-        <Button onPress={() => setModalVisible(true)} name="Avançar" />
-      </View>
-
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-        statusBarTranslucent={true}
-      >
-        <TermsRent
-          closeModal={() => setModalVisible(false)}
-          onAcceptTerms={handleAcceptTermsAndNavigateToPayment}
+        <Button
+          onPress={() => handleAcceptTermsAndNavigateToPayment()}
+          name="Avançar"
         />
-      </Modal>
+      </View>
     </View>
   );
 };

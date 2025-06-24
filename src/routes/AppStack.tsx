@@ -6,6 +6,7 @@ import FeedCars from "../pages/FeedCars";
 import TabRoutes from "./TabBottom";
 import { DetailsCars } from "../pages/DetailsCars/screen";
 import PaymentScreen from "../pages/PaymentScreen/PaymentSreen";
+import { VehicleRelease } from "../pages/VehicleRelease/screenVehicleRelease";
 
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
@@ -32,6 +33,13 @@ export default function AppStack() {
       <Stack.Screen
         name="DetailsCars"
         component={DetailsCars}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="VehicleRelease"
+        component={VehicleRelease}
         options={{
           headerShown: false,
         }}

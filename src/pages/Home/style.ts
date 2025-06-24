@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
   },
   headerCarsContainer: {
+    marginTop: 7,
     paddingStart: 5,
     marginBottom: 20,
   },

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: "auto",
     height: 240,
     borderRadius: 12,
+    marginTop: 20
   },
   containerCaracters: {
     flexDirection: "row",
@@ -32,8 +33,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 600,
     paddingVertical: 10,
-    marginVertical: 10,
+    marginVertical: 15,
     marginLeft: 12,
+    marginTop:-3
   },
   cardsCharacters: {
     flexDirection: "row",

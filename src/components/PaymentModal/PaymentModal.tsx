@@ -1,9 +1,15 @@
-import { Modal, Text, View } from "react-native";
-import { openBrowserAsync } from 'expo-web-browser';
-import { createPayment } from "../../services/CreatePayment";
+
+import { Linking, Modal, Text, View, TouchableOpacity } from "react-native";
+import styles from "./PaymentModalStyle";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
 import Button from "../Button/Button";
-import styles from "./PaymentModalStyle";
+import { openBrowserAsync } from "expo-web-browser";
+import { createPayment } from "../../services/CreatePayment";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext, useState } from "react";
+import { startPayment } from "../../services/paymentService";
+import { TermsRent } from "../Terms";
+
 
 type PaymentModalProps = {
   visible: boolean;
@@ -45,18 +51,38 @@ export default function PaymentModal({
   const seguro = 10;
   const total = valorBase + taxaServico + seguro;
 
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  const { user } = useContext(AuthContext);
   async function paymentCar() {
-    try{
-      const data = await createPayment(plano.id, carName, total);
-
-      if(data){
-        await openBrowserAsync(data);
-      }
-
-    } catch(error){
-      alert("Ocorreu um erro ao realizar o pagamento")
-      console.log(error);
+    if (!acceptedTerms) {
+      setShowError(true);
+      return;
     }
+    setShowError(false);
+    const userId = user?.uid || "anon";
+
+    try {
+      console.log("Chamando startPayment...");
+
+      await startPayment({
+        id: plano.id,
+        title: carName,
+        quantity: 1,
+        price: total,
+        external_reference: userId,
+      });
+      console.log("Pagamento iniciado com sucesso");
+    } catch (error) {
+      alert("Ocorreu um erro ao realizar o pagamento");
+      console.log("Erro no pagamento:", error);
+    }
+  }
+
+  function formatDateBR(date: Date) {
+    return date.toLocaleDateString("pt-BR");
   }
 
   return (
@@ -72,7 +98,7 @@ export default function PaymentModal({
             style={{
               flexDirection: "row",
               justifyContent: "flex-end",
-              marginTop: 20,
+              marginTop: 10,
             }}
           >
             <ButtonIcon iconName="close" iconSize={25} onPress={onClose} />
@@ -84,15 +110,11 @@ export default function PaymentModal({
             <Text style={styles.resumeCar}>Carro: {carName}</Text>
             <Text style={styles.resumeText}>
               Início:{" "}
-              <Text style={styles.resumeText2}>
-                {startDate.toLocaleDateString()}
-              </Text>
+              <Text style={styles.resumeText2}>{formatDateBR(startDate)}</Text>
             </Text>
             <Text style={styles.resumeText}>
               Fim:{" "}
-              <Text style={styles.resumeText2}>
-                {endDate.toLocaleDateString()}
-              </Text>
+              <Text style={styles.resumeText2}>{formatDateBR(endDate)}</Text>
             </Text>
             <Text style={styles.resumeText}>
               Duração Total:{" "}
@@ -142,7 +164,79 @@ export default function PaymentModal({
               <Text style={styles.totalText}>{total.toFixed(2)} </Text>
             </View>
           </View>
-          <Button onPress={paymentCar} style={{borderRadius: 12, marginTop: 200}} name={`Confirmar e Pagar R$ ${total.toFixed(2)}`} />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 40,
+              marginBottom: 10,
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                setAcceptedTerms(!acceptedTerms);
+                if (showError) setShowError(false);
+              }}
+              style={{
+                width: 22,
+                height: 22,
+                borderWidth: 2,
+                borderColor: "#1f51d8",
+                borderRadius: 4,
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: 10,
+                backgroundColor: acceptedTerms ? "#1f51d8" : "#fff",
+              }}
+            >
+              {acceptedTerms && (
+                <Text style={{ color: "#fff", fontWeight: "bold" }}>✓</Text>
+              )}
+            </TouchableOpacity>
+            <Text style={{ fontSize: 17 }}>
+              Li e aceito o{" "}
+              <Text
+                style={{ color: "#1f51d8", textDecorationLine: "underline" }}
+                onPress={() => setShowTermsModal(true)}
+              >
+                termo de responsabilidade
+              </Text>
+              .
+            </Text>
+          </View>
+          {showError && (
+            <Text
+              style={{
+                color: "red",
+                marginTop: -7,
+                marginLeft: 32,
+                fontSize: 14,
+              }}
+            >
+              É obrigatório aceitar o termo de responsabilidade.
+            </Text>
+          )}
+          <Modal
+            transparent={true}
+            visible={showTermsModal}
+            animationType="fade"
+            onRequestClose={() => setShowTermsModal(false)}
+            statusBarTranslucent={true}
+          >
+            <TermsRent
+              closeModal={() => setShowTermsModal(false)}
+              onAcceptTerms={() => {
+                setAcceptedTerms(true);
+                setShowTermsModal(false);
+              }}
+            />
+          </Modal>
+          <Button
+            onPress={paymentCar}
+            style={{ borderRadius: 12, marginTop: 45 }}
+            name={`Confirmar e Pagar R$ ${total.toFixed(2)}`}
+          />
         </View>
       </View>
     </Modal>
