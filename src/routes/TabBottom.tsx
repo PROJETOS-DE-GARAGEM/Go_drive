@@ -18,6 +18,7 @@ export default function TabRoutes() {
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
         tabBarActiveTintColor: "#1f51d8",
+        tabBarInactiveTintColor: "#fff",
         animation: "fade",
       }}
     >
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
     elevation: 5,
-    borderRadius: 30,
+    borderRadius: 999,
     height: 70,
     shadowColor: "#000",
     shadowOpacity: 0.3,
@@ -134,5 +135,6 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     position: "absolute",
     top: 4,
+   
   },
 });

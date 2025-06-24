@@ -3,16 +3,18 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   paymentContainer: {
-    padding: 5
+    padding: 5,
   },
   title: {
+    marginTop: 10,
+    marginBottom: 5,
     fontSize: 18,
     fontWeight: "bold",
     paddingVertical: 10,
-    marginVertical: 10,
+    marginVertical: 0,
     marginLeft: 12,
   },
   datePickerContainer: {
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
   cardPayment: {
     height: 110,
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 25,
     padding: 10,
     backgroundColor: "#ffffff",
     borderRadius: 45,
@@ -37,7 +39,6 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     alignItems: "center",
-    
   },
   iconContainer: {
     flexDirection: "row",

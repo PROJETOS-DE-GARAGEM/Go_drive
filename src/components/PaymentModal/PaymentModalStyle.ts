@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   PaymentContainer: {
     backgroundColor: "#fff",
     padding: 24,
-    borderRadius: 12,
     width: "100%",
     height: "100%",
   },
@@ -24,9 +23,10 @@ const styles = StyleSheet.create({
 
   resumeContainer: {
     backgroundColor: "#eff6ff",
-    height: "25%",
+    height: "27%",
     borderRadius: 5,
     padding: 18,
+    justifyContent: "center",
   },
 
   resumeTitle: {
@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
   },
   chargeContainer: {
     backgroundColor: "#f9fafb",
-    height: "25%",
+    height: "30%",
     borderRadius: 5,
     padding: 18,
     marginTop: 20,
+    justifyContent: "center",
   },
   chargeTitle: {
     fontWeight: "500",
