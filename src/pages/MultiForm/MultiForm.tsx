@@ -25,6 +25,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 type RegisterFormData = RegisterProps;
 
 export default function MultiForm() {
+  const [submitted, setSubmitted] = useState(false);
+
   const [currentStep, setCurrentStep] = useState(1);
   const methods = useForm<RegisterFormData>({
     mode: "onChange",
@@ -55,17 +57,19 @@ export default function MultiForm() {
       });
       await signOut();
       setIsRegistering(false);
+      setLoading(false); // <- Pare o loading ANTES de navegar
+      setSubmitted(true); // <- Adicione esta linha antes de navegar
       navigation.navigate("AuthStack", { screen: "RegisterConfirmation" });
+      return; // <- Impede renderização do restante
     } catch (error: any) {
       setIsRegistering(false);
-      Alert.alert("Erro", error.message || "Não foi possível criar a conta.");
-    } finally {
       setLoading(false);
+      Alert.alert("Erro", error.message || "Não foi possível criar a conta.");
     }
   });
 
-  // ✅ Interrompe renderização do formulário se estiver carregando
-  if (loading) {
+  // Interrompe renderização do formulário se estiver carregando
+  if (loading || submitted) {
     return (
       <View
         style={{
