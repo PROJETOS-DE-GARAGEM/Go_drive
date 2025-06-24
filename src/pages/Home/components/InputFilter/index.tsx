@@ -26,12 +26,12 @@ const InputFilter = ({ setModalVisible, searchInput }: SearchProps) => {
         </View>
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.iconContainer}
         onPress={() => setModalVisible(true)}
       >
         <Ionicons name="filter" size={25} color={"#000"} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

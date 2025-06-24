@@ -73,6 +73,7 @@ export default function FeedCars() {
           <FlatList
             data={filteredCars || ""}
             keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <ListCarsFeed
                 data={item}
@@ -82,6 +83,9 @@ export default function FeedCars() {
             numColumns={2}
             columnWrapperStyle={{ justifyContent: "space-between" }}
             contentContainerStyle={{ padding: 14 }}
+            ListFooterComponent={
+              <View style={{ paddingTop: 100 }}></View>
+            }
           />
         </>
       )}

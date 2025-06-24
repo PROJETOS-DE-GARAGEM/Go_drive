@@ -111,7 +111,7 @@ export default function Maps() {
           pitch: 50,
           heading: 0,
           altitude: 1000,
-          zoom: 15,
+          zoom: 14.6,
         }}
       >
         {parkings.map((marker, index) => (
