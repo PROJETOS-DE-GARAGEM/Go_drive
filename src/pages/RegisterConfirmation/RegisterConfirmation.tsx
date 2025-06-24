@@ -18,17 +18,22 @@ export default function RegisterConfirmation() {
     <View style={styles.container}>
       <BgGradient />
       <View style={styles.cardContainer}>
-        <View style={styles.iconContainer}>
-          <FontAwesome name="check" size={40} color="white" />
+        <View
+          style={{ flex: 1,  alignItems: "center" }}
+        >
+          <View style={styles.iconContainer}>
+            <FontAwesome name="check" size={40} color="white" />
+          </View>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Cadastro realizado com sucesso!</Text>
+          </View>
         </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Cadastro realizado com sucesso!</Text>
-          <Button
-            onPress={backScreenLogin}
-            style={styles.button}
-            name="Ir para tela de login"
-          />
-        </View>
+
+        <Button
+          onPress={backScreenLogin}
+          style={styles.button}
+          name="Ir para tela de login"
+        />
       </View>
     </View>
   );
