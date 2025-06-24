@@ -59,6 +59,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
+                  placeholderTextColor="#C7C7CD"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -75,6 +76,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 }, // Estilo de erro
                   ]}
                   placeholder={field.placeholder}
+                  placeholderTextColor="#C7C7CD"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -93,6 +95,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
+                  placeholderTextColor="#C7C7CD"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -109,6 +112,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
+                  placeholderTextColor="#C7C7CD"
                   onBlur={() => {
                     onBlur(); // do React Hook Form
                     field.onBlur && field.onBlur(); // seu customizado, se existir
@@ -126,6 +130,7 @@ const Form: React.FC<FormProps> = ({ title, fields }) => {
                     error && { borderColor: "red", borderWidth: 2 },
                   ]}
                   placeholder={field.placeholder}
+                  placeholderTextColor="#C7C7CD"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
