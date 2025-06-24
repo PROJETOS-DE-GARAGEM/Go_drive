@@ -26,7 +26,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.ads.godrive",
       "config": {
-        "googleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY"
+        "googleMapsApiKey": "${GOOGLE_MAPS_API_KEY}"
       },
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
@@ -34,7 +34,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/image (5).png",
         "backgroundColor": "#ffffff"
       },
       "intentFilters": [
@@ -56,13 +56,16 @@
       ],
       "package": "com.ads.godrive",
       "config": {
-        "googleMapsApiKey": "process.env.GOOGLE_MAPS_API_KEY"
+        "googleMaps": {
+          "apiKey": "${GOOGLE_MAPS_API_KEY}"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
+      "googleMapsApiKey": "${GOOGLE_MAPS_API_KEY}",
       "eas": {
         "projectId": "88117e53-15b0-4ee1-9692-614f4ba3c9ad"
       }
