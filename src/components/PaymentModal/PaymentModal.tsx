@@ -1,3 +1,4 @@
+
 import { Linking, Modal, Text, View, TouchableOpacity } from "react-native";
 import styles from "./PaymentModalStyle";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
@@ -8,6 +9,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { startPayment } from "../../services/paymentService";
 import { TermsRent } from "../Terms";
+
 
 type PaymentModalProps = {
   visible: boolean;

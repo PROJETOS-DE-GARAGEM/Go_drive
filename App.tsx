@@ -4,7 +4,6 @@ import "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { CustomStatusBar } from "./src/components/CustomStatusbar";
 import { NavigationContainer } from "@react-navigation/native";
-import { linking } from "./src/routes/Linking";
 import { AppProvider } from "./src/contexts/RootProvider";
 
 import AuthRoutes from "./src/routes/AuthRoutes";
