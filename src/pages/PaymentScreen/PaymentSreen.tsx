@@ -17,11 +17,33 @@ export default function PaymentScreen() {
   const route = useRoute() as any;
   const { selectedCar } = route.params;
 
+  console.log("selectedCar.aluguel:", selectedCar?.aluguel); // <-- aqui!
+
   const planos = [
     { id: "1", nome: "Taxa diária", preco: `R$ ${selectedCar.aluguel[0]}` },
     { id: "2", nome: "Taxa semanal", preco: `R$ ${selectedCar.aluguel[1]}` },
     { id: "3", nome: " Taxa mensal", preco: `R$ ${selectedCar.aluguel[2]}` },
   ];
+
+  //Divide o valor cheio por hora
+  function getHourlyPrice(planId: string) {
+    let totalStr = "0";
+    if (planId === "1") totalStr = selectedCar.aluguel?.[0] ?? "0";
+    if (planId === "2") totalStr = selectedCar.aluguel?.[1] ?? "0";
+    if (planId === "3") totalStr = selectedCar.aluguel?.[2] ?? "0";
+
+    // Remove ponto de milhar e troca vírgula por ponto
+    const cleaned = totalStr.replace(/\./g, "").replace(",", ".");
+    const total = Number(cleaned);
+
+    let hours = 24;
+    if (planId === "2") hours = 7 * 24;
+    if (planId === "3") hours = 30 * 24;
+
+    if (!total || !hours || isNaN(total)) return "0.00";
+
+    return (total / hours).toFixed(2);
+  }
 
   //Find the plan selected  by the user
   const SelectedPlan = planos.find((p) => p.id === selectedId);
@@ -102,7 +124,7 @@ export default function PaymentScreen() {
                     <Text style={styles.textIconContainer}>{item.nome}</Text>
                   </View>
                   <Text style={styles.price}>
-                    {item.preco.split("/")[0]}
+                    R$ {getHourlyPrice(item.id)}
                     <Text style={styles.priceHora}>/hora</Text>
                   </Text>
                 </TouchableOpacity>
@@ -127,6 +149,7 @@ export default function PaymentScreen() {
           plano={SelectedPlan}
           onClose={() => setModalVisible(false)}
           calculateDuration={calculateDuration}
+          getHourlyPrice={getHourlyPrice}
         />
       )}
     </View>

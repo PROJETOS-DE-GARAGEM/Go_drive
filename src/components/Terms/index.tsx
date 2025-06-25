@@ -6,6 +6,7 @@ import styles from "./style";
 
 type TermsProps = {
   closeModal: () => void;
+  onAcceptTerms: () => void;
 };
 
 const TermsRent = ({ closeModal }: TermsProps) => {

@@ -1,4 +1,3 @@
-
 import { Linking, Modal, Text, View, TouchableOpacity } from "react-native";
 import styles from "./PaymentModalStyle";
 import ButtonIcon from "../ButtonIcon/ButtonIcon";
@@ -9,7 +8,6 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useState } from "react";
 import { startPayment } from "../../services/paymentService";
 import { TermsRent } from "../Terms";
-
 
 type PaymentModalProps = {
   visible: boolean;
@@ -23,6 +21,7 @@ type PaymentModalProps = {
   };
   onClose: () => void;
   calculateDuration: (start: Date, end: Date) => number;
+  getHourlyPrice: (planId: string) => string;
 };
 
 export default function PaymentModal({
@@ -33,6 +32,7 @@ export default function PaymentModal({
   plano,
   onClose,
   calculateDuration,
+  getHourlyPrice, // <-- adicione aqui
 }: PaymentModalProps) {
   // Calcule os valores aqui:
   const duration = calculateDuration(startDate, endDate);
@@ -123,9 +123,9 @@ export default function PaymentModal({
               </Text>
             </Text>
             <Text style={styles.resumeText}>
-              Plano Selecionado:{" "}
+              Plano Selecionado:
               <Text style={styles.resumeText2}>
-                {plano.nome} - {plano.preco}
+                {plano.nome} - R$ {getHourlyPrice(plano.id)}/hora
               </Text>
             </Text>
           </View>
@@ -136,7 +136,12 @@ export default function PaymentModal({
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <Text style={styles.chargeText}>Valor Base do aluguel:</Text>
-              <Text style={styles.chargeText}>R$ {valorBase.toFixed(2)}</Text>
+              <Text style={styles.chargeText}>
+                {valorBase.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </Text>
             </View>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -161,7 +166,13 @@ export default function PaymentModal({
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <Text style={styles.totalText}>Total a Pagar: </Text>
-              <Text style={styles.totalText}>{total.toFixed(2)} </Text>
+              <Text style={styles.totalText}>
+                {" "}
+                {total.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </Text>
             </View>
           </View>
           <View
