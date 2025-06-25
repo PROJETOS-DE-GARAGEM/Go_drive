@@ -84,7 +84,7 @@ export default function MultiForm() {
     );
   }
 
-  // ✅ FORMULÁRIO SOMENTE SE NÃO ESTIVER CARREGANDO
+
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
