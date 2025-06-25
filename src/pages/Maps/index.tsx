@@ -3,18 +3,20 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Header } from "../../components/Header";
 import { AccessDeniedLocation } from "./components/AccessDenied";
 import { useMap } from "../../hooks/useMap";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import styles from "./style";
 
 const { width, height } = Dimensions.get("window");
 
 export default function Maps() {
   const {
+    loading,
     location,
     adressParking,
     handleOpenDeviceMap,
@@ -22,16 +24,27 @@ export default function Maps() {
     parkings,
     region,
     setAdressParking,
-    permissionDenied
+    permissionDenied,
   } = useMap();
+
+  if (loading || !region) {
+    return (
+      <View
+        style={[
+          styles.container,
+          { justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <ActivityIndicator size="large" color="#1E50D7" />
+        <Text>Carregando mapa...</Text>
+      </View>
+    );
+  }
 
   if (permissionDenied) {
     return (
       <View style={styles.container}>
-        <AccessDeniedLocation
-          openSettings={openSettingsPermissionLocation}
-          
-        />
+        <AccessDeniedLocation openSettings={openSettingsPermissionLocation} />
       </View>
     );
   }

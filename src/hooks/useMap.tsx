@@ -1,22 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Linking, Platform, AppState } from 'react-native';
-import * as Location from 'expo-location';
-import { mapsService } from '../services/mapsService';
-import { homeService } from '../services/homeService';
-import { Parking } from '../types/parking.type';
+import { useState, useEffect } from "react";
+import { Linking, Platform, AppState } from "react-native";
+import * as Location from "expo-location";
+import { mapsService } from "../services/mapsService";
+import { homeService } from "../services/homeService";
+import { Parking } from "../types/parking.type";
 
 const useMap = () => {
   const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState<Location.LocationObject | null>(null);
+  const [location, setLocation] = useState<Location.LocationObject | null>(
+    null
+  );
   const [permissionDenied, setPermissionDenied] = useState(false);
   const [parkings, setParkings] = useState<Parking[]>([]);
   const [adressParking, setAdressParking] = useState<Parking>();
-  const [region, setRegion] = useState({
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const [region, setRegion] = useState<{
+    latitude: number;
+    longitude: number;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  } | null>(null);
 
   useEffect(() => {
     getAddressParkings();
@@ -32,13 +34,32 @@ const useMap = () => {
   }, []);
 
   useEffect(() => {
-    if (parkings.length > 0) {
-      const avgLatitude = parkings.reduce((sum, loc) => sum + Number(loc.latitude), 0) / parkings.length;
-      const avgLongitude = parkings.reduce((sum, loc) => sum + Number(loc.longitude), 0) / parkings.length;
+    console.log("📍 Parkings recebidos:", parkings);
 
-      setRegion({
+    if (parkings.length > 0) {
+      const avgLatitude =
+        parkings.reduce((sum, loc) => sum + Number(loc.latitude), 0) /
+        parkings.length;
+      const avgLongitude =
+        parkings.reduce((sum, loc) => sum + Number(loc.longitude), 0) /
+        parkings.length;
+
+      const calculatedRegion = {
         latitude: avgLatitude,
         longitude: avgLongitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      };
+
+      console.log("🗺️ Região calculada:", calculatedRegion);
+
+      setRegion(calculatedRegion);
+    } else {
+      console.log("⚠️ Nenhum estacionamento retornado!");
+      // Valor padrão para Fortaleza, CE
+      setRegion({
+        latitude: -3.7319,
+        longitude: -38.5267,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
@@ -48,6 +69,14 @@ const useMap = () => {
   const currentLocation = async () => {
     setLoading(true);
     try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+
+      if (status !== "granted") {
+        setPermissionDenied(true);
+        setLoading(false);
+        return;
+      }
+
       const loc = await mapsService.getCurrentLocation();
       if (loc) {
         setLocation(loc);

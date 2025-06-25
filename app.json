@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/icon1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1E50D7"
+      "backgroundColor": "#fff"
     },
     "plugins": [
       [
@@ -54,12 +54,13 @@
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION"
       ],
+
+      "package": "com.ads.godrive",
       "config": {
         "googleMaps": {
-          "apiKey": "${GOOGLE_MAPS_API_KEY}"
+          "apiKey": "AIzaSyCN0ImOZCnfcy7YEcBgW5-7hUQw0GcINhU"
         }
-      },
-      "package": "com.ads.godrive"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
