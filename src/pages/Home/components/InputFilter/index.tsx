@@ -1,15 +1,14 @@
 import { View, TextInput, TouchableOpacity } from "react-native";
 
-import { Fontisto, Ionicons } from "@expo/vector-icons";
+import { Fontisto } from "@expo/vector-icons";
 
 import styles from "./style";
 
 type SearchProps = {
-  setModalVisible: (value: boolean) => void;
   searchInput: (text: string) => void;
 };
 
-const InputFilter = ({ setModalVisible, searchInput }: SearchProps) => {
+const InputFilter = ({ searchInput }: SearchProps) => {
   return (
     <View style={styles.containerSearch}>
       <View style={styles.inputContainer}>

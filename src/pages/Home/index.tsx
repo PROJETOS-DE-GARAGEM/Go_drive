@@ -7,35 +7,38 @@ import {
   Modal,
 } from "react-native";
 
-import styles from "./style";
-
 import { InputFilter } from "./components/InputFilter";
 import { Header } from "./components/Header";
 import { ListBrands } from "./components/ListBrands";
 import { ListCars } from "./components/ListCars";
-import { FilterModal } from "./components/FilterModal";
 import { SeeMore } from "../../components/SeeMore";
+
+import styles from "./style";
 
 import { useHome } from "../../hooks/useHome";
 
 export default function Home() {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [search, setSearch] = useState<string>("");
-
-  const { cars, brands ,loading, searchBrands } = useHome();
+  const {
+    cars, 
+    brands,
+    loading, 
+    searchBrands,
+    searchedBrand,
+    setSearchedBrand 
+  } = useHome();
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      searchBrands(search);
+      searchBrands(searchedBrand);
     }, 700);
 
     return () => clearTimeout(delay);
-  }, [search]);
+  }, [searchedBrand]);
 
   return (
     <View style={styles.container}>
       <Header />
-      <InputFilter setModalVisible={setModalVisible} searchInput={setSearch} />
+      <InputFilter searchInput={setSearchedBrand} />
       {loading ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -75,15 +78,6 @@ export default function Home() {
           </View>
         </>
       )}
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
-        statusBarTranslucent={true}
-      >
-        <FilterModal closeModal={() => setModalVisible(false)} />
-      </Modal>
     </View>
   );
 }
