@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "#fff",
     width: "85%",
-    height: "45%",
+    height: "40%",
     borderRadius: 30,
     padding: 25,
+    
   },
   iconContainer: {
     width: 70,
@@ -29,9 +30,10 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 35,
+    fontSize: 33,
     fontWeight: "bold",
-    marginBottom: 40
+    marginBottom: 40,
+    textAlign: "center"
   },
   button: {
     width: "100%",

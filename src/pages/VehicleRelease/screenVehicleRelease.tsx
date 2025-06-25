@@ -1,13 +1,14 @@
-
 import { useState, useMemo } from "react";
 import { View, Text } from "react-native";
 import Button from "../../components/Button/Button";
 import { Header } from "../../components/Header";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
 
 export const VehicleRelease = () => {
   const [showToken, setShowToken] = useState(false);
+  const navigation = useNavigation();
 
   const codigo = useMemo(() => {
     return Array.from({ length: 4 }, () => Math.floor(Math.random() * 9)).join(
@@ -17,7 +18,11 @@ export const VehicleRelease = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff", alignItems: "center" }}>
-      <Header title="Token de acesso" />
+      <Header
+        title="Token de acesso"
+        onBackPress={() => navigation.navigate("AppStack", { screen: "Home" })}
+      />
+
       <View
         style={{
           flex: 1,

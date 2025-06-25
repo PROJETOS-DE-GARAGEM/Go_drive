@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -8,13 +8,13 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import styles from './style';
-import { Header } from '../../components/Header';
-import { useForm, Controller } from 'react-hook-form';
-import { useAuth } from '../../hooks/useAuth';
-import { getMe } from '../../services/AuthService';
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import styles from "./style";
+import { Header } from "../../components/Header";
+import { useForm, Controller } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
+import { getMe } from "../../services/AuthService";
 import { changeProfile } from "../../services/profileService";
 
 interface ProfileFormData {
@@ -26,6 +26,7 @@ interface ProfileFormData {
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const { user } = useAuth();
+  const { signOut } = useAuth();
 
   const { control, handleSubmit, watch, reset } = useForm<ProfileFormData>({
     defaultValues: {
@@ -35,18 +36,18 @@ const ProfileScreen = () => {
     },
   });
 
-  const firstName = watch('firstName');
-  const lastName = watch('lastName');
+  const firstName = watch("firstName");
+  const lastName = watch("lastName");
 
   const onSubmit = async (data: ProfileFormData) => {
     try {
       if (user) {
         await changeProfile(user.uid, data);
-        Alert.alert('Sucesso', 'Perfil atualizado com sucesso!');
+        Alert.alert("Sucesso", "Perfil atualizado com sucesso!");
       }
     } catch (error) {
       console.error(error);
-      Alert.alert('Erro', 'Erro ao alterar informações!');
+      Alert.alert("Erro", "Erro ao alterar informações!");
     }
   };
 
@@ -71,7 +72,14 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Header title="Profile" />
+      <Header
+        title="Profile"
+        rightIconName="logout"
+        rightIconLib="MaterialIcons"
+        onRightIconPress={signOut}
+        rightIconColor="#545e69"
+        rightIconSize={25}
+      />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={{ flex: 1 }}
@@ -80,13 +88,19 @@ const ProfileScreen = () => {
           <Text style={styles.profileName}>{`${firstName} ${lastName}`}</Text>
         </View>
 
-        <View style={{ flex: 1, justifyContent: 'space-between', marginBottom: 124 }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "space-between",
+            marginBottom: 124,
+          }}
+        >
           <View style={styles.formContainer}>
             <Text style={styles.inputLabel}>Primeiro Nome</Text>
             <Controller
               control={control}
               name="firstName"
-              rules={{ required: 'Obrigatório' }}
+              rules={{ required: "Obrigatório" }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.input}
@@ -104,7 +118,7 @@ const ProfileScreen = () => {
             <Controller
               control={control}
               name="lastName"
-              rules={{ required: 'Obrigatório' }}
+              rules={{ required: "Obrigatório" }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.input}
@@ -122,7 +136,7 @@ const ProfileScreen = () => {
             <Controller
               control={control}
               name="email"
-              rules={{ required: 'Obrigatório' }}
+              rules={{ required: "Obrigatório" }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.input}
@@ -139,7 +153,10 @@ const ProfileScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.saveButton} onPress={handleSubmit(onSubmit)}>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={handleSubmit(onSubmit)}
+          >
             <Text style={styles.saveButtonText}>Salvar</Text>
           </TouchableOpacity>
         </View>

@@ -20,8 +20,21 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     justifyContent: "center",
     alignItems: "center",
-    position: 'absolute',
+    position: "absolute",
     left: 15,
+  },
+
+  rightIcon: {
+    backgroundColor: "#FFF",
+    width: 40,
+    height: 40,
+    borderRadius: 25,
+    marginTop: 15,
+    marginBottom: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    right: 10,
   },
   containerTitle: {
     flex: 1,
