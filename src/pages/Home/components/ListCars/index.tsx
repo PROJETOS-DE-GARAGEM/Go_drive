@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SkeletonLoading } from "../../../../components/Skeleton";
 import styles from "./style";
 
-import { CarsProps } from "../../../../contexts/homeContext";
+import { CarsProps } from "../../../../types/car.type";
 
 type ListCarProps = {
   data: CarsProps;

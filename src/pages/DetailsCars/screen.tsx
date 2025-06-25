@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, Modal } from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
 import { useRoute, RouteProp, useNavigation } from "@react-navigation/native";
 import { Header } from "../../components/Header";
-import { CarsProps } from "../../contexts/homeContext";
+import { CarsProps } from "../../types/car.type";
 import { ComponentImage } from "../../components/Image/component.Image";
 import { CardDetailsCar } from "./components/CardDetailsCar/screen";
 import { CardDetailsCarousel } from "./components/CardDetailsCarousel/screen";
-import { TermsRent } from "../../components/Terms";
 import ButtonIcon from "../../components/ButtonIcon/ButtonIcon";
 import Button from "../../components/Button/Button";
 
@@ -22,23 +21,12 @@ type DetailRouteProp = RouteProp<DetailsCarsProps, "DetailCars">;
 
 export const DetailsCars: React.FC = () => {
   const route = useRoute<DetailRouteProp>();
-  // const navigation = useNavigation();
-
-  const { cars } = route.params;
-
-  // const handleNavigateVehicleRelease = () => {
-  //   navigation.navigate("AppStack", {
-  //     screen: "VehicleRelease",
-  //     params: { cars },
-  //   });
-  // };
   const item = route.params.cars;
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   const carAttributes = item.funcionalidades.map((func) => ({
     attribute: func,
   }));
+  
   const navigation = useNavigation();
   const handleAcceptTermsAndNavigateToPayment = () => {
     navigation.navigate("AppStack", {

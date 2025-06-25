@@ -6,12 +6,10 @@ import Button from "../../../../components/Button/Button";
 
 type AccessDeniedProps = {
   openSettings: () => void;
-  errorPermission: string | null;
 };
 
 const AccessDeniedLocation = ({
   openSettings,
-  errorPermission,
 }: AccessDeniedProps) => {
   return (
     <View style={styles.container}>
@@ -21,7 +19,7 @@ const AccessDeniedLocation = ({
       />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>
-          {errorPermission}, por favor, acesse as configurações do dispositivo,
+          Por favor, acesse as configurações do dispositivo,
           habilite a localização e reinicie o aplicativo.
         </Text>
       </View>

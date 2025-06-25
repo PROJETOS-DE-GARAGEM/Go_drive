@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./style";
 
-import { BrandProps } from "../../../../contexts/homeContext";
+import { BrandProps } from "../../../../types/car.type";
 import { useNavigation } from "@react-navigation/native";
 
 type ListBrandsProps = {
