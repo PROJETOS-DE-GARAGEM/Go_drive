@@ -4,7 +4,6 @@ import {
   View,
   FlatList,
   ActivityIndicator,
-  Modal,
 } from "react-native";
 
 import { InputFilter } from "./components/InputFilter";

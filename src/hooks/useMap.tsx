@@ -3,14 +3,14 @@ import { Linking, Platform, AppState } from 'react-native';
 import * as Location from 'expo-location';
 import { mapsService } from '../services/mapsService';
 import { homeService } from '../services/homeService';
-import { ParkingProps } from '../types/parking.type';
+import { Parking } from '../types/parking.type';
 
 const useMap = () => {
   const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [permissionDenied, setPermissionDenied] = useState(false);
-  const [parkings, setParkings] = useState<ParkingProps[]>([]);
-  const [adressParking, setAdressParking] = useState<ParkingProps>();
+  const [parkings, setParkings] = useState<Parking[]>([]);
+  const [adressParking, setAdressParking] = useState<Parking>();
   const [region, setRegion] = useState({
     latitude: 0,
     longitude: 0,
@@ -81,7 +81,7 @@ const useMap = () => {
     Linking.openSettings();
   };
 
-  const handleOpenDeviceMap = async (address: ParkingProps) => {
+  const handleOpenDeviceMap = async (address: Parking) => {
     const latLng = `${address.latitude},${address.longitude}`;
     const url = Platform.select({
       ios: `http://maps.apple.com/?daddr=${latLng}&dirflg=d`,

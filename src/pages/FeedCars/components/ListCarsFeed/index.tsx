@@ -3,7 +3,7 @@ import { View, Text, Image, Pressable, DimensionValue } from "react-native";
 
 import { AntDesign, MaterialIcons, FontAwesome6 } from "@expo/vector-icons";
 
-import { CarsProps } from "../../../../contexts/homeContext";
+import { CarsProps } from "../../../../types/car.type";
 import { useNavigation } from "@react-navigation/native";
 
 import { SkeletonLoading } from "../../../../components/Skeleton";

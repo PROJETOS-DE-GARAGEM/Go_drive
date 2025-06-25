@@ -15,7 +15,6 @@ import { FontAwesome6 } from "@expo/vector-icons";
 import { Header } from "../../components/Header";
 import { ListCarsFeed } from "./components/ListCarsFeed";
 import { InputFilter } from "../Home/components/InputFilter";
-import { FilterModal } from "../Home/components/FilterModal";
 
 import { useHome } from "../../hooks/useHome";
 
@@ -32,7 +31,7 @@ export default function FeedCars() {
   const [search, setSearch] = useState<string>("");
 
   const route = useRoute<FeedRouteProps>();
-  const { cars, searchBrands, fetchCarsFiltered, loading } = useHome();
+  const { cars, searchBrands, setSearchedBrand ,loading } = useHome();
   const brand = route.params?.brand;
 
   useEffect(() => {
@@ -55,13 +54,13 @@ export default function FeedCars() {
       <Header title={brand} />
       <TouchableOpacity
         style={styles.buttonClearFilter}
-        onPress={() => fetchCarsFiltered(undefined)}
+        onPress={() => setSearchedBrand("")}
       >
         <View style={{ flexDirection: "row" }}>
           <FontAwesome6 name="filter-circle-xmark" size={30} color="#FFF" />
         </View>
       </TouchableOpacity>
-      <InputFilter setModalVisible={setModalVisible} searchInput={setSearch} />
+      <InputFilter searchInput={setSearch} />
       {loading ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -89,15 +88,6 @@ export default function FeedCars() {
           />
         </>
       )}
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        animationType="slide"
-        onRequestClose={() => setModalVisible(false)}
-        statusBarTranslucent={true}
-      >
-        <FilterModal closeModal={() => setModalVisible(false)} />
-      </Modal>
     </View>
   );
 }
