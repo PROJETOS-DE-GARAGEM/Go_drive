@@ -1,4 +1,4 @@
-import { View, Text } from "react-native-animatable";
+import { View, Text, Alert } from "react-native";
 import styles from "./PaymentScreenStyle";
 import { Header } from "../../components/Header";
 import DatePicker from "../../components/DatePicker/DatePicker";
@@ -134,8 +134,16 @@ export default function PaymentScreen() {
           <View style={styles.button}>
             <Button
               name="Confirmar aluguel"
-              onPress={() => setModalVisible(true)}
-              // disable={!selectedId}
+              onPress={() => {
+                if (!selectedId) {
+                  Alert.alert(
+                    "Selecione um plano",
+                    "Por favor, escolha um plano de aluguel antes de continuar."
+                  );
+                  return;
+                }
+                setModalVisible(true);
+              }}
             />
           </View>
         </View>
