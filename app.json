@@ -4,25 +4,66 @@
     "slug": "Go_drive",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon1.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "godrive",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/screen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      "expo-web-browser"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ads.godrive",
+      "config": {
+        "googleMapsApiKey": "${GOOGLE_MAPS_API_KEY}"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon1.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "godrive",
+              "host": "checkout",
+              "pathPrefix": "/congrats"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ],
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.ads.godrive"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "googleMapsApiKey": "${GOOGLE_MAPS_API_KEY}",
+      "eas": {
+        "projectId": "88117e53-15b0-4ee1-9692-614f4ba3c9ad"
+      }
     }
   }
 }
