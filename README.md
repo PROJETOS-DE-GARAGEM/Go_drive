@@ -4,11 +4,11 @@
 
 ## 📸 Screenshots
 
-<div align="center">
-  <img src="./assets/cima.png" alt="Tela inicial" width="250"/>
-  <img src="./assets/meio.png" alt="Tela de veículos" width="250"/>
-  <img src="./assets/final.png" alt="Tela de detalhes" width="250"/>
-</div>
+<img src="assets/cima.png" alt="Telas do App - Parte 1" width="100%"/>
+
+<img src="assets/meio.png" alt="Telas do App - Parte 2" width="100%"/>
+
+<img src="assets/final.png" alt="Telas do App - Parte 3" width="100%"/>
 
 ---
 
