@@ -2,6 +2,16 @@
 
 > Aplicativo mobile de aluguel de veículos desenvolvido com React Native e Expo.
 
+## 📸 Screenshots
+
+<div align="center">
+  <img src="./assets/cima.png" alt="Tela inicial" width="250"/>
+  <img src="./assets/meio.png" alt="Tela de veículos" width="250"/>
+  <img src="./assets/final.png" alt="Tela de detalhes" width="250"/>
+</div>
+
+---
+
 ## 📋 Índice
 
 - [Sobre o Projeto](#-sobre-o-projeto)
