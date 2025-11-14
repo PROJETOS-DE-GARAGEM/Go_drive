@@ -4,7 +4,7 @@
 
 ## 📸 Screenshots
 
-<img src="assets/cima.png" alt="Telas do App - Parte 1" width="100%"/>
+<img src="assets/cima (2).png" alt="Telas do App - Parte 1" width="100%"/>
 
 <img src="assets/meio.png" alt="Telas do App - Parte 2" width="100%"/>
 
